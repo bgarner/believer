@@ -3,6 +3,12 @@ package com.believernativeapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.christopherdro.RNPrint.RNPrintPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.ocetnik.timer.BackgroundTimerPackage;
+import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -22,7 +28,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new VectorIconsPackage(),
+            new RNPrintPackage(),
+            new RNFetchBlobPackage(),
+            new RNDeviceInfo(),
+            new BackgroundTimerPackage(),
+            new BackgroundJobPackage()
       );
     }
 
