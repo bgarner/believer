@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import BelieverRequestController from "../../controllers/BelieverRequestController";
+import {Navigation} from 'react-native-navigation';
 
 export default class Login extends Component {
+  static propTypes = {
+    componentId: PropTypes.string.isRequired,
+  };
   constructor(props) {
     super(props);
 
@@ -16,10 +21,10 @@ export default class Login extends Component {
 
   onLogin() {
     const { email, password } = this.state;
-    // this.believerRequestController.login({email, password});
     return new Promise((resolve, reject) => {
       return this.believerRequestController.login({email, password})
         .then(() => {
+          Navigation.dismissModal(this.props.componentId);
           return resolve();
         })
         .catch(err => {

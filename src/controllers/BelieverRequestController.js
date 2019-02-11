@@ -11,7 +11,7 @@ export default class BelieverRequestController {
       this.httpRequestController.postRequest("/api/user/login", credentials)
         .then((response) => {
           response = JSON.parse(response);
-          alert(response.token);
+          // alert(response.token);
           this.httpRequestController.setToken(response.token);
           return resolve();
         })

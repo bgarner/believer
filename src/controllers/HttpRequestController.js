@@ -20,9 +20,9 @@ export default class HttpRequestController {
     this.token = token;
   }
 
-  getToken() {
-    return this.token;
-  }
+  // getToken() {
+  //   return this.token;
+  // }
 
   postRequest(path, request) {
     return new Promise((resolve, reject) => {
