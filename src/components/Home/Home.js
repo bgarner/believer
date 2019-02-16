@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
+import {Alert, Button, TextInput, View, StyleSheet, ScrollView} from 'react-native';
 import {Text} from "react-native-elements";
 import PropTypes from 'prop-types';
 
 import BelieverRequestController from "../../controllers/BelieverRequestController";
 import HttpRequestController from "../../controllers/HttpRequestController";
 import {Navigation} from 'react-native-navigation';
+import ChallengeDetail from "../Challenge/ChallengeDetail";
 
 class Home extends Component {
   static propTypes = {
@@ -22,24 +23,24 @@ class Home extends Component {
 
   componentDidMount() {
 
-    if (!this.httpRequestController.token) {
-      Navigation.showModal({
-        stack: {
-          children: [{
-            component: {
-              name: 'Login',
-              options: {
-                topBar: {
-                  title: {
-                    text: 'Login'
-                  }
-                }
-              }
-            }
-          }]
-        }
-      });
-    }
+    // if (!this.httpRequestController.token) {
+    //   Navigation.showModal({
+    //     stack: {
+    //       children: [{
+    //         component: {
+    //           name: 'Login',
+    //           options: {
+    //             topBar: {
+    //               title: {
+    //                 text: 'Login'
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }]
+    //     }
+    //   });
+    // }
   }
 
   onChallengeClick() {
@@ -62,21 +63,19 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello</Text>
-        <Button
-          onPress={this.onChallengeClick}
-          title="Submit"
-        />
-      </View>
+      <ScrollView style={styles.container}>
+        <ChallengeDetail id={1}></ChallengeDetail>
+        <ChallengeDetail id={2}></ChallengeDetail>
+        <ChallengeDetail id={3}></ChallengeDetail>
+      </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#ecf0f1',
   },
   input: {
