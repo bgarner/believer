@@ -37,6 +37,12 @@ export default class SignIn extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+
+        <View style={styles.title}>
+          <Text style={styles.titleText}> BELIEVER </Text>
+        </View>
+
+        <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
           placeholder='Email'
@@ -68,8 +74,9 @@ export default class SignIn extends React.Component {
           color= {'#35AFC8'}
         >
         </Button>
+        </View>
 
-        <View>
+        <View style={{flex:1}}>
           <Text>Don't have an account yet?</Text>
           <Button
             title={'Sign Up'}
@@ -83,8 +90,26 @@ export default class SignIn extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  title:{
+    flex:1,
+    width : '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleText:{
+    paddingTop:100,
+    fontSize:40,
+    fontWeight :'900',
+
+  },
+  formContainer:{
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:'100%'
+  },
   input: {
-    width: '60%',
+    width: '80%',
     fontSize: 18,
     fontWeight: '500',
     height: 55,
@@ -98,11 +123,11 @@ const styles = StyleSheet.create({
 
   },
   login:{
-    width: '60%',
+    width: '80%',
     height: 55,
     backgroundColor: '#231F20',
     margin: 12,
-    marginTop:50,
+    // marginTop:50,
     padding: 8,
     borderRadius: 2,
     justifyContent: 'center',
@@ -116,6 +141,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column',
+
   }
 })
