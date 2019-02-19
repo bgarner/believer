@@ -67,7 +67,7 @@ export default class SignUp extends React.Component {
           style={styles.signup}
           onPress={this.signUp}
         >
-          <Text style={styles.signupText}>Continue -></Text>
+          <Text style={styles.signupText}>Continue</Text>
         </TouchableHighlight>
       </View>
 

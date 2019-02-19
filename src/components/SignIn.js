@@ -69,20 +69,17 @@ export default class SignIn extends React.Component {
           <Text style={styles.loginText}>Sign In</Text>
         </TouchableHighlight>
 
-        <Button
-          title={'Forgot your password?'}
-          color= {'#35AFC8'}
-        >
-        </Button>
+        <TouchableHighlight>
+          <Text style={{color: '#35AFC8'}}>Forgot your password?</Text>
+        </TouchableHighlight>
         </View>
 
-        <View style={{flex:1}}>
+        <View style={styles.signup}>
           <Text>Don't have an account yet?</Text>
-          <Button
-            title={'Sign Up'}
-            color= {'#35AFC8'}
-          >
-          </Button>
+          <TouchableHighlight>
+          <Text style={{color: '#35AFC8'}}> Sign Up
+          </Text>
+        </TouchableHighlight>
         </View>
       </View>
     )
@@ -90,6 +87,14 @@ export default class SignIn extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+
+  },
+
   title:{
     flex:1,
     width : '100%',
@@ -138,11 +143,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#FFF',
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-
+  signup:{
+    flex:1,
+    flexDirection: 'row',
   }
+
+
 })
