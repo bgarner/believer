@@ -10,11 +10,9 @@ import {
   Button
 } from 'react-native'
 
-
-
-import { goHome } from '../navigation'
+import {goHome, goSignup} from '../navigation'
 import { USER_KEY } from '../config'
-// import {Button} from "react-native-elements";
+
 
 export default class SignIn extends React.Component {
   state = {
@@ -76,7 +74,7 @@ export default class SignIn extends React.Component {
 
         <View style={styles.signup}>
           <Text>Don't have an account yet?</Text>
-          <TouchableHighlight>
+          <TouchableHighlight onPress= { () => goSignup() }>
           <Text style={{color: '#35AFC8'}}> Sign Up
           </Text>
         </TouchableHighlight>

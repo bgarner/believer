@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet, Text, TouchableHighlight
 } from 'react-native'
+import {goToAuth} from "../navigation";
 
 export default class SignUp extends React.Component {
   state = {
@@ -58,6 +59,14 @@ export default class SignUp extends React.Component {
           onChangeText={val => this.onChangeText('password', val)}
         />
 
+        <View style={styles.signIn}>
+          <Text>Already have an account?</Text>
+          <TouchableHighlight onPress= { () => goToAuth() }>
+            <Text style={{color: '#35AFC8'}}> Log in
+            </Text>
+          </TouchableHighlight>
+        </View>
+
         <View style={styles.disclaimer}>
         <Text style={styles.disclaimerText}>
           By creating an account you agree to our Terms of Service and Privacy Policy.
@@ -76,6 +85,11 @@ export default class SignUp extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   title:{
     fontSize:24,
     margin:20,
@@ -121,9 +135,8 @@ const styles = StyleSheet.create({
     fontSize:12,
     fontStyle: 'italic',
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  signIn:{
+    flexDirection: 'row',
   }
+
 })
