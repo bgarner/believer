@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import { Alert, Button, TextInput, View, StyleSheet, Image } from 'react-native';
 import {Text} from "react-native-elements";
-import BelieverRequestController from "../../controllers/BelieverRequestController";
-import HttpRequestController from "../../controllers/HttpRequestController";
+import BelieverRequestController from "../controllers/BelieverRequestController";
+import HttpRequestController from "../controllers/HttpRequestController";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 
-class ChallengeDetail extends Component {
+class Challenge extends Component {
   // static propTypes = {
   //   // componentId: PropTypes.string.isRequired,
   // };
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChallengeDetail;
+export default Challenge;

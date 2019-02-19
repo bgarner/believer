@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import BelieverRequestController from "../../controllers/BelieverRequestController";
+import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Navigation} from 'react-native-navigation';
 
 export default class Login extends Component {
