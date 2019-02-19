@@ -72,7 +72,7 @@ class Home extends Component {
           onPress={() => {
             Navigation.push(this.props.componentId, {
               component: {
-                name: 'Screen2',
+                name: 'Rewards',
               }
             });
           }}
@@ -82,6 +82,7 @@ class Home extends Component {
         <Challenge id={1}></Challenge>
         <Challenge id={2}></Challenge>
         <Challenge id={3}></Challenge>
+        <Challenge id={4}></Challenge>
       </ScrollView>
     );
   }

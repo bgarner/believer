@@ -7,12 +7,12 @@ import {
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 
-export default class Screen2 extends React.Component {
+export default class SideMenu extends React.Component {
   static get options() {
     return {
       topBar: {
         title: {
-          text: 'Screen 2'
+          text: 'Side Menu'
         },
       }
     };
@@ -20,11 +20,7 @@ export default class Screen2 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Screen 2</Text>
-        <Button
-          onPress={() => Navigation.pop(this.props.componentId)}
-          title="Go Back"
-        />
+        <Text>Side Menu</Text>
       </View>
     )
   }
