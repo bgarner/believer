@@ -12,7 +12,7 @@ export default class Explore extends React.Component {
     return {
       topBar: {
         title: {
-          text: 'Explore Brandsw'
+          text: 'Settings'
         },
       }
     };

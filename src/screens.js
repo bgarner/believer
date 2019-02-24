@@ -11,6 +11,9 @@ import Account from "./components/Account";
 import SideMenu from "./components/SideMenu";
 import Post from "./components/Post";
 import Explore from "./components/Explore";
+import Following from "./components/Following";
+import Status from "./components/Status";
+import Settings from "./components/Settings";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -24,6 +27,9 @@ export function registerScreens() {
   Navigation.registerComponent('Refer', () => Refer);
   Navigation.registerComponent('Account', () => Account);
   Navigation.registerComponent('Explore', () => Explore);
+  Navigation.registerComponent('Following', () => Following);
+  Navigation.registerComponent('Status', () => Status);
+  Navigation.registerComponent('Settings', () => Settings);
   Navigation.registerComponent('Challenge', () => Challenge);
   Navigation.registerComponent('SideMenu', () => SideMenu);
 

@@ -31,8 +31,8 @@ export default class SideMenu extends React.Component {
         componentName: 'Explore'
       },
       {
-        name: 'Find',
-        componentName: 'Find'
+        name: 'Following',
+        componentName: 'Following'
       },
       {
         name: 'Status',
@@ -98,18 +98,6 @@ export default class SideMenu extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   Navigation.events().registerComponentDidAppearListener((componentId, componentName) => {
-  //
-  //     console.log(componentId, componentName);
-  //   })
-  //   Navigation.events().registerBottomTabSelectedListener(({selectedTabIndex, unselectedTabIndex}) => {
-  //     console.log('********');
-  //     console.log(selectedTabIndex, unselectedTabIndex);
-  //     console.log('********');
-  //   })
-  //
-  // }
 }
 
 const styles = StyleSheet.create({
