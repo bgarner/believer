@@ -10,6 +10,7 @@ import Refer from "./components/Refer";
 import Account from "./components/Account";
 import SideMenu from "./components/SideMenu";
 import Post from "./components/Post";
+import Explore from "./components/Explore";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -22,6 +23,7 @@ export function registerScreens() {
   Navigation.registerComponent('Post', () => Post);
   Navigation.registerComponent('Refer', () => Refer);
   Navigation.registerComponent('Account', () => Account);
+  Navigation.registerComponent('Explore', () => Explore);
   Navigation.registerComponent('Challenge', () => Challenge);
   Navigation.registerComponent('SideMenu', () => SideMenu);
 

@@ -151,59 +151,7 @@ export const goHome = () => Navigation.setRoot({
 
           ]
         }
-        // bottomTabs: {
-        //   id: 'BottomTabsId',
-        //   children: [
-        //     {
-        //       component: {
-        //         name: 'Home',
-        //         options: {
-        //           bottomTab: {
-        //             fontSize: 12,
-        //             text: 'Home',
-        //             // icon: require('../signin.png')
-        //           }
-        //         }
-        //       },
-        //     },
-        //     {
-        //       component: {
-        //         name: 'Rewards',
-        //         options: {
-        //           bottomTab: {
-        //             text: 'Rewards',
-        //             fontSize: 12,
-        //             // icon: require('./signup.png')
-        //           }
-        //         }
-        //       },
-        //     },
-        //     {
-        //       component: {
-        //         name: 'Refer',
-        //         options: {
-        //           bottomTab: {
-        //             text: 'Refer',
-        //             fontSize: 12,
-        //             // icon: require('./signup.png')
-        //           }
-        //         }
-        //       },
-        //     },
-        //     {
-        //       component: {
-        //         name: 'Account',
-        //         options: {
-        //           bottomTab: {
-        //             text: 'Account',
-        //             fontSize: 12,
-        //             // icon: require('./signup.png')
-        //           }
-        //         }
-        //       },
-        //     },
-        //   ],
-        // },
+
       }
     }
   }

@@ -3,27 +3,17 @@ import {StyleSheet, ScrollView, Button} from 'react-native';
 import { AsyncStorage } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
-
-
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import HttpRequestController from "../controllers/HttpRequestController";
 import Challenge from "./Challenge";
-
 import { goToAuth } from '../navigation';
 import { USER_KEY } from '../config';
+import CommonUtils from "../CommonUtils";
 
 class Home extends Component {
   static propTypes = {
     componentId: PropTypes.string.isRequired,
   };
-  constructor(props, context) {
-    super(props, context);
-    // this.believerRequestController = new BelieverRequestController();
-    // this.httpRequestController = HttpRequestController.getInstance();
-    this.onChallengeClick = this.onChallengeClick.bind(this);
-    Navigation.events().bindComponent(this);
-
-  }
   static get options() {
     return {
       topBar: {
@@ -33,6 +23,16 @@ class Home extends Component {
       }
     };
   }
+
+  constructor(props, context) {
+    super(props, context);
+    // this.believerRequestController = new BelieverRequestController();
+    // this.httpRequestController = HttpRequestController.getInstance();
+    this.onChallengeClick = this.onChallengeClick.bind(this);
+    Navigation.events().bindComponent(this);
+
+  }
+
 
   logout = async () => {
     try {
@@ -64,15 +64,12 @@ class Home extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/*<Button*/}
-          {/*onPress={this.logout}*/}
-          {/*title="Sign Out"*/}
-        {/*/>*/}
+
         {/*<Button*/}
           {/*onPress={() => {*/}
             {/*Navigation.push(this.props.componentId, {*/}
               {/*component: {*/}
-                {/*name: 'Rewards',*/}
+                {/*name: 'Challenge',*/}
               {/*}*/}
             {/*});*/}
           {/*}}*/}
@@ -85,6 +82,13 @@ class Home extends Component {
         <Challenge id={4}></Challenge>
       </ScrollView>
     );
+  }
+
+  componentDidAppear() {
+    console.log('home');
+    console.log(this.props.componentId);
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
+
   }
 }
 const styles = StyleSheet.create({

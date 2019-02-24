@@ -6,8 +6,15 @@ import {
   StyleSheet,
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
+import PropTypes from "prop-types";
+import CommonUtils from "../CommonUtils";
 
 export default class Post extends React.Component {
+
+  static propTypes = {
+    componentId: PropTypes.string.isRequired,
+  };
+
   static get options() {
     return {
       topBar: {
@@ -17,6 +24,16 @@ export default class Post extends React.Component {
       }
     };
   }
+
+  constructor(props, context) {
+    super(props, context);
+    // this.believerRequestController = new BelieverRequestController();
+    // this.httpRequestController = HttpRequestController.getInstance();
+    // this.onChallengeClick = this.onChallengeClick.bind(this);
+    Navigation.events().bindComponent(this);
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,6 +41,12 @@ export default class Post extends React.Component {
 
       </View>
     )
+  }
+  componentDidAppear() {
+    console.log('Post');
+    console.log(this.props.componentId);
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
+
   }
 }
 
