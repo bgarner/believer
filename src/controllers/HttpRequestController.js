@@ -16,30 +16,31 @@ export default class HttpRequestController {
     return this._instance;
   }
 
+  //save this token to a local storage
   setToken(token) {
     this.token = token;
   }
 
-  // getToken() {
-  //   return this.token;
-  // }
+  getToken() {
+    return this.token;
+  }
 
-  postRequest(path, request) {
-    return new Promise((resolve, reject) => {
+  async postRequest(path, request) {
 
-      return fetch(this.baseUrl + path, {
+    try {
+     const response = await fetch(this.baseUrl + path, {
         method: 'POST',
         body: JSON.stringify(request),
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      })
-        .then((response) => response.text())
-        .then((responseJson) => resolve(responseJson))
-        .catch((error) => reject(error))
-
-    });
+      });
+      return response.text();
+    }
+    catch(e){
+      throw e;
+    }
   }
 
   getRequest(path, params) {

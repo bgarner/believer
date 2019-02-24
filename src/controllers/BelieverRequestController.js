@@ -6,17 +6,22 @@ export default class BelieverRequestController {
     this.httpRequestController = HttpRequestController.getInstance();
   }
 
-  login(credentials) {
-    return new Promise((resolve, reject) => {
-      this.httpRequestController.postRequest("/api/user/login", credentials)
-        .then((response) => {
-          response = JSON.parse(response);
-          // alert(response.token);
-          this.httpRequestController.setToken(response.token);
-          return resolve();
-        })
-        .catch((err) => reject(err));
-    });
+  async login(credentials) {
+
+    try {
+      let response = await this.httpRequestController.postRequest("/api/user/login", credentials);
+      response = JSON.parse(response);
+
+      if(!response.token){
+        throw new Error('Login failed');
+      }
+      this.httpRequestController.setToken(response.token);
+
+    }
+    catch(e){
+      throw e;
+    }
+
   }
 
   getJWTToken() {

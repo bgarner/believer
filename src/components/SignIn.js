@@ -11,23 +11,32 @@ import {
 } from 'react-native'
 
 import {goHome, goSignup} from '../navigation'
-import { USER_KEY } from '../config'
+// import { USER_KEY } from '../config'
+import BelieverRequestController from "../controllers/BelieverRequestController";
 
 
 export default class SignIn extends React.Component {
-  state = {
-    email: '', password: ''
+
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      email: '', password: ''
+    }
+    this.believerRequestController = new BelieverRequestController();
+    this.signIn = this.signIn.bind(this);
+
   }
+
   onChangeText = (key, value) => {
     this.setState({ [key]: value })
   }
-  signIn = async () => {
-    const { email, password } = this.state
+
+  async signIn() {
+    const { email, password } = this.state;
     try {
-      // login with provider
-      const user = await AsyncStorage.setItem(USER_KEY, email)
-      console.log('user successfully signed in!', user)
-      goHome()
+      await this.believerRequestController.login({email, password});
+      goHome();
     } catch (err) {
       console.log('error:', err)
     }
