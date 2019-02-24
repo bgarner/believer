@@ -21,69 +21,6 @@ export const goSignup = () => Navigation.setRoot({
 
 export const goHome = () => Navigation.setRoot({
   root: {
-    bottomTabs: {
-      id: 'BottomTabsId',
-      children: [
-        {
-          component: {
-            name: 'Home',
-            options: {
-              bottomTab: {
-                fontSize: 12,
-                text: 'Home',
-                // icon: require('../signin.png')
-              }
-            }
-          },
-        },
-        {
-          component: {
-            name: 'Rewards',
-            options: {
-              bottomTab: {
-                text: 'Rewards',
-                fontSize: 12,
-                // icon: require('./signup.png')
-              }
-            }
-          },
-        },
-        {
-          component: {
-            name: 'Refer',
-            options: {
-              bottomTab: {
-                text: 'Refer',
-                fontSize: 12,
-                // icon: require('./signup.png')
-              }
-            }
-          },
-        },
-        {
-          component: {
-            name: 'Account',
-            options: {
-              bottomTab: {
-                text: 'Account',
-                fontSize: 12,
-                // icon: require('./signup.png')
-              }
-            }
-          },
-        },
-      ],
-    },
-    stack: {
-      id: 'App',
-      children: [
-        {
-          component: {
-            name: 'Home',
-          }
-        }
-      ],
-    },
     sideMenu: {
       id: "sideMenu",
       left: {
@@ -93,17 +30,181 @@ export const goHome = () => Navigation.setRoot({
         }
       },
       center: {
-        stack: {
-          id: "AppRoot",
-          children: [{
-            component: {
-              id: "App",
-              name: "Home"
-            }
-          }]
+        bottomTabs: {
+          id: 'BottomTabsId',
+          children: [
+            {
+              stack: {
+                id: 'TabHome',
+                children: [
+                  {
+                    component: {
+                      name: 'Home',
+                      options: {
+                        bottomTab: {
+                          fontSize: 12,
+                          text: 'Home',
+                          // icon: require('../signin.png')
+                        },
+                        topBar: {
+                          visible: true
+                        },
+                      },
+                    },
+
+                  },
+                ]
+              }
+            },
+            {
+              stack: {
+                id: 'TabRewards',
+                children: [
+                  {
+                    component: {
+                      name: 'Rewards',
+                      options: {
+                        bottomTab: {
+                          fontSize: 12,
+                          text: 'Rewards',
+                          // icon: require('../signin.png')
+                        },
+                        topBar: {
+                          visible: true
+                        },
+                      },
+                    },
+
+                  },
+                ]
+              }
+            },
+            {
+              stack: {
+                id: 'TabPost',
+                children: [
+                  {
+                    component: {
+                      name: 'Post',
+                      options: {
+                        bottomTab: {
+                          fontSize: 12,
+                          text: 'Post',
+                          // icon: require('../signin.png')
+                        },
+                        topBar: {
+                          visible: true
+                        },
+                      },
+                    },
+
+                  },
+                ]
+              }
+            },
+            {
+              stack: {
+                id: 'TabRefer',
+                children: [
+                  {
+                    component: {
+                      name: 'Refer',
+                      options: {
+                        bottomTab: {
+                          fontSize: 12,
+                          text: 'Refer',
+                          // icon: require('../signin.png')
+                        },
+                        topBar: {
+                          visible: true
+                        },
+                      },
+                    },
+
+                  },
+                ]
+              }
+            },
+            {
+              stack: {
+                id: 'TabAccount',
+                children: [
+                  {
+                    component: {
+                      name: 'Account',
+                      options: {
+                        bottomTab: {
+                          fontSize: 12,
+                          text: 'Account',
+                          // icon: require('../signin.png')
+                        },
+                        topBar: {
+                          visible: true
+                        },
+                      },
+                    },
+
+                  },
+                ]
+              }
+            },
+
+          ]
         }
+        // bottomTabs: {
+        //   id: 'BottomTabsId',
+        //   children: [
+        //     {
+        //       component: {
+        //         name: 'Home',
+        //         options: {
+        //           bottomTab: {
+        //             fontSize: 12,
+        //             text: 'Home',
+        //             // icon: require('../signin.png')
+        //           }
+        //         }
+        //       },
+        //     },
+        //     {
+        //       component: {
+        //         name: 'Rewards',
+        //         options: {
+        //           bottomTab: {
+        //             text: 'Rewards',
+        //             fontSize: 12,
+        //             // icon: require('./signup.png')
+        //           }
+        //         }
+        //       },
+        //     },
+        //     {
+        //       component: {
+        //         name: 'Refer',
+        //         options: {
+        //           bottomTab: {
+        //             text: 'Refer',
+        //             fontSize: 12,
+        //             // icon: require('./signup.png')
+        //           }
+        //         }
+        //       },
+        //     },
+        //     {
+        //       component: {
+        //         name: 'Account',
+        //         options: {
+        //           bottomTab: {
+        //             text: 'Account',
+        //             fontSize: 12,
+        //             // icon: require('./signup.png')
+        //           }
+        //         }
+        //       },
+        //     },
+        //   ],
+        // },
       }
     }
-
   }
 })

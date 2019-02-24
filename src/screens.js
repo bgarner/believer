@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn";
 import Refer from "./components/Refer";
 import Account from "./components/Account";
 import SideMenu from "./components/SideMenu";
+import Post from "./components/Post";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -18,6 +19,7 @@ export function registerScreens() {
   Navigation.registerComponent('SignIn', () => SignIn);
   Navigation.registerComponent('Home', () => Home);
   Navigation.registerComponent('Rewards', () => Rewards);
+  Navigation.registerComponent('Post', () => Post);
   Navigation.registerComponent('Refer', () => Refer);
   Navigation.registerComponent('Account', () => Account);
   Navigation.registerComponent('Challenge', () => Challenge);

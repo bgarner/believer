@@ -29,20 +29,20 @@ class Challenge extends Component {
 
 
   renderHeader() {
-    return <View style={{flex: 0.2, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
-      <View style={{flex: 0.1 }}>
+    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
+      <View style={{flex: 2 }}>
         <Avatar
-          size="xlarge"
+          // size="xlarge"
           rounded
           title="CR"
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
         />
       </View>
-      <View style={{flex: 0.8, paddingLeft: 10}}>
+      <View style={{flex: 8, paddingLeft: 10}}>
         <Text style={{fontWeight: 'bold'}}>Challenge Title</Text>
       </View>
-      <View style={{flex: 0.1, alignItems: 'flex-end'}}>
+      <View style={{flex: 1, alignItems: 'flex-end'}}>
         <Text>...</Text>
       </View>
 
@@ -51,10 +51,13 @@ class Challenge extends Component {
 
   renderImage() {
 
-    return <Image source= {'https://www.fairmont.com/assets/0/137/9768/9827/9829/14353/edd35485-f1b1-4495-a469-25a7a453106f.jpg'} style={styles.imageStyle} />
+    return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
+      <Image source={{uri: 'https://facebook.github.io/react/logo-og.png'}}
+             style={{width:'100%', height: '100%'}} />
+    </View>
   }
   renderDescription() {
-    return <View style={{flex:0.10, padding: 15, backgroundColor: '#f2f2f2',  /*borderColor: 'red', borderWidth: 1*/}}>
+    return <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
 
       <Text style={{ lineHeight: 30, fontWeight: 'bold' }}>Mission Title</Text>
 
@@ -72,7 +75,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     // borderColor: 'black', borderWidth: 1,
-    fontFamily: 'Helvetica'
+    fontFamily: 'Helvetica',
+    height: 500
   },
   input: {
     width: 200,

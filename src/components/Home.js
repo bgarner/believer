@@ -64,20 +64,20 @@ class Home extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Button
-          onPress={this.logout}
-          title="Sign Out"
-        />
-        <Button
-          onPress={() => {
-            Navigation.push(this.props.componentId, {
-              component: {
-                name: 'Rewards',
-              }
-            });
-          }}
-          title="View next screen"
-        />
+        {/*<Button*/}
+          {/*onPress={this.logout}*/}
+          {/*title="Sign Out"*/}
+        {/*/>*/}
+        {/*<Button*/}
+          {/*onPress={() => {*/}
+            {/*Navigation.push(this.props.componentId, {*/}
+              {/*component: {*/}
+                {/*name: 'Rewards',*/}
+              {/*}*/}
+            {/*});*/}
+          {/*}}*/}
+          {/*title="View next screen"*/}
+        {/*/>*/}
 
         <Challenge id={1}></Challenge>
         <Challenge id={2}></Challenge>
