@@ -1,4 +1,5 @@
 import {stringify} from 'query-string';
+import CommonUtils from "../CommonUtils";
 
 export default class HttpRequestController {
 
@@ -19,10 +20,7 @@ export default class HttpRequestController {
   //save this token to a local storage
   setToken(token) {
     this.token = token;
-  }
-
-  getToken() {
-    return this.token;
+    CommonUtils.setLoginToken(token);
   }
 
   async postRequest(path, request) {

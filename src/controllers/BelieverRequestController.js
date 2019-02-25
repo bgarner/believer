@@ -24,7 +24,5 @@ export default class BelieverRequestController {
 
   }
 
-  getJWTToken() {
-    return this.httpRequestController.getToken();
-  }
+
 }

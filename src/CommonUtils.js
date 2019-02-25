@@ -12,7 +12,23 @@ export default class CommonUtils {
   }
 
   static async setCurrentActiveTab(value) {
+    return await AsyncStorage.setItem('activeTab', JSON.stringify(value));
+  }
 
-    await AsyncStorage.setItem('activeTab', JSON.stringify(value));
+  static async setLoginToken(token) {
+    return await AsyncStorage.setItem('loginToken', JSON.stringify(token));
+  }
+
+  static async clearLoginToken() {
+    return await AsyncStorage.setItem('loginToken', '');
+  }
+
+  static async getLoginToken() {
+    const value = await AsyncStorage.getItem('loginToken');
+    if (value !== null) {
+      return JSON.parse(value);
+    } else {
+      return null;
+    }
   }
 }

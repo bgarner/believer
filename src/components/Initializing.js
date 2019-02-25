@@ -2,24 +2,22 @@
 import React from 'react'
 import {
   View,
-  Text,
+  Image,
   StyleSheet,
-  AsyncStorage
 } from 'react-native'
 
 import { goToAuth, goHome } from '../navigation'
-
-import { USER_KEY } from '../config'
+import CommonUtils from "../CommonUtils";
 
 export default class Initialising extends React.Component {
   async componentDidMount() {
     try {
-      const user = await AsyncStorage.getItem(USER_KEY)
-      console.log('user: ', user)
-      if (user) {
-        goHome()
+      const token = await CommonUtils.getLoginToken();
+      console.log('token: ', token)
+      if (token) {
+        setTimeout(goHome, 1000)
       } else {
-        goToAuth()
+        setTimeout(goToAuth, 1000);
       }
     } catch (err) {
       console.log('error: ', err)
@@ -30,19 +28,17 @@ export default class Initialising extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Loading</Text>
+        <Image source={require('../../assets/splash.png')} style={{height: 85, width: 300}}/>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  welcome: {
-    fontSize: 28
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#000'
   }
 })

@@ -6,8 +6,6 @@ export const goToAuth = () => Navigation.setRoot({
       name: 'SignIn'
     },
 
-
-
   }
 });
 
