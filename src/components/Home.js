@@ -5,7 +5,7 @@ import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import HttpRequestController from "../controllers/HttpRequestController";
-import Challenge from "./Challenge";
+import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
 
 class Home extends Component {
@@ -51,8 +51,9 @@ class Home extends Component {
   }
 
   renderMission(item) {
-    return <Challenge
+    return <Mission
       id={item.id}
+      key={item.id}
       missionId={item.id}
       missionTitle={item.name}
       missionDescription={item.content}
@@ -60,7 +61,11 @@ class Home extends Component {
       missionPoints={item.points}
       missionImage={'https://facebook.github.io/react/logo-og.png'}
       clientLogo={'https://facebook.github.io/react/logo-og.png'}
-      clientName={'Dummy Client'}/>
+      clientName={'Dummy Client'}
+      onMissionClick={() => this.onMissionClick(item)}
+      onBrandClick={() => this.onMissionClick(item)}
+
+    />
   }
 
   renderMissionList() {
@@ -71,20 +76,29 @@ class Home extends Component {
     return missionList;
   }
 
-  onMissionClick() {
+  onMissionClick(item) {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'Challenge',
+        name: 'MissionDetail',
         passProps: {
-          text: 'Pushed screen'
+          missionId: item.id,
+          missionTitle: item.name,
+          missionDescription: item.content,
+          missionType: item.challenge_type,
+          missionPoints: item.points,
+          missionImage: 'https://facebook.github.io/react/logo-og.png',
+          clientLogo: 'https://facebook.github.io/react/logo-og.png',
+          clientName: 'Dummy Client',
         },
         options: {
           topBar: {
+            visible: true,
             title: {
-              text: 'Challenge Detail' //challenge detail title
+              text: item.name
             }
           }
         }
+
       }
     });
   }

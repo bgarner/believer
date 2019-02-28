@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Image } from 'react-native';
+import { Alert, Button, TextInput, View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import {Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import HttpRequestController from "../controllers/HttpRequestController";
@@ -7,7 +7,7 @@ import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 
-class Challenge extends Component {
+class Mission extends Component {
   static propTypes = {
     // componentId: PropTypes.string.isRequired,
     missionId : PropTypes.number.isRequired,
@@ -18,28 +18,34 @@ class Challenge extends Component {
     missionPoints : PropTypes.number.isRequired,
     clientLogo : PropTypes.string.isRequired,
     clientName : PropTypes.string.isRequired,
-
+    onMissionClick : PropTypes.func,
+    onBrandClick : PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
+    this.onMissionClick = this.onMissionClick.bind(this);
+    this.onBrandClick = this.onBrandClick.bind(this);
     // Navigation.events().bindComponent(this);
 
   }
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.renderHeader()}
-        {this.renderImage()}
-        {this.renderDescription()}
-      </View>
-    );
+
+  onMissionClick() {
+    if (this.props.onMissionClick) {
+      this.props.onMissionClick();
+    }
   }
 
+  onBrandClick() {
+    if (this.props.onBrandClick) {
+      this.props.onBrandClick();
+    }
+  }
 
   renderHeader() {
     return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
       <View style={{flex: 2 }}>
+        <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
           // size="xlarge"
           rounded
@@ -50,9 +56,12 @@ class Challenge extends Component {
             uri: this.props.clientLogo,
           }}
         />
+        </TouchableHighlight>
       </View>
       <View style={{flex: 8, paddingLeft: 10}}>
-        <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
+          <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
+            <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
+          </TouchableHighlight>
       </View>
       <View style={{flex: 1, alignItems: 'flex-end'}}>
         <Text>...</Text>
@@ -61,25 +70,41 @@ class Challenge extends Component {
     </View>
   }
 
+
+
   renderImage() {
 
     return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
-      <Image source={{uri: this.props.missionImage}}
+      <TouchableHighlight onPress={this.onMissionClick} activeOpacity={0} style={{width:'100%', height: '100%'}}>
+        <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
+      </TouchableHighlight>
     </View>
   }
+
+
   renderDescription() {
-    return <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+    return (
+      <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+          <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+            <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
+            <Text style={{flex : 1}}>
+              {this.props.missionPoints}
+            </Text>
+          </View>
 
-      <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
-        <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
-        <Text style={{flex : 1}}>
-          {this.props.missionPoints}
-        </Text>
+          <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
+      </View>);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderHeader()}
+        {this.renderImage()}
+        {this.renderDescription()}
       </View>
-
-      <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
-    </View>
+    );
   }
 
 }
@@ -105,4 +130,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Challenge;
+export default Mission;
