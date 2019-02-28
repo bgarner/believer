@@ -34,7 +34,9 @@ export default class HttpRequestController {
           'Content-Type': 'application/json',
         },
       });
-      return response.text();
+
+     return response.json();
+
     }
     catch(e){
       throw e;

@@ -8,9 +8,18 @@ import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 
 class Challenge extends Component {
-  // static propTypes = {
-  //   // componentId: PropTypes.string.isRequired,
-  // };
+  static propTypes = {
+    // componentId: PropTypes.string.isRequired,
+    missionId : PropTypes.number.isRequired,
+    missionTitle : PropTypes.string.isRequired,
+    missionDescription : PropTypes.string.isRequired,
+    missionImage : PropTypes.string.isRequired,
+    missionType : PropTypes.number.isRequired,
+    missionPoints : PropTypes.number.isRequired,
+    clientLogo : PropTypes.string.isRequired,
+    clientName : PropTypes.string.isRequired,
+
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -37,10 +46,13 @@ class Challenge extends Component {
           title="CR"
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
+          source={{
+            uri: this.props.clientLogo,
+          }}
         />
       </View>
       <View style={{flex: 8, paddingLeft: 10}}>
-        <Text style={{fontWeight: 'bold'}}>Challenge Title</Text>
+        <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
       </View>
       <View style={{flex: 1, alignItems: 'flex-end'}}>
         <Text>...</Text>
@@ -52,16 +64,21 @@ class Challenge extends Component {
   renderImage() {
 
     return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
-      <Image source={{uri: 'https://facebook.github.io/react/logo-og.png'}}
+      <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
     </View>
   }
   renderDescription() {
     return <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
 
-      <Text style={{ lineHeight: 30, fontWeight: 'bold' }}>Mission Title</Text>
+      <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+        <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
+        <Text style={{flex : 1}}>
+          {this.props.missionPoints}
+        </Text>
+      </View>
 
-      <Text style={{ paddingTop: 10, paddingBottom: 10 }}>Lorem ipsum dolor sit amet, esse vulputate referrentur ut mel, est oporteat quaerendum in. Ex reque quaestio aliquando est, accumsan consectetuer est id. An unum accusam repudiandae est, cum natum splendide ut.</Text>
+      <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
     </View>
   }
 

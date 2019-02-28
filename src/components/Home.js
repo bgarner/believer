@@ -24,17 +24,54 @@ class Home extends Component {
 
   constructor(props, context) {
     super(props, context);
-    // this.believerRequestController = new BelieverRequestController();
-    // this.httpRequestController = HttpRequestController.getInstance();
-    this.onChallengeClick = this.onChallengeClick.bind(this);
+    this.believerRequestController = new BelieverRequestController();
+    this.onMissionClick = this.onMissionClick.bind(this);
     Navigation.events().bindComponent(this);
+    this.state = {
+      missions : []
+    }
+  }
+
+  componentDidAppear() {
+    console.log('home');
+    console.log(this.props.componentId);
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
 
   }
 
+  async componentDidMount() {
+    try {
+      let missions = await this.believerRequestController.getMissionsFeed();
+      this.setState({missions});
+    }
+    catch(e) {
+      throw e;
+    }
 
+  }
 
+  renderMission(item) {
+    return <Challenge
+      id={item.id}
+      missionId={item.id}
+      missionTitle={item.name}
+      missionDescription={item.content}
+      missionType={item.challenge_type}
+      missionPoints={item.points}
+      missionImage={'https://facebook.github.io/react/logo-og.png'}
+      clientLogo={'https://facebook.github.io/react/logo-og.png'}
+      clientName={'Dummy Client'}/>
+  }
 
-  onChallengeClick() {
+  renderMissionList() {
+    let missionList = [];
+    this.state.missions.forEach((item) => {
+      missionList.push(this.renderMission(item));
+    });
+    return missionList;
+  }
+
+  onMissionClick() {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'Challenge',
@@ -55,34 +92,20 @@ class Home extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Challenge id={1}></Challenge>
-        <Challenge id={2}></Challenge>
-        <Challenge id={3}></Challenge>
-        <Challenge id={4}></Challenge>
+        { this.renderMissionList() }
+
+
       </ScrollView>
     );
   }
 
-  componentDidAppear() {
-    console.log('home');
-    console.log(this.props.componentId);
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
-
-  }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ecf0f1',
   },
-  // input: {
-  //   width: 200,
-  //   height: 44,
-  //   padding: 10,
-  //   borderWidth: 1,
-  //   borderColor: 'black',
-  //   marginBottom: 10,
-  // },
+
 });
 
 export default Home;

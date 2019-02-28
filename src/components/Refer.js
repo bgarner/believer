@@ -27,7 +27,7 @@ export default class Refer extends React.Component {
     super(props, context);
     // this.believerRequestController = new BelieverRequestController();
     // this.httpRequestController = HttpRequestController.getInstance();
-    // this.onChallengeClick = this.onChallengeClick.bind(this);
+    // this.onMissionClick = this.onMissionClick.bind(this);
     Navigation.events().bindComponent(this);
 
   }
