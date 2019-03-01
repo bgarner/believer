@@ -15,6 +15,7 @@ import Following from "./components/Following";
 import Status from "./components/Status";
 import Settings from "./components/Settings";
 import MissionDetail from "./components/MissionDetail";
+import Client from "./components/Client";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -33,6 +34,7 @@ export function registerScreens() {
   Navigation.registerComponent('Settings', () => Settings);
   Navigation.registerComponent('Mission', () => Mission);
   Navigation.registerComponent('MissionDetail', () => MissionDetail);
+  Navigation.registerComponent('Client', () => Client);
   Navigation.registerComponent('SideMenu', () => SideMenu);
 
 

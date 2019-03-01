@@ -42,5 +42,22 @@ export default class BelieverRequestController {
     }
   }
 
+  async getClientsNearUser()
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': 115} );
+      // response = JSON.parse(response);
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get missions for user');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

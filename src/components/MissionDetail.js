@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Image } from 'react-native';
+import { Alert, Button, View, StyleSheet, Image } from 'react-native';
 import {Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import HttpRequestController from "../controllers/HttpRequestController";

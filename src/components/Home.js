@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, Button} from 'react-native';
-import { AsyncStorage } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
-import HttpRequestController from "../controllers/HttpRequestController";
 import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
 
@@ -50,32 +48,6 @@ class Home extends Component {
 
   }
 
-  renderMission(item) {
-    return <Mission
-      id={item.id}
-      key={item.id}
-      missionId={item.id}
-      missionTitle={item.name}
-      missionDescription={item.content}
-      missionType={item.challenge_type}
-      missionPoints={item.points}
-      missionImage={'https://facebook.github.io/react/logo-og.png'}
-      clientLogo={'https://facebook.github.io/react/logo-og.png'}
-      clientName={'Dummy Client'}
-      onMissionClick={() => this.onMissionClick(item)}
-      onBrandClick={() => this.onMissionClick(item)}
-
-    />
-  }
-
-  renderMissionList() {
-    let missionList = [];
-    this.state.missions.forEach((item) => {
-      missionList.push(this.renderMission(item));
-    });
-    return missionList;
-  }
-
   onMissionClick(item) {
     Navigation.push(this.props.componentId, {
       component: {
@@ -102,6 +74,34 @@ class Home extends Component {
       }
     });
   }
+
+  renderMission(item) {
+    return <Mission
+      id={item.id}
+      key={item.id}
+      missionId={item.id}
+      missionTitle={item.name}
+      missionDescription={item.content}
+      missionType={item.challenge_type}
+      missionPoints={item.points}
+      missionImage={'https://facebook.github.io/react/logo-og.png'}
+      clientLogo={'https://facebook.github.io/react/logo-og.png'}
+      clientName={'Dummy Client'}
+      onMissionClick={() => this.onMissionClick(item)}
+      onBrandClick={() => this.onMissionClick(item)}
+
+    />
+  }
+
+  renderMissionList() {
+    let missionList = [];
+    this.state.missions.forEach((item) => {
+      missionList.push(this.renderMission(item));
+    });
+    return missionList;
+  }
+
+
 
   render() {
     return (

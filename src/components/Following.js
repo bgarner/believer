@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
+import BelieverRequestController from "../controllers/BelieverRequestController";
 
 export default class Explore extends React.Component {
   static get options() {
@@ -17,6 +18,29 @@ export default class Explore extends React.Component {
       }
     };
   }
+
+
+  constructor(props, context) {
+    super(props, context);
+    this.believerRequestController = new BelieverRequestController();
+    // this.onMissionClick = this.onMissionClick.bind(this);
+    // Navigation.events().bindComponent(this);
+    this.state = {
+      clients : []
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      let clients = await this.believerRequestController.getClientsFollowedByUser();
+      this.setState({clients: clients});
+    }
+    catch(e) {
+      throw e;
+    }
+
+  }
+
   render() {
     return (
       <View style={styles.container}>

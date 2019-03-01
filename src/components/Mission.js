@@ -9,7 +9,6 @@ import { Avatar } from 'react-native-elements';
 
 class Mission extends Component {
   static propTypes = {
-    // componentId: PropTypes.string.isRequired,
     missionId : PropTypes.number.isRequired,
     missionTitle : PropTypes.string.isRequired,
     missionDescription : PropTypes.string.isRequired,
@@ -26,7 +25,6 @@ class Mission extends Component {
     super(props, context);
     this.onMissionClick = this.onMissionClick.bind(this);
     this.onBrandClick = this.onBrandClick.bind(this);
-    // Navigation.events().bindComponent(this);
 
   }
 
