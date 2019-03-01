@@ -26,15 +26,6 @@ class MissionDetail extends Component {
     Navigation.events().bindComponent(this);
 
   }
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.renderHeader()}
-        {this.renderImage()}
-        {this.renderDescription()}
-      </View>
-    );
-  }
 
 
   renderHeader() {
@@ -69,7 +60,7 @@ class MissionDetail extends Component {
     </View>
   }
   renderDescription() {
-    return <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+    return <View style={{flex: 2, /*padding: 15,*/ backgroundColor: '#f2f2f2', width: '100%'/* borderColor: 'red', borderWidth: 1*/}}>
 
       <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
         <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
@@ -78,9 +69,33 @@ class MissionDetail extends Component {
         </Text>
       </View>
 
-      <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
+      <Text style={{ flex: 1, padding:10}}>{this.props.missionDescription}</Text>
     </View>
   }
+
+
+  renderMissionLaunchButton() {
+    if(this.props.missionType) {
+      return <Button
+      // onPress={onPressLearnMore}
+      title="Learn More"
+      color="#841584"
+      accessibilityLabel="Learn more about this purple button"
+        />
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderHeader()}
+        {this.renderImage()}
+        {this.renderDescription()}
+        {this.renderMissionLaunchButton()}
+      </View>
+    );
+  }
+
 
 }
 

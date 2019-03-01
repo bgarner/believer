@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import {Text} from "react-native-elements";
-import BelieverRequestController from "../controllers/BelieverRequestController";
-import HttpRequestController from "../controllers/HttpRequestController";
-import {Navigation} from "react-native-navigation";
+// import BelieverRequestController from "../controllers/BelieverRequestController";
+// import HttpRequestController from "../controllers/HttpRequestController";
+// import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 
@@ -85,7 +85,7 @@ class Mission extends Component {
 
   renderDescription() {
     return (
-      <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
+      <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1,*/ width: '100%'}}>
           <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
             <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
             <Text style={{flex : 1}}>
