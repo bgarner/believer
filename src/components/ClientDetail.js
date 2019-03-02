@@ -1,26 +1,19 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Image } from 'react-native';
-import {Text} from "react-native-elements";
-import BelieverRequestController from "../controllers/BelieverRequestController";
-import HttpRequestController from "../controllers/HttpRequestController";
+import {View, StyleSheet, Image, ScrollView} from 'react-native';
+import {Text, Button, SocialIcon} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
-import { Avatar } from 'react-native-elements';
+import { Avatar, Icon } from 'react-native-elements';
 
 class ClientDetail extends Component {
-  // static propTypes = {
-  //   componentId: PropTypes.string.isRequired,
-  // };
+
   static propTypes = {
     componentId: PropTypes.string.isRequired,
-    missionId : PropTypes.number.isRequired,
-    missionTitle : PropTypes.string.isRequired,
-    missionDescription : PropTypes.string.isRequired,
-    missionImage : PropTypes.string.isRequired,
-    missionType : PropTypes.number.isRequired,
-    missionPoints : PropTypes.number.isRequired,
-    clientLogo : PropTypes.string.isRequired,
+    clientId : PropTypes.number.isRequired,
     clientName : PropTypes.string.isRequired,
+    clientDescription : PropTypes.string.isRequired,
+    clientImage : PropTypes.string.isRequired,
+    clientLogo : PropTypes.string.isRequired,
 
   };
 
@@ -30,72 +23,86 @@ class ClientDetail extends Component {
 
   }
 
-
-  // renderHeader() {
-  //   return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
-  //     <View style={{flex: 2 }}>
-  //       <Avatar
-  //         // size="xlarge"
-  //         rounded
-  //         title="CR"
-  //         onPress={() => console.log("Works!")}
-  //         activeOpacity={0.7}
-  //         source={{
-  //           uri: this.props.clientLogo,
-  //         }}
-  //       />
-  //     </View>
-  //     <View style={{flex: 8, paddingLeft: 10}}>
-  //       <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
-  //     </View>
-  //     <View style={{flex: 1, alignItems: 'flex-end'}}>
-  //       <Text>...</Text>
-  //     </View>
-  //
-  //   </View>
-  // }
-
-  // renderImage() {
-  //
-  //   return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
-  //     <Image source={{uri: this.props.missionImage}}
-  //            style={{width:'100%', height: '100%'}} />
-  //   </View>
-  // }
-  // renderDescription() {
-  //   return <View style={{flex: 2, /*padding: 15,*/ backgroundColor: '#f2f2f2', width: '100%'/* borderColor: 'red', borderWidth: 1*/}}>
-  //
-  //     <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
-  //       <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
-  //       <Text style={{flex : 1}}>
-  //         {this.props.missionPoints}
-  //       </Text>
-  //     </View>
-  //
-  //     <Text style={{ flex: 1, padding:10}}>{this.props.missionDescription}</Text>
-  //   </View>
-  // }
-  //
-  //
-  // renderMissionLaunchButton() {
-  //   if(this.props.missionType) {
-  //     return <Button
-  //       // onPress={onPressLearnMore}
-  //       title="Learn More"
-  //       color="#841584"
-  //       accessibilityLabel="Learn more about this purple button"
-  //     />
-  //   }
-  // }
-
   render() {
     return (
+      <ScrollView styles={{flex:1}}>
       <View style={styles.container}>
-        {/*{this.renderHeader()}*/}
-        {/*{this.renderImage()}*/}
-        {/*{this.renderDescription()}*/}
-        {/*{this.renderMissionLaunchButton()}*/}
+        <View style={{flex:2.5}}>
+          <Image source={{uri: this.props.clientImage}}
+                 style={{width:'100%', height: '100%'}} />
+        </View>
+        <View style={{flex:1.75, flexDirection: 'row', alignItems: 'center',}}>
+          <View style={{flex: 3, height:'100%',backgroundColor: '#FFF', paddingLeft:20, paddingTop:15}}>
+              <Avatar
+                large
+                rounded
+                title="CR"
+                onPress={() => console.log("Works!")}
+                activeOpacity={0.7}
+                source={{
+                  uri: this.props.clientLogo,
+                }}
+
+              />
+          </View>
+          <View style={{flex: 7, paddingLeft: 10, height:'100%', justifyContent: 'center', }}>
+            <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#231F20'}}>{this.props.clientName}</Text>
+          </View>
+        </View>
+        <View style={{flex:1, flexDirection: 'row',}}>
+          <View style={{flex:1}}>
+          <Button
+            backgroundColor={'#35AFC8'}
+            title={'Follow'}
+            textStyle={{
+              fontSize: 14,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              fontFamily:'Helvetica'
+              }}
+            onPress={() => { alert('You are following the brand now!');}}
+          />
+          </View>
+
+          <View style={{flex:1}}>
+          <Button
+            backgroundColor={'#35AFC8'}
+            title={'Share This'}
+            onPress={() => { alert('You are sharing the brand now!');}}
+            textStyle={{
+              fontSize: 14,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              fontFamily:'Helvetica'
+            }}
+          />
+          </View>
+
+
+        </View>
+        <View style={{flex:2, alignItems: 'center', padding: 10, paddingLeft: 20, paddingRight:20, textAlign: 'center', fontFamily: 'Helvetica'}}>
+          <View>
+          <Text>{this.props.clientDescription}</Text>
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: '60%' }}>
+            <SocialIcon
+              type='facebook'
+            />
+            <SocialIcon
+              type='twitter'
+            />
+            <SocialIcon
+              type='instagram'
+            />
+          </View>
+        </View>
+
+        <View style={{flex:6,  borderWidth:1}}>
+
+        </View>
+
       </View>
+      </ScrollView>
     );
   }
 
@@ -106,20 +113,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#fff',
     // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
-    height: 500
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
+    height: 1000,
+    borderColor: 'blue',
+    borderWidth: 1
   }
 });
 

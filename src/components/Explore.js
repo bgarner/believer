@@ -26,7 +26,7 @@ export default class Explore extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
-    // this.onClientClick = this.onClientClick.bind(this);
+    this.onClientClick = this.onClientClick.bind(this);
     Navigation.events().bindComponent(this);
     this.state = {
       clients : []
@@ -44,32 +44,33 @@ export default class Explore extends React.Component {
 
   }
 
-  // async onClientClick(item) {
-  //
-  //   let currentActiveTab = await CommonUtils.getCurrentActiveTab();
-  //   Navigation.push(currentActiveTab, {
-  //     component: {
-  //       name: 'ClientDetail',
-  //       passProps: {
-  //         clientId: item.id,
-  //         clientName: item.name,
-  //         clientDescription: item.description,
-  //         clientImage: 'https://facebook.github.io/react/logo-og.png',
-  //         // clientLogo: item.logo,
-  //         clientLogo: 'https://facebook.github.io/react/logo-og.png',
-  //       },
-  //       options: {
-  //         topBar: {
-  //           visible: true,
-  //           title: {
-  //             text: item.name
-  //           }
-  //         }
-  //       }
-  //
-  //     }
-  //   });
-  // }
+  async onClientClick(item) {
+
+
+    let currentActiveTab = await CommonUtils.getCurrentActiveTab();
+    console.log(currentActiveTab)
+    Navigation.push(currentActiveTab, {
+      component: {
+        name: 'ClientDetail',
+        passProps: {
+          clientId: item.id,
+          clientName: item.name,
+          clientDescription: item.description,
+          clientImage: 'https://picsum.photos/g/640/480/?random',
+          clientLogo: 'https://picsum.photos/75/75/?random',
+        },
+        options: {
+          topBar: {
+            visible: true,
+            title: {
+              text: item.name
+            }
+          }
+        }
+
+      }
+    });
+  }
 
   renderClient(item) {
 
@@ -81,7 +82,7 @@ export default class Explore extends React.Component {
       clientDescription={item.content}
       clientImage={'https://picsum.photos/g/640/480/?random'}
       clientLogo={'https://picsum.photos//75/75/?random'}
-      // onClientClick={() => this.onClientClick(item)}
+      onClientClick={() => this.onClientClick(item)}
     />
   }
 
@@ -105,7 +106,5 @@ export default class Explore extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
   }
 })

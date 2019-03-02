@@ -41,11 +41,11 @@ class Mission extends Component {
   }
 
   renderHeader() {
-    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
+    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight:10}}>
       <View style={{flex: 2 }}>
         <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
-          // size="xlarge"
+          medium
           rounded
           title="CR"
           onPress={() => console.log("Works!")}
@@ -72,7 +72,7 @@ class Mission extends Component {
 
   renderImage() {
 
-    return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
+    return <View style={{flex:2.5, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
       <TouchableHighlight onPress={this.onMissionClick} activeOpacity={0} style={{width:'100%', height: '100%'}}>
         <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
