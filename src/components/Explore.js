@@ -79,8 +79,8 @@ export default class Explore extends React.Component {
       clientId={item.id}
       clientName={item.name}
       clientDescription={item.content}
-      clientImage={'https://facebook.github.io/react/logo-og.png'}
-      clientLogo={'https://facebook.github.io/react/logo-og.png'}
+      clientImage={'https://picsum.photos/g/640/480/?random'}
+      clientLogo={'https://picsum.photos//75/75/?random'}
       // onClientClick={() => this.onClientClick(item)}
     />
   }

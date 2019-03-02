@@ -31,14 +31,12 @@ class Client extends Component {
 
   render() {
 
-    // const resizeMode = 'center';
-
-    return <View style={{ borderColor: '#E6E7E8', borderWidth: 1, }}>
-      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 100, padding: 10, /*backgroundColor: '#e6e7e8',*/}}>
-        <View style={{flex: 2.6}}>
-          <TouchableHighlight activeOpacity={0} /*onPress={this.onBrandClick}*/>
+    return <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10}}>
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
+        <View style={{flex: 2, height:'100%',backgroundColor: '#FFF', }}>
+          <TouchableHighlight activeOpacity={0} style={{ height:'100%'}} onPress={this.onBrandClick}>
             <Avatar
-              large
+              medium
               rounded
               title="CR"
               onPress={() => console.log("Works!")}
@@ -46,28 +44,27 @@ class Client extends Component {
               source={{
                 uri: this.props.clientLogo,
               }}
+              containerStyle={{flex: 1, margin: 10}}
             />
           </TouchableHighlight>
         </View>
-        <View style={{flex: 7, paddingLeft: 10, height:'100%', justifyContent: 'center', /*borderColor: 'blue', borderWidth: 1,*/}}>
+        <View style={{flex: 8, paddingLeft: 10, height:'100%', justifyContent: 'center', }}>
           <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
-            <Text style={{fontWeight: 'bold', fontSize: 20,  color: '#231F20'}}>{this.props.clientName}</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 20,  color: '#FFF'}}>{this.props.clientName}</Text>
           </TouchableHighlight>
         </View>
 
 
       </View>
 
-      <View style={{flex: 1, flexDirection: 'column',  height: 70, paddingLeft: '50%', marginTop: 10}}>
-        {/*<View style={{flex: 2.5, alignItems: 'center', /*borderColor: 'blue', borderWidth: 1*!/}>*/}
+      <View style={{flex: 1, flexDirection: 'column',  height: 80, paddingLeft: '50%', marginTop: 25, }}>
           <Button
             backgroundColor={'#35AFC8'}
             title={'Follow'}
             onPress={() => { alert('You are following the brand now!');}}
-          ></Button>
-        {/*</View>*/}
+          />
       </View>
-    </View>
+    </ImageBackground>
 
 
   }
