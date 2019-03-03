@@ -5,7 +5,7 @@ import {Text} from "react-native-elements";
 // import HttpRequestController from "../controllers/HttpRequestController";
 // import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
-import { Avatar } from 'react-native-elements';
+import { Avatar, Icon } from 'react-native-elements';
 
 class Mission extends Component {
   static propTypes = {
@@ -86,9 +86,13 @@ class Mission extends Component {
       <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1,*/ width: '100%'}}>
           <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
             <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
-            <Text style={{flex : 1}}>
+            <View style={{flex : 1}}>
+              <Icon
+
+              >
               {this.props.missionPoints}
-            </Text>
+              </Icon>
+            </View>
           </View>
 
           <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
-    height: 500
+    height: 400
   },
   input: {
     width: 200,

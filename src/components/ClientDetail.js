@@ -84,7 +84,7 @@ class ClientDetail extends Component {
           <View>
           <Text>{this.props.clientDescription}</Text>
           </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: '60%' }}>
+          <View style={{ flex: 1.2, flexDirection: 'row', justifyContent: 'space-between', width: '60%' }}>
             <SocialIcon
               type='facebook'
             />
@@ -97,7 +97,7 @@ class ClientDetail extends Component {
           </View>
         </View>
 
-        <View style={{flex:6,  borderWidth:1}}>
+        <View style={{flex:6}}>
 
         </View>
 
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
     height: 1000,
-    borderColor: 'blue',
-    borderWidth: 1
+    // borderColor: 'blue',
+    // borderWidth: 1
   }
 });
 

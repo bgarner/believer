@@ -75,26 +75,5 @@ class Client extends Component {
 
 
 }
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     backgroundColor: '#fff',
-//     // borderColor: 'black', borderWidth: 1,
-//     fontFamily: 'Helvetica',
-//     height: 200
-//   },
-//   input: {
-//     width: 200,
-//     height: 44,
-//     padding: 10,
-//     borderWidth: 1,
-//     borderColor: 'black',
-//     marginBottom: 10,
-//   }
-// });
 
 export default Client;

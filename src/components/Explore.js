@@ -7,7 +7,6 @@ import BelieverRequestController from "../controllers/BelieverRequestController"
 import Client from "./Client";
 import PropTypes from "prop-types";
 import CommonUtils from "../CommonUtils";
-import {Text} from "react-native-elements";
 
 export default class Explore extends React.Component {
   // static propTypes = {
@@ -81,7 +80,7 @@ export default class Explore extends React.Component {
       clientName={item.name}
       clientDescription={item.content}
       clientImage={'https://picsum.photos/g/640/480/?random'}
-      clientLogo={'https://picsum.photos//75/75/?random'}
+      clientLogo={'https://picsum.photos/75/75/?random'}
       onClientClick={() => this.onClientClick(item)}
     />
   }

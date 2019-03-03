@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Alert, Button, View, StyleSheet, Image } from 'react-native';
-import {Text} from "react-native-elements";
+import {Badge, Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import HttpRequestController from "../controllers/HttpRequestController";
 import {Navigation} from "react-native-navigation";
@@ -32,7 +32,7 @@ class MissionDetail extends Component {
     return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
       <View style={{flex: 2 }}>
         <Avatar
-          // size="xlarge"
+          medium
           rounded
           title="CR"
           onPress={() => console.log("Works!")}
@@ -62,11 +62,14 @@ class MissionDetail extends Component {
   renderDescription() {
     return <View style={{flex: 2, /*padding: 15,*/ backgroundColor: '#f2f2f2', width: '100%'/* borderColor: 'red', borderWidth: 1*/}}>
 
-      <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
-        <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
-        <Text style={{flex : 1}}>
-          {this.props.missionPoints}
-        </Text>
+      <View style={{flex: 0.75, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /*borderColor: 'red', borderWidth: 1,*/ alignItems: 'center'}}>
+
+        <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold', verticalAlign:'center' }}>{this.props.missionTitle}</Text>
+
+        <Badge style={{flex: 1,borderRadius: 9,
+          height: 18,
+          minWidth: 0,
+          width: 18, backgroundColor: '#35AFC8'}} value={this.props.missionPoints}/>
       </View>
 
       <Text style={{ flex: 1, padding:10}}>{this.props.missionDescription}</Text>
