@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import { Alert, Button, View, StyleSheet, Image } from 'react-native';
-import {Badge, Text} from "react-native-elements";
-import BelieverRequestController from "../controllers/BelieverRequestController";
-import HttpRequestController from "../controllers/HttpRequestController";
+import { Alert, Button, View, StyleSheet, Image, Share, TouchableHighlight} from 'react-native';
+import {Avatar, Badge, Text} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
-import { Avatar } from 'react-native-elements';
+import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 
 class MissionDetail extends Component {
   static propTypes = {
@@ -24,8 +22,56 @@ class MissionDetail extends Component {
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
-
+    // this.shareToSocialMedia = this.shareToSocialMedia.bind(this);
+    const shareLinkContent = {
+      contentType: 'link',
+      contentUrl: "https://believerapp.com",
+      contentDescription: 'Checkout this app!',
+    };
+    this.state = {shareLinkContent: shareLinkContent,};
   }
+
+  // shareToSocialMedia() {
+  //   Share.share({
+  //     message: 'BAM: we\'re helping your business with awesome React Native apps',
+  //     url: 'http://bam.tech',
+  //     title: 'Wow, did you see that?'
+  //   }, {
+  //     // Android only:
+  //     // dialogTitle: 'Share BAM goodness',
+  //     // iOS only:
+  //     excludedActivityTypes: [
+  //       'com.apple.UIKit.activity.PostToTwitter'
+  //     ]
+  //   })
+  // }
+
+
+
+  shareLinkWithShareDialog() {
+    var tmp = this;
+    ShareDialog.canShow(this.state.shareLinkContent).then(
+      function(canShow) {
+        if (canShow) {
+          return ShareDialog.show(tmp.state.shareLinkContent);
+        }
+      }
+    ).then(
+      function(result) {
+        console.log(result);
+        if (result.isCancelled) {
+          alert('Share cancelled');
+        } else {
+          alert('Share success with postId: ' + result.postId);
+        }
+      },
+      function(error) {
+        alert('Share fail with error: ' + error);
+      }
+    );
+  }
+
+
 
 
   renderHeader() {
@@ -45,9 +91,7 @@ class MissionDetail extends Component {
       <View style={{flex: 8, paddingLeft: 10}}>
         <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
       </View>
-      <View style={{flex: 1, alignItems: 'flex-end'}}>
-        <Text>...</Text>
-      </View>
+
 
     </View>
   }
@@ -64,7 +108,7 @@ class MissionDetail extends Component {
 
       <View style={{flex: 0.75, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /*borderColor: 'red', borderWidth: 1,*/ alignItems: 'center'}}>
 
-        <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold', verticalAlign:'center' }}>{this.props.missionTitle}</Text>
+        <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold'}}>{this.props.missionTitle}</Text>
 
         <Badge style={{flex: 1,borderRadius: 9,
           height: 18,
@@ -79,12 +123,34 @@ class MissionDetail extends Component {
 
   renderMissionLaunchButton() {
     if(this.props.missionType) {
-      return <Button
-      // onPress={onPressLearnMore}
-      title="Learn More"
-      color="#841584"
-      accessibilityLabel="Learn more about this purple button"
-        />
+      // return <Button
+      // onPress={this.shareToSocialMedia}
+      // title="Complete Mission"
+      // color="#35AFC8"
+      //   />
+
+      return (
+        <View style={styles.container}>
+          {/*<LoginButton*/}
+            {/*readPermissions={["email"]}*/}
+            {/*onLoginFinished={*/}
+              {/*(error, result) => {*/}
+                {/*if (error) {*/}
+                  {/*alert("Login failed with error: " + error.message);*/}
+                {/*} else if (result.isCancelled) {*/}
+                  {/*alert("Login was cancelled");*/}
+                {/*} else {*/}
+                  {/*alert("Login was successful with permissions: " + result.grantedPermissions)*/}
+                {/*}*/}
+              {/*}*/}
+            {/*}*/}
+            {/*onLogoutFinished={() => alert("User logged out")}/>*/}
+          <TouchableHighlight onPress={this.shareLinkWithShareDialog.bind(this)}>
+            <Text style={styles.shareText}> Share on Facebook </Text>
+          </TouchableHighlight>
+        </View>
+      );
+
     }
   }
 
@@ -120,7 +186,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
-  }
+  },
+  shareText: {
+    fontSize: 20,
+    margin: 10,
+  },
+
 });
 
 export default MissionDetail;
