@@ -60,8 +60,10 @@ class Home extends Component {
           missionType: item.challenge_type,
           missionPoints: item.points,
           missionImage: 'https://picsum.photos/g/640/480/?random',
+          missionUrl: item.share_url,
           clientLogo: 'https://picsum.photos//75/75/?random',
           clientName: 'Dummy Client',
+
         },
         options: {
           topBar: {
@@ -108,8 +110,6 @@ class Home extends Component {
     return (
       <ScrollView style={styles.container}>
         { this.renderMissionList() }
-
-
       </ScrollView>
     );
   }

@@ -59,5 +59,21 @@ export default class BelieverRequestController {
     }
   }
 
+  async postMissionCompletion(mission_id)
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 115, 'mission_id': mission_id} );
+
+      if (response && response.length < 1){
+        throw new Error('Oops. Something went wrong while saving your progress.');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

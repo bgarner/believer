@@ -41,7 +41,7 @@ export default class Account extends React.Component {
   }
 
   renderAccount(item) {
-    return <View style={{flex:1, backgroundColor:'#fff', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom:25, paddingHorizontal: 10 , borderRadius: 3}}>
+    return <View key={item.accountType} style={{flex:1, backgroundColor:'#fff', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom:25, paddingHorizontal: 10 , borderRadius: 3}}>
       <View style={{ flex:1, }}>
         <SocialIcon
           type={item.iconName}

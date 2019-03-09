@@ -4,6 +4,8 @@ import {Avatar, Badge, Text} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
+import BelieverRequestController from "../controllers/BelieverRequestController";
+import {default as DeviceInfo} from 'react-native-device-info';
 
 class MissionDetail extends Component {
   static propTypes = {
@@ -16,19 +18,21 @@ class MissionDetail extends Component {
     missionPoints : PropTypes.number.isRequired,
     clientLogo : PropTypes.string.isRequired,
     clientName : PropTypes.string.isRequired,
+    missionUrl: PropTypes.string
 
   };
 
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
-    // this.shareToSocialMedia = this.shareToSocialMedia.bind(this);
+    console.log(this.props.missionUrl);
     const shareLinkContent = {
       contentType: 'link',
-      contentUrl: "https://believerapp.com",
+      contentUrl: this.props.missionUrl,
       contentDescription: 'Checkout this app!',
     };
-    this.state = {shareLinkContent: shareLinkContent,};
+    this.state = {shareLinkContent: shareLinkContent};
+    this.believerRequestController = new BelieverRequestController();
   }
 
   // shareToSocialMedia() {
@@ -47,30 +51,71 @@ class MissionDetail extends Component {
   // }
 
 
+  async shareLinkWithShareDialog() {
+    const tmp = this;
+    try {
+      const canShowDialog = await ShareDialog.canShow(this.state.shareLinkContent);
+      if(canShowDialog) {
+        const result = await ShareDialog.show(tmp.state.shareLinkContent);
+        if(! DeviceInfo.isEmulator()){
+          if (result.isCancelled) {
+            alert('Share cancelled');
+          }
+          else {
+            try{
+              // let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
+              alert(`You earned ${this.props.missionPoints} points`);
+            }
+            catch(e) {
+              alert('Oops! Something went wrong while saving your progress.');
+            }
 
-  shareLinkWithShareDialog() {
-    var tmp = this;
-    ShareDialog.canShow(this.state.shareLinkContent).then(
-      function(canShow) {
-        if (canShow) {
-          return ShareDialog.show(tmp.state.shareLinkContent);
+          }
+        }
+        else {
+          try{
+            // let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
+            alert(`You earned ${this.props.missionPoints} points`);
+          }
+          catch(e) {
+            alert('Oops! Something went wrong while saving your progress.');
+          }
         }
       }
-    ).then(
-      function(result) {
-        console.log(result);
-        if (result.isCancelled) {
-          alert('Share cancelled');
-        } else {
-          alert('Share success with postId: ' + result.postId);
-        }
-      },
-      function(error) {
-        alert('Share fail with error: ' + error);
-      }
-    );
+    }
+    catch(e) {
+      alert('Share fail with error: ' + e);
+    }
+
+
+  //   ShareDialog.canShow(this.state.shareLinkContent).then(
+  //     function(canShow) {
+  //       if (canShow) {
+  //         return ShareDialog.show(tmp.state.shareLinkContent);
+  //       }
+  //     }
+  //   ).then(
+  //     function(result) {
+  //       console.log(result);
+  //       if (result.isCancelled) {
+  //         alert('Share cancelled');
+  //       } else {
+  //         // alert('Share success with postId: ' + result.postId);
+  //         try{
+  //           let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
+  //           alert(`You earned ${response.points} points`);
+  //         }
+  //         catch(e) {
+  //           alert('Oops! Something went wrong while saving your progress.');
+  //         }
+  //
+  //       }
+  //     },
+  //     function(error) {
+  //       alert('Share fail with error: ' + error);
+  //     }
+  //   );
   }
-
 
 
 
