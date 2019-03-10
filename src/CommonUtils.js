@@ -31,4 +31,17 @@ export default class CommonUtils {
       return null;
     }
   }
+
+  static async setDrawerOpen(isOpen) {
+    return await AsyncStorage.setItem('drawerOpen', JSON.stringify(isOpen));
+  }
+
+  static async isDrawerOpen() {
+    const value = await AsyncStorage.getItem('drawerOpen');
+    if (value !== null) {
+      return JSON.parse(value);
+    } else {
+      return false;
+    }
+  }
 }

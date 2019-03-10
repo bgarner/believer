@@ -11,20 +11,10 @@ import {Avatar, ListItem} from "react-native-elements";
 import CommonUtils from "../CommonUtils";
 
 export default class SideMenu extends React.Component {
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: 'Side Menu'
-        },
-      }
-    };
-  }
-
-
   constructor(props, context) {
     super(props, context);
     this.renderItem = this.renderItem.bind(this);
+    Navigation.events().bindComponent(this);
     this.menuItems = [
       {
         name: 'Explore',
@@ -43,6 +33,53 @@ export default class SideMenu extends React.Component {
         componentName: 'Settings'
       }
     ]
+  }
+
+  componentDidMount() {
+    this.registerDrawerListener();
+  }
+
+  componentWillUnmount() {
+    if (this.drawerOpenListener) {
+      this.drawerOpenListener.remove();
+    }
+
+    if (this.drawerCloseListener) {
+      this.drawerCloseListener.remove();
+    }
+
+    if (this.drawerButtonListener) {
+      this.drawerButtonListener.remove();
+    }
+  }
+
+  registerDrawerListener() {
+    this.drawerOpenListener = Navigation.events().registerComponentDidAppearListener(
+      ({ componentId, componentName }) => {
+        if (componentId === "Drawer") {
+          CommonUtils.setDrawerOpen(true);
+        }
+      });
+
+    this.drawerCloseListener = Navigation.events().registerComponentDidDisappearListener(
+      ({ componentId, componentName }) => {
+        if (componentId === "Drawer") {
+          CommonUtils.setDrawerOpen(false);
+        }
+      });
+
+    this.drawerButtonListener = Navigation.events().registerNavigationButtonPressedListener(async ({ buttonId }) => {
+      const isOpen = await CommonUtils.isDrawerOpen();
+      if (buttonId === 'sideMenuHamburger') {
+        Navigation.mergeOptions('Drawer', {
+          sideMenu: {
+            left: {
+              visible: !isOpen,
+            },
+          },
+        });
+      }
+    });
   }
 
   render() {

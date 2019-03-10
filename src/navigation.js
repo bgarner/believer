@@ -1,5 +1,15 @@
-import { Navigation } from 'react-native-navigation'
+import {Navigation} from 'react-native-navigation'
 
+// Navigation.setDefaultOptions({
+//   topBar: {
+//     visible: true,
+//     background: {
+//       color: 'black',
+//       translucent: true,
+//       blur: false
+//     }
+//   },
+// });
 export const goToAuth = () => Navigation.setRoot({
   root: {
     component: {
@@ -45,7 +55,9 @@ export const goHome = () => Navigation.setRoot({
                           // icon: require('../signin.png')
                         },
                         topBar: {
-                          visible: true
+                          title: {
+                            text: 'Home',
+                          },
                         },
                       },
                     },
@@ -67,9 +79,9 @@ export const goHome = () => Navigation.setRoot({
                           text: 'Rewards',
                           // icon: require('../signin.png')
                         },
-                        topBar: {
-                          visible: true
-                        },
+                        // topBar: {
+                        //   visible: true
+                        // },
                       },
                     },
 
@@ -90,9 +102,9 @@ export const goHome = () => Navigation.setRoot({
                           text: 'Post',
                           // icon: require('../signin.png')
                         },
-                        topBar: {
-                          visible: true
-                        },
+                        // topBar: {
+                        //   visible: true
+                        // },
                       },
                     },
 
@@ -113,9 +125,9 @@ export const goHome = () => Navigation.setRoot({
                           text: 'Refer',
                           // icon: require('../signin.png')
                         },
-                        topBar: {
-                          visible: true
-                        },
+                        // topBar: {
+                        //   visible: true
+                        // },
                       },
                     },
 
@@ -136,9 +148,9 @@ export const goHome = () => Navigation.setRoot({
                           text: 'Account',
                           // icon: require('../signin.png')
                         },
-                        topBar: {
-                          visible: true
-                        },
+                        // topBar: {
+                        //   visible: true
+                        // },
                       },
                     },
 

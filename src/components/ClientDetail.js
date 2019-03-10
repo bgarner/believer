@@ -15,6 +15,7 @@ class ClientDetail extends Component {
     clientImage : PropTypes.string.isRequired,
     clientLogo : PropTypes.string.isRequired,
 
+
   };
 
   constructor(props, context) {

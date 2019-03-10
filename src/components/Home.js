@@ -11,21 +11,13 @@ class Home extends Component {
   static propTypes = {
     componentId: PropTypes.string.isRequired,
   };
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: 'Home'
-        },
-      }
-    };
-  }
 
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     this.onMissionClick = this.onMissionClick.bind(this);
     Navigation.events().bindComponent(this);
+
     this.state = {
       missions : []
     }
@@ -95,6 +87,8 @@ class Home extends Component {
 
     />
   }
+
+
 
   renderMissionList() {
     let missionList = [];

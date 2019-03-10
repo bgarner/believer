@@ -1,13 +1,13 @@
 import React from 'react'
 import {
   View,
-  Text,
-  Button,
   StyleSheet, ScrollView,
 } from 'react-native'
+import {Button} from 'react-native-elements'
 import {Navigation} from 'react-native-navigation';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import ClientCard from "./ClientCard";
+import CommonUtils from "../CommonUtils";
 
 export default class Following extends React.Component {
   static get options() {
@@ -25,6 +25,7 @@ export default class Following extends React.Component {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     // this.onMissionClick = this.onMissionClick.bind(this);
+    this.onClientCardClick = this.onClientCardClick.bind(this);
     Navigation.events().bindComponent(this);
     this.state = {
       clients : []
@@ -42,6 +43,35 @@ export default class Following extends React.Component {
 
   }
 
+
+  async onClientCardClick(item) {
+
+
+    let currentActiveTab = await CommonUtils.getCurrentActiveTab();
+    console.log(currentActiveTab)
+    Navigation.push(currentActiveTab, {
+      component: {
+        name: 'ClientDetail',
+        passProps: {
+          clientId: item.id,
+          clientName: item.name,
+          clientDescription: item.description,
+          clientImage: 'https://picsum.photos/g/640/480/?random',
+          clientLogo: 'https://picsum.photos/75/75/?random',
+        },
+        options: {
+          topBar: {
+            visible: true,
+            title: {
+              text: item.name
+            }
+          }
+        }
+
+      }
+    });
+  }
+
   renderClient(item) {
 
     return <ClientCard
@@ -52,7 +82,7 @@ export default class Following extends React.Component {
       clientDescription={item.content}
       clientImage={'https://picsum.photos/g/640/480/?random'}
       clientLogo={'https://picsum.photos/75/75/?random'}
-      onClientClick={() => this.onClientClick(item)}
+      onClientCardClick={() => this.onClientCardClick(item)}
     />
   }
 
@@ -66,13 +96,33 @@ export default class Following extends React.Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        { this.renderClientList() }
-      </ScrollView>
+      <View style={{flex:1, flexDirection:'column'}}>
+        <View style={{flex:9}}>
+          <ScrollView>
+            <View style={styles.container}>
+              { this.renderClientList() }
+            </View>
+          </ScrollView>
+        </View>
+
+        <View style={{flex:1, flexDirection: 'row', width:'100%', justifyContent: 'center', alignItems:'flex-end'}}>
+          <Button
+          backgroundColor={'#35AFC8'}
+          title={'Find Worthy Brands'}
+          textStyle={{
+          fontSize: 14,
+          fontWeight: 'bold',
+          textAlign: 'center',
+          fontFamily:'Helvetica'
+          }}
+          onPress={() => { alert('You are following the brand now!');}}
+          />
+        </View>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, width:'100%', flexWrap: 'wrap', flexDirection:'row', /*justifyContent:'center'*/ }
+  container: { flex: 1, width:'100%', height: '100%', flexWrap: 'wrap', flexDirection:'row' }
 })
