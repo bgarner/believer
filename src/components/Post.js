@@ -21,6 +21,13 @@ export default class Post extends React.Component {
         title: {
           text: 'Post'
         },
+        leftButtons: [
+          {
+            id: 'sideMenuHamburger',
+            icon: require('../../assets/menu-button.png'),
+            color: 'white',
+          }
+        ],
       }
     };
   }

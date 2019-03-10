@@ -97,7 +97,7 @@ export default class Following extends React.Component {
   render() {
     return (
       <View style={{flex:1, flexDirection:'column'}}>
-        <View style={{flex:9}}>
+        <View style={{flex:12}}>
           <ScrollView>
             <View style={styles.container}>
               { this.renderClientList() }

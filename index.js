@@ -7,13 +7,13 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({
     topBar: {
       visible: true,
-      leftButtons: [
-        {
-          id: 'sideMenuHamburger',
-          icon: require('./assets/menu-button.png'),
-          color: 'white',
-        }
-      ],
+      // leftButtons: [
+      //   {
+      //     id: 'sideMenuHamburger',
+      //     icon: require('./assets/menu-button.png'),
+      //     color: 'white',
+      //   }
+      // ],
       background: {
         color: '#231f20',
         blur: false

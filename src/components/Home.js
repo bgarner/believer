@@ -12,6 +12,20 @@ class Home extends Component {
     componentId: PropTypes.string.isRequired,
   };
 
+  static get options() {
+    return {
+      topBar: {
+        leftButtons: [
+          {
+            id: 'sideMenuHamburger',
+            icon: require('../../assets/menu-button.png'),
+            color: 'white',
+          }
+        ],
+      }
+    };
+  }
+
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();

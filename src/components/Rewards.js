@@ -14,12 +14,20 @@ export default class Rewards extends React.Component {
   static propTypes = {
     componentId: PropTypes.string.isRequired,
   };
+
   static get options() {
     return {
       topBar: {
         title: {
-          text: 'Rewards'
+          text: 'Rewards',
         },
+        leftButtons: [
+          {
+            id: 'sideMenuHamburger',
+            icon: require('../../assets/menu-button.png'),
+            color: 'white',
+          }
+        ],
       }
     };
   }
