@@ -25,8 +25,7 @@ export default class BelieverRequestController {
   }
 
 
-  async getMissionsFeed()
-  {
+  async getMissionsFeed() {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 115} );
       // response = JSON.parse(response);
@@ -42,14 +41,12 @@ export default class BelieverRequestController {
     }
   }
 
-  async getClientsNearUser()
-  {
+  async getClientsNearUser() {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': 115} );
-      // response = JSON.parse(response);
 
       if (response && response.length < 1){
-        throw new Error('Failed to get missions for user');
+        throw new Error('Failed to get brands for user');
       }
       return (response);
 
@@ -59,8 +56,22 @@ export default class BelieverRequestController {
     }
   }
 
-  async postMissionCompletion(mission_id)
-  {
+  async getClientsFollowedByUser() {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': 115} );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get followed brands for user');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async postMissionCompletion(mission_id) {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 115, 'mission_id': mission_id} );
 

@@ -31,7 +31,7 @@ export default class SideMenu extends React.Component {
         componentName: 'Explore'
       },
       {
-        name: 'Following',
+        name: 'Manage Brands',
         componentName: 'Following'
       },
       {
