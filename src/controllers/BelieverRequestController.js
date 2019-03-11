@@ -86,5 +86,20 @@ export default class BelieverRequestController {
     }
   }
 
+  async getRewardsList() {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/rewards" );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get rewards');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

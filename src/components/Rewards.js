@@ -3,11 +3,13 @@ import {
   View,
   Text,
   Button,
-  StyleSheet,
+  StyleSheet, ScrollView,
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 import PropTypes from "prop-types";
 import CommonUtils from "../CommonUtils";
+import RewardCard from "./RewardCard";
+import BelieverRequestController from "../controllers/BelieverRequestController";
 
 export default class Rewards extends React.Component {
 
@@ -34,34 +36,102 @@ export default class Rewards extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    // this.believerRequestController = new BelieverRequestController();
+    this.believerRequestController = new BelieverRequestController();
     // this.httpRequestController = HttpRequestController.getInstance();
-    // this.onMissionClick = this.onMissionClick.bind(this);
-    Navigation.events().bindComponent(this);
+    this.onRewardClick = this.onRewardClick.bind(this);
+    // Navigation.events().bindComponent(this);
+    this.state = {
+      rewards : []
+    }
 
   }
+
+  async componentDidMount() {
+    try {
+      let rewards = await this.believerRequestController.getRewardsList();
+      this.setState({rewards});
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
+  componentDidAppear() {
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
+
+  }
+
+  onRewardClick(item) {
+    // Navigation.push(this.props.componentId, {
+    //   component: {
+    //     name: 'RewardDetail',
+    //     passProps: {
+    //       missionId: item.id,
+    //       missionTitle: item.name,
+    //       missionDescription: item.content,
+    //       missionType: item.challenge_type,
+    //       missionPoints: item.points,
+    //       missionImage: 'https://picsum.photos/g/640/480/?random',
+    //       missionUrl: item.share_url,
+    //       clientLogo: 'https://picsum.photos//75/75/?random',
+    //       clientName: 'Dummy Client',
+    //
+    //     },
+    //     options: {
+    //       topBar: {
+    //         visible: true,
+    //         title: {
+    //           text: item.name
+    //         }
+    //       }
+    //     }
+    //
+    //   }
+    // });
+
+    console.log('email sent to redeem points');
+  }
+
+  renderReward(item) {
+    return <RewardCard
+      id={item.id}
+      key={item.id}
+      rewardId={item.id}
+      rewardTitle={item.title}
+      rewardDescription={item.description}
+      rewardType={item.type}
+      rewardPoints={item.points}
+      rewardImage={item.image}
+      onRewardClick={() => this.onRewardClick(item)}
+
+    />
+  }
+
+
+
+  renderRewardList() {
+    let rewardList = [];
+    this.state.rewards.forEach((item) => {
+      rewardList.push(this.renderReward(item));
+    });
+    return rewardList;
+  }
+
 
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Rewards</Text>
-      </View>
-    )
+      <ScrollView style={styles.container}>
+        { this.renderRewardList() }
+      </ScrollView>
+    );
   }
 
-  componentDidAppear() {
-    console.log('Rewards');
-    console.log(this.props.componentId);
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
 
-  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 })
