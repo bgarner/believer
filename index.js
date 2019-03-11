@@ -23,6 +23,11 @@ Navigation.events().registerAppLaunchedListener(() => {
         fontFamily: 'Helvetica',
       },
     },
+    bottomTab: {
+      selectedTextColor: '#35AFC8',
+      fontFamily: 'Helvetica',
+      fontSize: 10
+    },
   });
   Navigation.setRoot({
     root: {

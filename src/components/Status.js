@@ -40,7 +40,7 @@ export default class Status extends React.Component {
    renderImage() {
     return <ImageBackground
       source={{uri: 'https://picsum.photos/g/640/480/?random'}}
-      style={{ flex:3, height:'100%', width:'100%',}}>
+      style={{ flex:2.5, height:'100%', width:'100%',}}>
       <View style={{flex:1, flexDirection:'column', alignItems:'center', }}>
         <View style={{flex:3, width:'100%', alignItems: 'center', paddingTop:20}}>
           <Text style={{color:'#fff', fontSize: 20, fontWeight:'bold'}}>
@@ -70,7 +70,7 @@ export default class Status extends React.Component {
   }
 
   renderAnalytics() {
-    return <View style={{flex:2.5, backgroundColor: '#E6E7E8', margin:10}}>
+    return <View style={{flex:2, backgroundColor: '#E6E7E8', margin:10}}>
       <View style={{flex:1, flexDirection: 'row', justifyContent:'center'}}>
         <View style={{ flex:1, borderBottomWidth:1, borderRightWidth:1, borderColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>

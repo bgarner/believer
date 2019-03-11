@@ -39,7 +39,7 @@ export default class Rewards extends React.Component {
     this.believerRequestController = new BelieverRequestController();
     // this.httpRequestController = HttpRequestController.getInstance();
     this.onRewardClick = this.onRewardClick.bind(this);
-    // Navigation.events().bindComponent(this);
+    Navigation.events().bindComponent(this);
     this.state = {
       rewards : []
     }
