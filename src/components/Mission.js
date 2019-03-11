@@ -46,7 +46,7 @@ class Mission extends Component {
         <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
           medium
-          rounded
+          // rounded
           title="CR"
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}

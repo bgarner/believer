@@ -37,7 +37,7 @@ class Client extends Component {
           <TouchableHighlight activeOpacity={0} style={{ height:'100%'}} onPress={this.onClientClick}>
             <Avatar
               medium
-              rounded
+              // rounded
               title="CR"
               onPress={() => console.log("Works!")}
               activeOpacity={0.7}
