@@ -62,33 +62,6 @@ export default class Rewards extends React.Component {
   }
 
   onRewardClick(item) {
-    // Navigation.push(this.props.componentId, {
-    //   component: {
-    //     name: 'RewardDetail',
-    //     passProps: {
-    //       missionId: item.id,
-    //       missionTitle: item.name,
-    //       missionDescription: item.content,
-    //       missionType: item.challenge_type,
-    //       missionPoints: item.points,
-    //       missionImage: 'https://picsum.photos/g/640/480/?random',
-    //       missionUrl: item.share_url,
-    //       clientLogo: 'https://picsum.photos//75/75/?random',
-    //       clientName: 'Dummy Client',
-    //
-    //     },
-    //     options: {
-    //       topBar: {
-    //         visible: true,
-    //         title: {
-    //           text: item.name
-    //         }
-    //       }
-    //     }
-    //
-    //   }
-    // });
-
     console.log('email sent to redeem points');
   }
 

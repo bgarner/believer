@@ -101,5 +101,20 @@ export default class BelieverRequestController {
     }
   }
 
+  async getUserProfile() {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: 115} );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get profile');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

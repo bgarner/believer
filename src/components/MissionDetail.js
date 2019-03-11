@@ -87,40 +87,12 @@ class MissionDetail extends Component {
       alert('Share fail with error: ' + e);
     }
 
-
-  //   ShareDialog.canShow(this.state.shareLinkContent).then(
-  //     function(canShow) {
-  //       if (canShow) {
-  //         return ShareDialog.show(tmp.state.shareLinkContent);
-  //       }
-  //     }
-  //   ).then(
-  //     function(result) {
-  //       console.log(result);
-  //       if (result.isCancelled) {
-  //         alert('Share cancelled');
-  //       } else {
-  //         // alert('Share success with postId: ' + result.postId);
-  //         try{
-  //           let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
-  //           alert(`You earned ${response.points} points`);
-  //         }
-  //         catch(e) {
-  //           alert('Oops! Something went wrong while saving your progress.');
-  //         }
-  //
-  //       }
-  //     },
-  //     function(error) {
-  //       alert('Share fail with error: ' + error);
-  //     }
-  //   );
   }
 
 
 
   renderHeader() {
-    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', /*borderColor: 'blue', borderWidth: 1,*/ padding: 10}}>
+    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', padding: 10}}>
       <View style={{flex: 2 }}>
         <Avatar
           medium
@@ -143,15 +115,15 @@ class MissionDetail extends Component {
 
   renderImage() {
 
-    return <View style={{flex:4, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
+    return <View style={{flex:4, backgroundColor: '#f2f2f2', width:'100%', height: 50}}>
       <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
     </View>
   }
   renderDescription() {
-    return <View style={{flex: 2, /*padding: 15,*/ backgroundColor: '#f2f2f2', width: '100%'/* borderColor: 'red', borderWidth: 1*/}}>
+    return <View style={{flex: 2, backgroundColor: '#f2f2f2', width: '100%'}}>
 
-      <View style={{flex: 0.75, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /*borderColor: 'red', borderWidth: 1,*/ alignItems: 'center'}}>
+      <View style={{flex: 0.75, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', alignItems: 'center'}}>
 
         <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold'}}>{this.props.missionTitle}</Text>
 

@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import CommonUtils from "../CommonUtils";
 import {Button, Icon} from "react-native-elements";
 
-export default class Rewards extends React.Component {
+export default class RewardCard extends React.Component {
 
   static propTypes = {
     // componentId: PropTypes.string.isRequired,
@@ -74,7 +74,7 @@ export default class Rewards extends React.Component {
         <Button
           backgroundColor={'#35AFC8'}
           title={'Redeem'}
-          onPress={() => { alert('Reward Redeemed');}}
+          onPress={this.props.onRedeemClick}
           textStyle={{
             fontSize: 14,
             fontWeight: 'bold',
