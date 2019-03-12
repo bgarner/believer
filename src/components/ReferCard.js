@@ -41,20 +41,6 @@ export default class ReferCard extends React.Component {
     return <View style={{flex:3}}>
     <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10, height: '100%'}}>
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
-        {/*<View style={{flex: 2, height:'100%',backgroundColor: '#FFF', }}>*/}
-          {/*<TouchableHighlight activeOpacity={0} style={{ height:'100%'}} onPress={this.onClientClick}>*/}
-            {/*<Avatar*/}
-              {/*medium*/}
-              {/*rounded*/}
-              {/*title="CR"*/}
-              {/*onPress={() => console.log("Works!")}*/}
-              {/*activeOpacity={0.7}*/}
-              {/*source={{*/}
-                {/*uri: this.props.clientLogo,*/}
-              {/*}}*/}
-              {/*containerStyle={{flex: 1, margin: 10}}*/}
-            {/*/>*/}
-          {/*</TouchableHighlight>*/}
         {/*</View>*/}
         <TouchableHighlight
           activeOpacity={0}
@@ -80,7 +66,7 @@ export default class ReferCard extends React.Component {
         <Button
           backgroundColor={'#35AFC8'}
           title={'Learn More'}
-          onPress={() => { alert('You are following the brand now!');}}
+          onPress={this.props.onReferClick}
           textStyle={{
             fontSize: 14,
             fontWeight: 'bold',
@@ -113,30 +99,7 @@ export default class ReferCard extends React.Component {
           {/*<Text >{this.props.clientDescription}</Text>*/}
         </View>
       </View>);
-  }
 
-  renderActions() {
-    return <View style={{flex:1, flexDirection: 'row', marginTop:20}}>
-      <View style={{flex:1, justifyContent:'center'}}>
-        <Text style={{fontSize:12, color:'#a4a4a4', paddingLeft:10}}>
-          {this.props.rewardPoints} Points
-        </Text>
-      </View>
-      <View style={{flex:0.8}}>
-        <Button
-          backgroundColor={'#35AFC8'}
-          title={'Redeem'}
-          onPress={this.props.onRedeemClick}
-          textStyle={{
-            fontSize: 14,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            fontFamily:'Helvetica'
-          }}
-        />
-      </View>
-
-    </View>
   }
 
   render() {
@@ -144,8 +107,6 @@ export default class ReferCard extends React.Component {
       <View style={styles.container}>
         {this.renderTitle()}
         {this.renderImage()}
-
-        {/*{this.renderActions()}*/}
       </View>
     )
   }

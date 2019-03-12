@@ -17,6 +17,7 @@ import Settings from "./components/Settings";
 import MissionDetail from "./components/MissionDetail";
 import Client from "./components/Client";
 import ClientDetail from "./components/ClientDetail";
+import ReferForm from "./components/ReferForm";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -28,6 +29,7 @@ export function registerScreens() {
   Navigation.registerComponent('Rewards', () => Rewards);
   Navigation.registerComponent('Post', () => Post);
   Navigation.registerComponent('Refer', () => Refer);
+  Navigation.registerComponent('ReferForm', () => ReferForm);
   Navigation.registerComponent('Account', () => Account);
   Navigation.registerComponent('Explore', () => Explore);
   Navigation.registerComponent('Following', () => Following);

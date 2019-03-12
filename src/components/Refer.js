@@ -55,7 +55,28 @@ export default class Refer extends React.Component {
   }
 
   onReferClick(item) {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'ReferForm',
+        passProps: {
+          clientId: item.id,
+          clientName: item.name,
+          clientDescription: item.description,
+          clientImage: 'https://picsum.photos/g/640/480/?random',
+          viewTitle: `Refer a Friend to ${item.name}`,
 
+        },
+        options: {
+          topBar: {
+            visible: true,
+            title: {
+              text: item.name
+            }
+          }
+        }
+
+      }
+    });
   }
   renderClient(item) {
 
@@ -64,7 +85,7 @@ export default class Refer extends React.Component {
       key={item.id}
       clientId={item.id}
       clientName={item.name}
-      clientDescription={item.content}
+      clientDescription={item.description}
       clientImage={'https://picsum.photos/g/640/480/?random'}
       clientLogo={'https://picsum.photos/75/75/?random'}
       onReferClick={() => this.onReferClick(item)}
