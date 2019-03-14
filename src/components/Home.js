@@ -95,7 +95,7 @@ class Home extends Component {
       missionPoints={item.points}
       missionImage={'https://picsum.photos/g/640/480/?random'}
       clientLogo={'https://picsum.photos//75/75/?random'}
-      clientName={'Dummy Client'}
+      clientName={item.brand_name}
       onMissionClick={() => this.onMissionClick(item)}
       onBrandClick={() => this.onMissionClick(item)}
 

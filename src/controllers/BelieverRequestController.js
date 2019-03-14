@@ -117,4 +117,38 @@ export default class BelieverRequestController {
   }
 
 
+
+  async followClient(clientId)
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 115, client_id: clientId} );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to follow Client');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async unfollowClient(clientId)
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 115, client_id: clientId} );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to unfollow Client');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+
 }

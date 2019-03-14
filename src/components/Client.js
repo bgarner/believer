@@ -3,6 +3,9 @@ import {View, StyleSheet, Image, ImageBackground, TouchableHighlight} from 'reac
 import {Text, Button} from "react-native-elements";
 import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
+import BelieverRequestController from "../controllers/BelieverRequestController";
+import FollowButton from "./FollowButton";
+import UnfollowButton from "./UnfollowButton";
 
 class Client extends Component {
 
@@ -13,13 +16,19 @@ class Client extends Component {
     clientDescription : PropTypes.string,
     clientImage : PropTypes.string.isRequired,
     clientLogo : PropTypes.string.isRequired,
-    // onClientClick : PropTypes.func,
+    onClientClick : PropTypes.func.isRequired,
 
   };
 
   constructor(props, context) {
     super(props, context);
+    this.believerRequestController = new BelieverRequestController();
     this.onClientClick = this.onClientClick.bind(this);
+    this.followClient = this.followClient.bind(this);
+    this.unfollowClient = this.unfollowClient.bind(this);
+    this.state = {
+      isFollowing : false
+    }
 
   }
 
@@ -29,7 +38,45 @@ class Client extends Component {
     }
   }
 
+  async followClient() {
+    const clientId = this.props.clientId;
+    try {
+      let requestFollow = await this.believerRequestController.followClient(clientId);
+      if(requestFollow) {
+        const isFollowing = requestFollow.isFollowing;
+        this.setState({isFollowing});
+      }
+
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
+  async unfollowClient() {
+    const clientId = this.props.clientId;
+    try {
+      let requestUnfollow = await this.believerRequestController.unfollowClient(clientId);
+      if(requestUnfollow) {
+        const isFollowing = requestUnfollow.isFollowing;
+        this.setState({isFollowing});
+      }
+
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
   render() {
+
+    let isFollowing = this.state.isFollowing;
+    let button;
+    if(isFollowing) {
+      button = <UnfollowButton onUnfollowClick={this.unfollowClient} buttonTitle={'Unfollow'} />;
+    }else {
+      button = <FollowButton onFollowClick={this.followClient} buttonTitle={'Follow'} />;
+    }
 
     return <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10}}>
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
@@ -56,17 +103,7 @@ class Client extends Component {
       </View>
 
       <View style={{flex: 1, flexDirection: 'column',  height: 80, paddingLeft: '50%', marginTop: 25, }}>
-          <Button
-            backgroundColor={'#35AFC8'}
-            title={'Follow'}
-            onPress={() => { alert('You are following the brand now!');}}
-            textStyle={{
-              fontSize: 14,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontFamily:'Helvetica'
-            }}
-          />
+        {button}
       </View>
     </ImageBackground>
 
