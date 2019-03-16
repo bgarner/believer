@@ -25,7 +25,8 @@ class MissionDetail extends Component {
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
-    console.log(this.props.missionUrl);
+    this.shareToSocialMedia = this.shareToSocialMedia.bind(this);
+    this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
     const shareLinkContent = {
       contentType: 'link',
       contentUrl: this.props.missionUrl,
@@ -35,20 +36,21 @@ class MissionDetail extends Component {
     this.believerRequestController = new BelieverRequestController();
   }
 
-  // shareToSocialMedia() {
-  //   Share.share({
-  //     message: 'BAM: we\'re helping your business with awesome React Native apps',
-  //     url: 'http://bam.tech',
-  //     title: 'Wow, did you see that?'
-  //   }, {
-  //     // Android only:
-  //     // dialogTitle: 'Share BAM goodness',
-  //     // iOS only:
-  //     excludedActivityTypes: [
-  //       'com.apple.UIKit.activity.PostToTwitter'
-  //     ]
-  //   })
-  // }
+  shareToSocialMedia() {
+    const self = this;
+    Share.share({
+      message: self.props.missionDescription,
+      url: self.props.missionUrl,
+      title: self.props.missionTitle,
+    }, {
+      // Android only:
+      // dialogTitle: 'Share BAM goodness',
+      // iOS only:
+      excludedActivityTypes: [
+        'com.apple.UIKit.activity.PostToTwitter'
+      ]
+    })
+  }
 
 
   async shareLinkWithShareDialog() {
@@ -162,7 +164,8 @@ class MissionDetail extends Component {
               {/*}*/}
             {/*}*/}
             {/*onLogoutFinished={() => alert("User logged out")}/>*/}
-          <TouchableHighlight onPress={this.shareLinkWithShareDialog.bind(this)}>
+          <TouchableHighlight onPress={this.shareLinkWithShareDialog}>
+          {/*<TouchableHighlight onPress={this.shareToSocialMedia}>*/}
             <Text style={styles.shareText}> Share on Facebook </Text>
           </TouchableHighlight>
         </View>

@@ -74,7 +74,7 @@ export default class Rewards extends React.Component {
       rewardDescription={item.description}
       rewardType={item.type}
       rewardPoints={item.points}
-      rewardImage={item.image}
+      rewardImage={'https://picsum.photos/g/640/480/?random'}
       onRewardClick={() => this.onRewardClick(item)}
 
     />

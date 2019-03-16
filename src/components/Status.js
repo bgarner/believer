@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet, Image, ScrollView, TouchableHighlight, ImageBackground,
 } from 'react-native'
-// import {Navigation} from 'react-native-navigation';
+import {Navigation} from 'react-native-navigation';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button} from "react-native-elements";
 
@@ -22,9 +22,27 @@ export default class Status extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
+    this.onRedeemPointsClick = this.onRedeemPointsClick.bind(this);
+    this.onSendReferralClick = this.onSendReferralClick.bind(this);
     this.state = {
       user : null
     }
+  }
+
+  onRedeemPointsClick() {
+    Navigation.mergeOptions('BottomTabsId', {
+      bottomTabs: {
+        currentTabIndex: 1,
+      }
+    });
+  }
+
+  onSendReferralClick() {
+    Navigation.mergeOptions('BottomTabsId', {
+      bottomTabs: {
+        currentTabIndex: 3,
+      }
+    });
   }
 
   async componentDidMount() {
@@ -54,7 +72,7 @@ export default class Status extends React.Component {
           <Button
             backgroundColor={'#35AFC8'}
             title={'Redeem Points'}
-            // onPress={() => { alert('You are following the brand now!');}}
+            onPress={this.onRedeemPointsClick}
             textStyle={{
               fontSize: 16,
               fontWeight: 'bold',
@@ -74,7 +92,7 @@ export default class Status extends React.Component {
       <View style={{flex:1, flexDirection: 'row', justifyContent:'center'}}>
         <View style={{ flex:1, borderBottomWidth:1, borderRightWidth:1, borderColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-              330
+            {this.state.user? this.state.user.missions_completed_count : null}
           </Text>
           <Text style={styles.analyticsName}>
             Missions Completed
@@ -82,44 +100,44 @@ export default class Status extends React.Component {
         </View>
         <View style={{ flex:1, borderBottomWidth:1, borderRightWidth:1, borderColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-            330
+            {this.state.user? this.state.user.point_balance : null}
           </Text>
           <Text style={styles.analyticsName}>
-            Missions Completed
+            Unredeemed Points
           </Text>
         </View>
         <View style={{ flex:1, borderBottomWidth:1, borderBottomColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-            330
+            {this.state.user? this.state.user.historic_total_points : null}
           </Text>
           <Text style={styles.analyticsName}>
-            Missions Completed
+            Total Points Earned
           </Text>
         </View>
       </View>
       <View style={{flex:1, flexDirection: 'row', justifyContent:'center'}}>
         <View style={{ flex:1, borderRightWidth:1, borderColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-            330
+            {this.state.user? this.state.user.brands_following_count : null}
           </Text>
           <Text style={styles.analyticsName}>
-            Missions Completed
+            Following
           </Text>
         </View>
         <View style={{ flex:1, borderRightWidth:1, borderColor:'#fff', alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-            330
+            {this.state.user? this.state.user.rewards_redeemed_count : null}
           </Text>
           <Text style={styles.analyticsName}>
-            Missions Completed
+            Unlocked Rewards
           </Text>
         </View>
         <View style={{ flex:1, alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-            330
+
           </Text>
           <Text style={styles.analyticsName}>
-            Missions Completed
+            Referrals Sent
           </Text>
         </View>
       </View>
@@ -138,7 +156,7 @@ export default class Status extends React.Component {
         <Button
           backgroundColor={'#35AFC8'}
           title={'Send a Referral'}
-          // onPress={() => { alert('You are following the brand now!');}}
+          onPress={this.onSendReferralClick}
           textStyle={{
             fontSize: 16,
             fontWeight: 'bold',

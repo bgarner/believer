@@ -25,6 +25,7 @@ Navigation.events().registerAppLaunchedListener(() => {
     },
     bottomTab: {
       selectedTextColor: '#35AFC8',
+      selectedIconColor: '35AFC8',
       fontFamily: 'Helvetica',
       fontSize: 10
     },

@@ -27,7 +27,7 @@ export default class BelieverRequestController {
 
   async getMissionsFeed() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 115} );
+      let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 2} );
       // response = JSON.parse(response);
 
       if (response && response.length < 1){
@@ -43,7 +43,7 @@ export default class BelieverRequestController {
 
   async getClientsNearUser() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': 115} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': 2} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get brands for user');
@@ -58,7 +58,7 @@ export default class BelieverRequestController {
 
   async getClientsFollowedByUser() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': 115} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': 2} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get followed brands for user');
@@ -73,7 +73,7 @@ export default class BelieverRequestController {
 
   async postMissionCompletion(mission_id) {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/missions/complete", {'user_id': 115, 'mission_id': mission_id} );
+      let response = await this.httpRequestController.postRequest("/api/v1/missions/complete", {'user_id': 2, 'mission_id': mission_id} );
 
       if (response && response.length < 1){
         throw new Error('Oops. Something went wrong while saving your progress.');
@@ -103,7 +103,7 @@ export default class BelieverRequestController {
 
   async getUserProfile() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: 115} );
+      let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: 2} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get profile');
@@ -121,7 +121,7 @@ export default class BelieverRequestController {
   async followClient(clientId)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 115, client_id: clientId} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 2, client_id: clientId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to follow Client');
@@ -137,7 +137,7 @@ export default class BelieverRequestController {
   async unfollowClient(clientId)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 115, client_id: clientId} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 2, client_id: clientId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to unfollow Client');

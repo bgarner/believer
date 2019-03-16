@@ -52,7 +52,7 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Home',
-                          // icon: require('../signin.png')
+                          icon: require('../assets/home.png')
                         },
                         topBar: {
                           title: {
@@ -77,7 +77,7 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Rewards',
-                          // icon: require('../signin.png')
+                          icon: require('../assets/rewards.png')
                         },
                         // topBar: {
                         //   visible: true
@@ -100,7 +100,8 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Post',
-                          // icon: require('../signin.png')
+                          icon: require('../assets/post.png')
+
                         },
                         // topBar: {
                         //   visible: true
@@ -123,7 +124,8 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Refer',
-                          // icon: require('../signin.png')
+                          icon: require('../assets/refer.png')
+
                         },
                         // topBar: {
                         //   visible: true
@@ -146,7 +148,8 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Account',
-                          // icon: require('../signin.png')
+                          icon: require('../assets/account.png')
+
                         },
                         // topBar: {
                         //   visible: true

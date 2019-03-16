@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
-import Client from "./Explore";
 
 class Home extends Component {
   static propTypes = {
