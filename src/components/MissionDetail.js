@@ -63,7 +63,7 @@ class MissionDetail extends Component {
           }
           else {
             try{
-              // let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
+              await this.believerRequestController.postMissionCompletion(this.props.missionId);
               alert(`You earned ${this.props.missionPoints} points`);
             }
             catch(e) {
@@ -74,7 +74,7 @@ class MissionDetail extends Component {
         }
         else {
           try{
-            // let response = await this.believerRequestController.postMissionCompletion(this.props.missionId);
+            await this.believerRequestController.postMissionCompletion(this.props.missionId);
             alert(`You earned ${this.props.missionPoints} points`);
           }
           catch(e) {

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Image, TouchableHighlight} from 'react-native';
 import {Text, Button,} from "react-native-elements";
 import PropTypes from 'prop-types';
+import FollowButton from "./FollowButton";
 
 class ClientCard extends Component {
 
@@ -40,17 +41,7 @@ class ClientCard extends Component {
           source={{ uri:this.props.clientLogo }}
         />
       </TouchableHighlight>
-        <Button
-          backgroundColor={'#E6E7E8'}
-          title={'Unfollow'}
-          onPress={() => { alert('You are following the brand now!');}}
-          textStyle={{
-            fontSize: 14,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            fontFamily:'Helvetica'
-          }}
-        />
+      <FollowButton clientId={this.props.clientId} initialState={"Unfollow"} unFollowEnable={true}/>
     </View>
 
 

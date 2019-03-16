@@ -37,14 +37,10 @@ class Home extends Component {
     }
   }
 
-  componentDidAppear() {
+  async componentDidAppear() {
     console.log('home');
     console.log(this.props.componentId);
     CommonUtils.setCurrentActiveTab(this.props.componentId);
-
-  }
-
-  async componentDidMount() {
     try {
       let missions = await this.believerRequestController.getMissionsFeed();
       this.setState({missions});
@@ -54,6 +50,17 @@ class Home extends Component {
     }
 
   }
+
+  // async componentDidMount() {
+  //   try {
+  //     let missions = await this.believerRequestController.getMissionsFeed();
+  //     this.setState({missions});
+  //   }
+  //   catch(e) {
+  //     throw e;
+  //   }
+  //
+  // }
 
   onMissionClick(item) {
     Navigation.push(this.props.componentId, {
@@ -68,7 +75,7 @@ class Home extends Component {
           missionImage: 'https://picsum.photos/g/640/480/?random',
           missionUrl: item.share_url,
           clientLogo: 'https://picsum.photos//75/75/?random',
-          clientName: 'Dummy Client',
+          clientName: item.brand_name,
 
         },
         options: {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import FollowButton from "./FollowButton";
-import UnfollowButton from "./UnfollowButton";
+// import UnfollowButton from "./UnfollowButton";
 
 class Client extends Component {
 
@@ -24,11 +24,11 @@ class Client extends Component {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     this.onClientClick = this.onClientClick.bind(this);
-    this.followClient = this.followClient.bind(this);
-    this.unfollowClient = this.unfollowClient.bind(this);
-    this.state = {
-      isFollowing : false
-    }
+    // this.followClient = this.followClient.bind(this);
+    // this.unfollowClient = this.unfollowClient.bind(this);
+    // this.state = {
+    //   isFollowing : false
+    // }
 
   }
 
@@ -38,45 +38,45 @@ class Client extends Component {
     }
   }
 
-  async followClient() {
-    const clientId = this.props.clientId;
-    try {
-      let requestFollow = await this.believerRequestController.followClient(clientId);
-      if(requestFollow) {
-        const isFollowing = requestFollow.isFollowing;
-        this.setState({isFollowing});
-      }
-
-    }
-    catch(e) {
-      throw e;
-    }
-  }
-
-  async unfollowClient() {
-    const clientId = this.props.clientId;
-    try {
-      let requestUnfollow = await this.believerRequestController.unfollowClient(clientId);
-      if(requestUnfollow) {
-        const isFollowing = requestUnfollow.isFollowing;
-        this.setState({isFollowing});
-      }
-
-    }
-    catch(e) {
-      throw e;
-    }
-  }
+  // async followClient() {
+  //   const clientId = this.props.clientId;
+  //   try {
+  //     let requestFollow = await this.believerRequestController.followClient(clientId);
+  //     if(requestFollow) {
+  //       const isFollowing = requestFollow.isFollowing;
+  //       this.setState({isFollowing});
+  //     }
+  //
+  //   }
+  //   catch(e) {
+  //     throw e;
+  //   }
+  // }
+  //
+  // async unfollowClient() {
+  //   const clientId = this.props.clientId;
+  //   try {
+  //     let requestUnfollow = await this.believerRequestController.unfollowClient(clientId);
+  //     if(requestUnfollow) {
+  //       const isFollowing = requestUnfollow.isFollowing;
+  //       this.setState({isFollowing});
+  //     }
+  //
+  //   }
+  //   catch(e) {
+  //     throw e;
+  //   }
+  // }
 
   render() {
 
-    let isFollowing = this.state.isFollowing;
-    let button;
-    if(isFollowing) {
-      button = <UnfollowButton onUnfollowClick={this.unfollowClient} buttonTitle={'Unfollow'} />;
-    }else {
-      button = <FollowButton onFollowClick={this.followClient} buttonTitle={'Follow'} />;
-    }
+    // let isFollowing = this.state.isFollowing;
+    // let button;
+    // if(isFollowing) {
+    //   button = <UnfollowButton onUnfollowClick={this.unfollowClient} buttonTitle={'Unfollow'} />;
+    // }else {
+    //   button = <FollowButton onFollowClick={this.followClient} buttonTitle={'Follow'} />;
+    // }
 
     return <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10}}>
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
@@ -103,7 +103,7 @@ class Client extends Component {
       </View>
 
       <View style={{flex: 1, flexDirection: 'column',  height: 80, paddingLeft: '50%', marginTop: 25, }}>
-        {button}
+        <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.props.clientId}/>
       </View>
     </ImageBackground>
 
