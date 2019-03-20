@@ -150,5 +150,21 @@ export default class BelieverRequestController {
     }
   }
 
+  async getMessages()
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/messages", {user_id: 2} );
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get messages for user');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

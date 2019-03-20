@@ -95,7 +95,7 @@ export const goHome = () => Navigation.setRoot({
                 children: [
                   {
                     component: {
-                      name: 'Post',
+                      name: 'MessageList',
                       options: {
                         bottomTab: {
                           fontSize: 12,

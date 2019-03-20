@@ -29,6 +29,10 @@ Navigation.events().registerAppLaunchedListener(() => {
       fontFamily: 'Helvetica',
       fontSize: 10
     },
+    sideMenu: {
+      popGesture: false,
+      openGestureMode: 'bezel'
+    }
   });
   Navigation.setRoot({
     root: {
