@@ -4,6 +4,8 @@ import {Text, Button, SocialIcon} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { Avatar, Icon } from 'react-native-elements';
+import FollowButton from "./FollowButton";
+import BelieverRequestController from "../controllers/BelieverRequestController";
 
 class ClientDetail extends Component {
 
@@ -21,24 +23,125 @@ class ClientDetail extends Component {
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
+    this.believerRequestController = new BelieverRequestController();
+    // this.renderStatsContainer = this.renderStatsContainer.bind(this);
+    this.state= {
+      client: null
+    }
 
+  }
+
+  async componentDidMount() {
+    try {
+      let client = await this.believerRequestController.getClientDetails(this.props.clientId);
+      this.setState({client: client});
+    }
+    catch(e) {
+      throw e;
+    }
+
+  }
+
+  renderStatsList() {
+    if(this.state.client) {
+      return (
+        <View>
+          {this.renderSingleStat( 'Believers',  this.state.client.stats.follower_count )}
+          {this.renderSingleStat( 'City',  this.state.client.city)}
+          {this.renderSingleStat( 'Address',  this.state.client.address1)}
+          {this.renderSingleStat( 'New Believers this week',  this.state.client.stats.new_followers_this_week )}
+          {this.renderSingleStat( 'Active Missions',  this.state.client.stats.active_missions )}
+          {this.renderSingleStat( 'Missions Completed this week',  this.state.client.stats.mission_completions_this_week )}
+          {this.renderLeaderboard()}
+
+        </View>
+      );
+
+    }
+  }
+
+  renderSingleStat(statParam, statValue) {
+      return (
+        <View style={{  margin:10, borderBottomWidth:1, borderColor:'#E6E7E8', flexDirection: 'row', flexGrow: 1}}>
+          <View style={{ flex:2, padding:10, justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
+            <Text style={{ color: '#9c9d9e'}} >{statParam}</Text>
+          </View>
+          <View style={{ flex:4, padding:10, justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
+            <Text style={{ color: '#9c9d9e'}}>{statValue}</Text>
+          </View>
+        </View>
+      );
+  }
+
+  renderLeaderboard() {
+    let result = [];
+    result.push(this.renderLeaderboardHeader());
+    const leaderboardData = this.state.client.stats.leaderboard;
+    Object.getOwnPropertyNames(leaderboardData).forEach( (item, index) => {
+      result.push(
+        <View key={`${index}`} style={{  marginHorizontal:10,  flexDirection: 'row', flexGrow: 1}}>
+          <View style={{ flex:1, padding:10, justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
+            {this.renderLeaderboardProfile(leaderboardData[item].name, leaderboardData[item].point_balance)}
+          </View>
+          <View style={{ flex:1, padding:10, borderLeftWidth:1, borderColor:'#E6E7E8', justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
+            {this.renderLeaderboardProfile(leaderboardData[item].name, leaderboardData[item].point_balance)}
+          </View>
+        </View>)
+    })
+    return result;
+  }
+  renderLeaderboardHeader() {
+    return <View key='header' style={{  marginHorizontal:10,   flexGrow: 1}}>
+      <Text style={{marginTop:10, color: '#9c9d9e'}}>Leaderboards</Text>
+      <View style={{flexDirection: 'row', marginTop:20}}>
+        <View style={{ flex:1, padding:10, justifyContent:'center', alignItems:'center', flexDirection: 'row' }}>
+          <Text style={{color: '#35AFC8'}}>Highest Points</Text>
+        </View>
+        <View style={{ flex:1, padding:10, justifyContent:'center', alignItems:'center', flexDirection: 'row' }}>
+          <Text style={{color: '#35AFC8'}}>Growing Influencers</Text>
+        </View>
+      </View>
+    </View>
+  }
+
+  renderLeaderboardProfile(name, point_balance) {
+    return (
+      <View style={{flex:1.75, flexDirection: 'row', alignItems: 'center', marginHorizontal:0}}>
+      <View style={{flex: 3.5, height:'100%',backgroundColor: '#FFF', }}>
+        <Avatar
+          medium
+          rounded
+          title="CR"
+          activeOpacity={0.7}
+          source={{
+            uri: 'http://lorempixel.com/100/100/people/',
+          }}
+
+        />
+      </View>
+      <View style={{flex: 5, paddingLeft: 10, height:'100%', justifyContent: 'flex-start',   }}>
+        <Text style={{ fontSize: 14,  color: '#231F20'}}>{name}</Text>
+        <Text style={{ fontSize: 10,  color: '#9c9d9e', paddingTop:3}}>{point_balance} total points</Text>
+      </View>
+    </View>
+    );
   }
 
   render() {
     return (
+      <View style={{height: '100%', flex:1}}>
       <ScrollView styles={{flex:1}}>
       <View style={styles.container}>
         <View style={{flex:2.5}}>
           <Image source={{uri: this.props.clientImage}}
-                 style={{width:'100%', height: '100%'}} />
+                 style={{width:'100%', height: 150}} />
         </View>
-        <View style={{flex:1.75, flexDirection: 'row', alignItems: 'center',}}>
+        <View style={{flex:2.5, flexDirection: 'row', alignItems: 'center',}}>
           <View style={{flex: 3, height:'100%',backgroundColor: '#FFF', paddingLeft:20, paddingTop:15}}>
               <Avatar
                 large
                 rounded
                 title="CR"
-                onPress={() => console.log("Works!")}
                 activeOpacity={0.7}
                 source={{
                   uri: this.props.clientLogo,
@@ -50,19 +153,9 @@ class ClientDetail extends Component {
             <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#231F20'}}>{this.props.clientName}</Text>
           </View>
         </View>
-        <View style={{flex:1, flexDirection: 'row',}}>
+        <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
           <View style={{flex:1}}>
-          <Button
-            backgroundColor={'#35AFC8'}
-            title={'Follow'}
-            textStyle={{
-              fontSize: 14,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontFamily:'Helvetica'
-              }}
-            onPress={() => { alert('You are following the brand now!');}}
-          />
+            <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.props.clientId}/>
           </View>
 
           <View style={{flex:1}}>
@@ -81,11 +174,19 @@ class ClientDetail extends Component {
 
 
         </View>
-        <View style={{flex:2, alignItems: 'center', padding: 10, paddingLeft: 20, paddingRight:20, textAlign: 'center', fontFamily: 'Helvetica'}}>
-          <View>
+        <View style={{
+          flex:2,
+          alignItems: 'center',
+          margin: 20,
+          textAlign: 'center',
+          fontFamily: 'Helvetica',
+          borderBottomWidth:0.25,
+          borderColor: '#9c9d9e'
+        }}>
+          <View style={{flex:1}}>
           <Text>{this.props.clientDescription}</Text>
           </View>
-          <View style={{ flex: 1.2, flexDirection: 'row', justifyContent: 'space-between', width: '60%' }}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: '60%', paddingBottom: 20 }}>
             <SocialIcon
               type='facebook'
             />
@@ -98,12 +199,13 @@ class ClientDetail extends Component {
           </View>
         </View>
 
-        <View style={{flex:6}}>
-
+        <View style={{flex:8}}>
+          {this.renderStatsList()}
         </View>
 
       </View>
       </ScrollView>
+      </View>
     );
   }
 
@@ -114,14 +216,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     backgroundColor: '#fff',
-    // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
-    height: 1000,
-    // borderColor: 'blue',
-    // borderWidth: 1
   }
 });
 

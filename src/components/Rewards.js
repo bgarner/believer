@@ -53,7 +53,7 @@ export default class Rewards extends React.Component {
       let userProfile = await this.believerRequestController.getUserProfile();
       this.setState({
         rewards,
-        userPointBalance: userProfile.point_balance
+        userPointBalance: parseInt(userProfile.point_balance)
       });
     }
     catch(e) {

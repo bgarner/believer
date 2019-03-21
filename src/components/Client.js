@@ -38,46 +38,7 @@ class Client extends Component {
     }
   }
 
-  // async followClient() {
-  //   const clientId = this.props.clientId;
-  //   try {
-  //     let requestFollow = await this.believerRequestController.followClient(clientId);
-  //     if(requestFollow) {
-  //       const isFollowing = requestFollow.isFollowing;
-  //       this.setState({isFollowing});
-  //     }
-  //
-  //   }
-  //   catch(e) {
-  //     throw e;
-  //   }
-  // }
-  //
-  // async unfollowClient() {
-  //   const clientId = this.props.clientId;
-  //   try {
-  //     let requestUnfollow = await this.believerRequestController.unfollowClient(clientId);
-  //     if(requestUnfollow) {
-  //       const isFollowing = requestUnfollow.isFollowing;
-  //       this.setState({isFollowing});
-  //     }
-  //
-  //   }
-  //   catch(e) {
-  //     throw e;
-  //   }
-  // }
-
   render() {
-
-    // let isFollowing = this.state.isFollowing;
-    // let button;
-    // if(isFollowing) {
-    //   button = <UnfollowButton onUnfollowClick={this.unfollowClient} buttonTitle={'Unfollow'} />;
-    // }else {
-    //   button = <FollowButton onFollowClick={this.followClient} buttonTitle={'Follow'} />;
-    // }
-
     return <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10}}>
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
         <View style={{flex: 2, height:'100%',backgroundColor: '#FFF', }}>

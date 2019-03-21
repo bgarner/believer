@@ -71,6 +71,21 @@ export default class BelieverRequestController {
     }
   }
 
+  async getClientDetails(client_id)
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/show", {client_id} );
+      if (response && response.length < 1){
+        throw new Error('Failed to get client details');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
   async postMissionCompletion(mission_id) {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/missions/complete", {'user_id': 2, 'mission_id': mission_id} );
