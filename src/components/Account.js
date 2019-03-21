@@ -142,7 +142,7 @@ export default class Account extends React.Component {
         </View>
 
 
-        {this.renderLoginButton()}
+        {/*{this.renderLoginButton()}*/}
       </View>
     )
   }

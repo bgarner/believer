@@ -17,16 +17,16 @@ export default class SideMenu extends React.Component {
     Navigation.events().bindComponent(this);
     this.menuItems = [
       {
-        name: 'Explore',
+        name: 'Find Worthy Brands',
         componentName: 'Explore'
+      },
+      {
+        name: 'Current Points',
+        componentName: 'Status'
       },
       {
         name: 'Manage Brands',
         componentName: 'Following'
-      },
-      {
-        name: 'Status',
-        componentName: 'Status'
       },
       {
         name: 'Settings',
@@ -89,7 +89,7 @@ export default class SideMenu extends React.Component {
           keyExtractor={(item, index) => `${index}`}
           data={ this.menuItems}
           renderItem={this.renderItem}
-          style={{width:'100%'}}
+          style={{width:'100%', }}
         >
         </FlatList>
       </View>
@@ -97,12 +97,16 @@ export default class SideMenu extends React.Component {
   }
 
   renderItem(item) {
-    return (<ListItem style={{color: '#fff'}}
-      title={item.item.name}
+    return (<ListItem
+      style={{color: '#fff',}}
+      title={<Text style={{fontFamily: "leaguespartan-bold", color: '#fff', fontSize: 20}}>{item.item.name}</Text>}
       titleStyle={{color: '#fff'}}
       titleNumberOfLines={1}
       onPress={() => this.handleClick(item.item)}
-
+      hideChevron
+      containerStyle={{
+        borderBottomWidth: 0
+      }}
     />);
   }
 
@@ -143,6 +147,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#231F20',
-    width: '75%'
+    width: '75%',
+    paddingTop: 70,
+    paddingLeft: 20,
+
   }
 })

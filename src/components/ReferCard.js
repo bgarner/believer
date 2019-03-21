@@ -71,7 +71,6 @@ export default class ReferCard extends React.Component {
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           <Avatar
             medium
-            onPress={() => console.log("Works!")}
             activeOpacity={0.7}
             source={{
               uri: this.props.clientLogo,

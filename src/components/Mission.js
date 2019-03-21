@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
-import {Text} from "react-native-elements";
+import {Badge, Text} from "react-native-elements";
 // import BelieverRequestController from "../controllers/BelieverRequestController";
 // import HttpRequestController from "../controllers/HttpRequestController";
 // import {Navigation} from "react-native-navigation";
@@ -83,19 +83,22 @@ class Mission extends Component {
 
   renderDescription() {
     return (
-      <View style={{flex: 2, padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1,*/ width: '100%'}}>
-          <View style={{flex: 1, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', /* borderColor: 'red', borderWidth: 1*/}}>
-            <Text style={{ flex: 4 , lineHeight: 30, fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
-            <View style={{flex : 1}}>
-              <Icon
-
-              >
-              {this.props.missionPoints}
-              </Icon>
+      <View style={{flex: 1, paddingHorizontal: 10, backgroundColor: '#f2f2f2', width: '100%'}}>
+          <View style={{flex: 1, paddingTop:20, flexDirection: 'row', backgroundColor: '#f2f2f2', }}>
+            <Text style={{ flex: 5 ,fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
+            <View style={{flex : 1, }}>
+              <Badge
+                value={this.props.missionPoints}
+                containerStyle={{
+                  backgroundColor: '#35AFC8',
+                  width: 50,
+                  height: 25,
+                }}
+              />
             </View>
           </View>
 
-          <Text style={{ flex: 1, paddingTop: 10, paddingBottom: 10 }}>{this.props.missionDescription}</Text>
+          <Text style={{ flex: 3, flexGrow:1, }}>{this.props.missionDescription}</Text>
       </View>);
   }
 
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
-    height: 400
+    minHeight: 400
   },
   input: {
     width: 200,

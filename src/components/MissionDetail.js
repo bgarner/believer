@@ -129,13 +129,17 @@ class MissionDetail extends Component {
 
         <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold'}}>{this.props.missionTitle}</Text>
 
-        <Badge style={{flex: 1,borderRadius: 9,
-          height: 18,
-          minWidth: 0,
-          width: 18, backgroundColor: '#35AFC8'}} value={this.props.missionPoints}/>
+        <Badge
+          value={this.props.missionPoints}
+          containerStyle={{
+            backgroundColor: '#35AFC8',
+            width: 50,
+            height: 25,
+          }}
+        />
       </View>
 
-      <Text style={{ flex: 1, padding:10}}>{this.props.missionDescription}</Text>
+      <Text style={{ flex: 1, paddingHorizontal:15}}>{this.props.missionDescription}</Text>
     </View>
   }
 

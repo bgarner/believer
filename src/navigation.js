@@ -52,7 +52,8 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Home',
-                          icon: require('../assets/home.png')
+                          icon: require('../assets/home.png'),
+                          iconInsets: { top: 0, left: 0, bottom: 0, right: 0 },
                         },
                         topBar: {
                           title: {
@@ -100,7 +101,7 @@ export const goHome = () => Navigation.setRoot({
                         bottomTab: {
                           fontSize: 12,
                           text: 'Inbox',
-                          icon: require('../assets/post.png')
+                          icon: require('../assets/inbox.png')
 
                         },
                         // topBar: {
