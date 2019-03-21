@@ -1,47 +1,110 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, } from 'react-native';
+import {View, StyleSheet, ScrollView, Image, Animated,} from 'react-native';
 // import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import {Avatar, Button, SocialIcon, Text} from "react-native-elements";
+import BelieverRequestController from "../controllers/BelieverRequestController";
+import CommonUtils from "../CommonUtils";
 
 class Message extends Component {
   static propTypes = {
+    componentId: PropTypes.string.isRequired,
     messageId : PropTypes.number.isRequired,
-    messageTitle : PropTypes.string.isRequired,
-    messageDescription : PropTypes.string.isRequired,
-    onMissionClick : PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
-    this.onMessageClick = this.onMessageClick.bind(this);
-  }
-
-  onMessageClick() {
-    if (this.props.onMessageClick) {
-      this.props.onMessageClick();
+    this.believerRequestController = new BelieverRequestController();
+    this.renderMessageImage = this.renderMessageImage.bind(this);
+    this.state= {
+      message: null,
     }
   }
 
+  async componentDidMount() {
+
+    try {
+      let message = await this.believerRequestController.getMessage(this.props.messageId);
+      this.setState({
+        message,
+        clientLogo: 'https://picsum.photos/g/75/75/?random'
+      });
+    }
+    catch(e) {
+      throw e;
+    }
+
+  }
+
+
+  renderMessageImage() {
+    // if(this.state.message) {
+    //   if(this.state.message.messageImage) {
+    //     return (
+    //       <View style={{flex:2.5}}>
+    //         <Image
+    //           source={{uri: this.state.message.messageImage}}
+    //           style={{width:'100%', height: '100%'}} />
+    //       </View>
+    //     );
+    //   }
+    //   else{
+        return (
+          <View style={{flex:2.5}}>
+            <Image
+              source={{ uri: 'https://picsum.photos/g/640/480/?random'}}
+              style={{width:'100%', height: '100%'}} />
+          </View>
+        );
+      // }
+    // }
+    // return null;
+
+  }
+
   render() {
+    if(! this.state.message){
+      return null;
+    }
     return (
-      <SwipeListView
-        useFlatList
-        data={this.state.listViewData}
-        renderItem={ (data, rowMap) => (
-          <View style={styles.rowFront}>
-            <Text>I am {data.item} in a SwipeListView</Text>
+      <ScrollView styles={{flex:1}}>
+        <View style={styles.container}>
+
+          <View style={{flex:1.75, flexDirection: 'row', alignItems: 'center', borderBottomWidth:1, borderColor: '#E6E7E8', margin:10}}>
+            <View style={{flex: 2, height:'100%',backgroundColor: '#FFF', }}>
+              <Avatar
+                large
+                rounded
+                title="CR"
+                onPress={() => console.log("Works!")}
+                activeOpacity={0.7}
+                source={{
+                  uri: this.state.clientLogo,
+                }}
+
+              />
+            </View>
+            <View style={{flex: 6, paddingLeft: 10, height:'100%', justifyContent: 'flex-start', paddingTop: 20  }}>
+              <Text style={{ fontSize: 14,  color: '#231F20'}}>{this.state.message.brand_name}</Text>
+              <Text style={{ fontSize: 10,  color: '#9c9d9e', paddingTop:3}}>{this.state.message.created_at}</Text>
+            </View>
           </View>
-        )}
-        renderHiddenItem={ (data, rowMap) => (
-          <View style={styles.rowBack}>
-            <Text>Left</Text>
-            <Text>Right</Text>
+          <View style={{flex:0.8, flexDirection: 'row', paddingLeft:20, paddingTop:10}}>
+            <Text style={{ fontWeight:'bold', fontFamily: 'Helvetica'}}>
+              {this.state.message.subject}
+            </Text>
+
           </View>
-        )}
-        leftOpenValue={75}
-        rightOpenValue={-75}
-      />
+          {this.renderMessageImage()}
+          <View style={{flex:2, alignItems: 'center', padding: 20, textAlign: 'center', fontFamily: 'Helvetica'}}>
+            <View>
+              <Text style={{lineHeight:16, color:'#231F20'}}>{this.state.message.body}</Text>
+            </View>
+          </View>
+
+        </View>
+      </ScrollView>
     )
   }
 

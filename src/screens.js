@@ -19,6 +19,7 @@ import Client from "./components/Client";
 import ClientDetail from "./components/ClientDetail";
 import ReferForm from "./components/ReferForm";
 import MessageList from "./components/MessageList";
+import Message from "./components/Message";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -42,6 +43,7 @@ export function registerScreens() {
   Navigation.registerComponent('ClientDetail', () => ClientDetail);
   Navigation.registerComponent('SideMenu', () => SideMenu);
   Navigation.registerComponent('MessageList', () => MessageList);
+  Navigation.registerComponent('Message', () => Message);
 
 
 

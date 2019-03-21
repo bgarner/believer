@@ -3,7 +3,6 @@ import {StyleSheet, Dimensions, Image, View, ListView, TouchableHighlight, Touch
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
-import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {Avatar, Text} from "react-native-elements";
@@ -17,6 +16,9 @@ class MessageList extends Component {
   static get options() {
     return {
       topBar: {
+        title: {
+          text: 'Inbox',
+        },
         leftButtons: [
           {
             id: 'sideMenuHamburger',
@@ -63,17 +65,14 @@ class MessageList extends Component {
   onMessageClick(item) {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'MessageDetail',
+        name: 'Message',
         passProps: {
           messageId: item.id,
-          messageTitle: item.title,
-          messageDescription: item.content,
         },
         options: {
           topBar: {
-            visible: true,
             title: {
-              text: item.name
+              text: 'Inbox'
             }
           }
         }
@@ -118,15 +117,14 @@ class MessageList extends Component {
           recalculateHiddenLayout
           renderItem={ (data, rowMap) => (
             <TouchableHighlight
-              onPress={ _ => console.log('You touched me') }
+              onPress={ () => this.onMessageClick(data.item) }
               style={styles.rowFront}
               underlayColor={'#AAA'}
             >
             <View style={{flex:1, flexDirection:'row'}}>
-              <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+              <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingLeft:20}}>
                 <Avatar
                   medium
-                  // rounded
                   title="CR"
                   onPress={() => console.log("Works!")}
                   activeOpacity={0.7}
@@ -135,11 +133,11 @@ class MessageList extends Component {
                   }}
                 />
               </View>
-              <View style={{flex:5, paddingTop:10, paddingLeft:10}}>
-                <Text style={{color:'#231F20', fontSize:16, fontFamily:'Helvetica', fontWeight:'bold'}}>{data.item.client.name}</Text>
-                <Text style={{color:'#9c9d9e', marginTop: 10 }}>{data.item.subject}</Text>
+              <View style={{flex:5, paddingTop:15, paddingLeft:15}}>
+                <Text style={{color:'#231F20', fontSize:14, fontFamily:'Helvetica', fontWeight:'bold'}}>{data.item.client.name}</Text>
+                <Text style={{color:'#9c9d9e', marginTop: 5 }}>{data.item.subject}</Text>
               </View>
-              <View style={{ flex:1.5, alignItems:'flex-end'}}>
+              <View style={{ flex:1.5, alignItems:'flex-end', paddingRight:15}}>
                 <Text style={{color:'#9c9d9e', marginTop: 10, fontSize:10 }}>{data.item.prettyCreatedAt}</Text>
               </View>
             </View>
@@ -180,7 +178,7 @@ class MessageList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    paddingTop:10
   },
   backTextWhite: {
     color: '#FFF'

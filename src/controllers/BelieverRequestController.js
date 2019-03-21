@@ -166,5 +166,20 @@ export default class BelieverRequestController {
     }
   }
 
+  async getMessage(message_id)
+  {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/messages/show", {user_id: 2, message_id: message_id} );
+      if (response && response.length < 1){
+        throw new Error('Failed to get message details');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

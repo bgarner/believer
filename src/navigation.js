@@ -99,7 +99,7 @@ export const goHome = () => Navigation.setRoot({
                       options: {
                         bottomTab: {
                           fontSize: 12,
-                          text: 'Post',
+                          text: 'Inbox',
                           icon: require('../assets/post.png')
 
                         },
