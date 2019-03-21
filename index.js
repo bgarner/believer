@@ -31,7 +31,8 @@ Navigation.events().registerAppLaunchedListener(() => {
     },
     sideMenu: {
       popGesture: false,
-      openGestureMode: 'bezel'
+      openGestureMode: 'bezel',
+      animationType: 'parallax'
     }
   });
   Navigation.setRoot({

@@ -17,23 +17,9 @@ export default class RewardCard extends React.Component {
     rewardImage : PropTypes.string.isRequired,
     rewardType : PropTypes.string.isRequired,
     rewardPoints : PropTypes.number.isRequired,
+    userPointBalance: PropTypes.number,
     onRedeemClick : PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-    // this.believerRequestController = new BelieverRequestController();
-    // this.onRewardClick = this.onRewardClick.bind(this);
-    // Navigation.events().bindComponent(this);
-
-  }
-
-  componentDidAppear() {
-    console.log('Rewards');
-    console.log(this.props.componentId);
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
-
-  }
 
   renderImage() {
 
@@ -71,10 +57,12 @@ export default class RewardCard extends React.Component {
         </Text>
       </View>
       <View style={{flex:0.8}}>
+
         <Button
           backgroundColor={'#35AFC8'}
           title={'Redeem'}
-          onPress={this.props.onRedeemClick}
+          onPress={this.props.onRewardClick}
+          disabled={this.props.userPointBalance < this.props.rewardPoints}
           textStyle={{
             fontSize: 14,
             fontWeight: 'bold',

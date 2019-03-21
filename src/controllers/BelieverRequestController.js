@@ -101,6 +101,21 @@ export default class BelieverRequestController {
     }
   }
 
+  async redeemReward(reward_id) {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/rewards/redeem" , {user_id: 2, reward_id: reward_id});
+
+      if (response && response.length < 1){
+        throw new Error('Failed to get rewards');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
   async getUserProfile() {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: 2} );
@@ -118,10 +133,10 @@ export default class BelieverRequestController {
 
 
 
-  async followClient(clientId)
+  async followClient(client_id)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 2, client_id: clientId} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 2, client_id: client_id} );
 
       if (response && response.length < 1){
         throw new Error('Failed to follow Client');
@@ -134,10 +149,10 @@ export default class BelieverRequestController {
     }
   }
 
-  async unfollowClient(clientId)
+  async unfollowClient(client_id)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 2, client_id: clientId} );
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 2, client_id: client_id} );
 
       if (response && response.length < 1){
         throw new Error('Failed to unfollow Client');

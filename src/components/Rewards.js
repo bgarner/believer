@@ -41,7 +41,8 @@ export default class Rewards extends React.Component {
     this.onRewardClick = this.onRewardClick.bind(this);
     Navigation.events().bindComponent(this);
     this.state = {
-      rewards : []
+      rewards : [],
+      userPointBalance: null,
     }
 
   }
@@ -49,7 +50,11 @@ export default class Rewards extends React.Component {
   async componentDidMount() {
     try {
       let rewards = await this.believerRequestController.getRewardsList();
-      this.setState({rewards});
+      let userProfile = await this.believerRequestController.getUserProfile();
+      this.setState({
+        rewards,
+        userPointBalance: userProfile.point_balance
+      });
     }
     catch(e) {
       throw e;
@@ -61,8 +66,20 @@ export default class Rewards extends React.Component {
 
   }
 
-  onRewardClick(item) {
-    console.log('email sent to redeem points');
+  async onRewardClick(item) {
+    try {
+      let message = await this.believerRequestController.redeemReward(item.id);
+      if(message.isRedeemed){
+        alert(`Reward redeemed. New point balance : ${message.new_point_balance} `)
+      }
+      else{
+        alert(`Could not redeem reward. Point balance : ${message.new_point_balance} `)
+      }
+      this.setState({userPointBalance: message.new_point_balance})
+    }
+    catch(e) {
+      throw e;
+    }
   }
 
   renderReward(item) {
@@ -76,6 +93,7 @@ export default class Rewards extends React.Component {
       rewardPoints={item.points}
       rewardImage={'https://picsum.photos/g/640/480/?random'}
       onRewardClick={() => this.onRewardClick(item)}
+      userPointBalance={this.state.userPointBalance}
 
     />
   }
