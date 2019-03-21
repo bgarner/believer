@@ -21,21 +21,6 @@ export default class ReferCard extends React.Component {
     onReferClick: PropTypes.func
   };
 
-  constructor(props, context) {
-    super(props, context);
-    // this.believerRequestController = new BelieverRequestController();
-    // this.onRewardClick = this.onRewardClick.bind(this);
-    // Navigation.events().bindComponent(this);
-
-  }
-
-  componentDidAppear() {
-    console.log('Rewards');
-    console.log(this.props.componentId);
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
-
-  }
-
   renderImage() {
 
     return <View style={{flex:3}}>
@@ -83,9 +68,6 @@ export default class ReferCard extends React.Component {
   renderTitle() {
     return (
       <View style={{flex: 1, width: '100%'}}>
-        {/*<View style={{flex: 1, flexDirection: 'row', padding: 15}}>*/}
-          {/*<Text style={{ flex: 4 , lineHeight: 20, fontWeight: 'bold' }}>{this.props.clientName}</Text>*/}
-        {/*</View>*/}
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           <Avatar
             medium
@@ -96,7 +78,6 @@ export default class ReferCard extends React.Component {
             }}
             containerStyle={{flex: 1, margin: 10}}
           />
-          {/*<Text >{this.props.clientDescription}</Text>*/}
         </View>
       </View>);
 

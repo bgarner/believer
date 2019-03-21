@@ -134,7 +134,7 @@ export default class Status extends React.Component {
         </View>
         <View style={{ flex:1, alignItems:'center', justifyContent:'center'}}>
           <Text style={styles.analyticsNumber}>
-
+            {this.state.user? this.state.user.referrals_sent_count : null}
           </Text>
           <Text style={styles.analyticsName}>
             Referrals Sent

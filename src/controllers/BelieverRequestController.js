@@ -211,5 +211,27 @@ export default class BelieverRequestController {
     }
   }
 
+  async postReferral(first, last, email, brand_id) {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/referral/create",
+        {
+          'first_name': first,
+          'last_name': last,
+          'email': email,
+          'brand_id': brand_id,
+          'referred_by_id': 2
+        });
+
+      if (response && response.length < 1){
+        throw new Error('Oops. Something went wrong while submitting the referral.');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
 }

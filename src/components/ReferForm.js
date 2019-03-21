@@ -8,7 +8,6 @@ import {
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button} from "react-native-elements";
 import PropTypes from "prop-types";
-import {goToAuth} from "../navigation";
 
 export default class ReferForm extends React.Component {
   static get options() {
@@ -33,18 +32,32 @@ export default class ReferForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
-
+    this.submitReferral = this.submitReferral.bind(this);
+    this.state = {
+      firstName: null,
+      lastName: null,
+      email: null,
+    }
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     let user = await this.believerRequestController.getUserProfile();
-  //     this.setState({user: user});
-  //   }
-  //   catch(e) {
-  //     throw e;
-  //   }
-  // }
+  async submitReferral() {
+    try {
+      await this.believerRequestController.postReferral(
+        this.state.firstName,
+        this.state.lastName,
+        this.state.email,
+        this.props.clientId
+      );
+      alert('Referral submitted!');
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
+  onChangeText = (key, value) => {
+    this.setState({ [key]: value })
+  }
 
   renderImage() {
     return <View style={{flex:1, width: '100%',}}>
@@ -66,39 +79,42 @@ export default class ReferForm extends React.Component {
     return <View style={{flex:2, width:'100%' }}>
       <View style={{flex:1, paddingHorizontal: 0, width:'100%', alignItems: 'center'}}>
         <TextInput
+          value={this.state.firstName}
           style={styles.input}
           placeholder="Friend's First Name"
           autoCapitalize="none"
           placeholderTextColor='#939495'
-          onChangeText={val => this.onChangeText('firstname', val)}
+          onChangeText={val => this.onChangeText('firstName', val)}
         />
         <TextInput
+          value={this.state.lastName}
           style={styles.input}
           placeholder="Friend's Last Name"
           autoCapitalize="none"
           placeholderTextColor='#939495'
-          onChangeText={val => this.onChangeText('lastname', val)}
+          onChangeText={val => this.onChangeText('lastName', val)}
         />
         <TextInput
+          value={this.state.email}
           style={styles.input}
           placeholder="Friend's Email"
           autoCapitalize="none"
           placeholderTextColor='#939495'
           onChangeText={val => this.onChangeText('email', val)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Sales Contact'
-          autoCapitalize="none"
-          placeholderTextColor='#939495'
-          onChangeText={val => this.onChangeText('sales_contact', val)}
-        />
+        {/*<TextInput*/}
+          {/*style={styles.input}*/}
+          {/*placeholder='Sales Contact'*/}
+          {/*autoCapitalize="none"*/}
+          {/*placeholderTextColor='#939495'*/}
+          {/*onChangeText={val => this.onChangeText('sales_contact', val)}*/}
+        {/*/>*/}
 
         <View style={{marginTop: 30 }}>
         <Button
           backgroundColor={'#35AFC8'}
           title={'Send'}
-          // onPress={() => { alert('You are following the brand now!');}}
+          onPress={this.submitReferral}
           textStyle={{
             fontSize: 16,
             width:'60%',
@@ -140,7 +156,7 @@ const styles = StyleSheet.create({
     borderColor: '#939495',
     margin: 10,
     color: '#939495',
-    padding: 20,
+    padding: 10,
     borderRadius: 2,
     borderWidth: 1,
 
