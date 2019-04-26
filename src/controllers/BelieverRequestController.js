@@ -6,16 +6,18 @@ export default class BelieverRequestController {
     this.httpRequestController = HttpRequestController.getInstance();
   }
 
+
+
   async login(credentials) {
 
     try {
       let response = await this.httpRequestController.postRequest("/api/user/login", credentials);
-      // response = JSON.parse(response);
 
       if(!response.token){
         throw new Error('Login failed');
       }
       this.httpRequestController.setToken(response.token);
+      this.httpRequestController.setUserId(response.user_id);
 
     }
     catch(e){
@@ -27,8 +29,8 @@ export default class BelieverRequestController {
 
   async getMissionsFeed() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': 2} );
-      // response = JSON.parse(response);
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': userId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get missions for user');
@@ -43,7 +45,8 @@ export default class BelieverRequestController {
 
   async getClientsNearUser() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': 2} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': userId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get brands for user');
@@ -58,7 +61,8 @@ export default class BelieverRequestController {
 
   async getClientsFollowedByUser() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': 2} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': userId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get followed brands for user');
@@ -88,7 +92,8 @@ export default class BelieverRequestController {
 
   async postMissionCompletion(mission_id) {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/missions/complete", {'user_id': 2, 'mission_id': mission_id} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/missions/complete", {'user_id': userId, 'mission_id': mission_id} );
 
       if (response && response.length < 1){
         throw new Error('Oops. Something went wrong while saving your progress.');
@@ -118,7 +123,8 @@ export default class BelieverRequestController {
 
   async redeemReward(reward_id) {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/rewards/redeem" , {user_id: 2, reward_id: reward_id});
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/rewards/redeem" , {user_id: userId, reward_id: reward_id});
 
       if (response && response.length < 1){
         throw new Error('Failed to get rewards');
@@ -133,7 +139,8 @@ export default class BelieverRequestController {
 
   async getUserProfile() {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: 2} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/profile", {user_id: userId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get profile');
@@ -151,7 +158,8 @@ export default class BelieverRequestController {
   async followClient(client_id)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: 2, client_id: client_id} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: userId, client_id: client_id} );
 
       if (response && response.length < 1){
         throw new Error('Failed to follow Client');
@@ -167,7 +175,8 @@ export default class BelieverRequestController {
   async unfollowClient(client_id)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: 2, client_id: client_id} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: userId, client_id: client_id} );
 
       if (response && response.length < 1){
         throw new Error('Failed to unfollow Client');
@@ -183,7 +192,8 @@ export default class BelieverRequestController {
   async getMessages()
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/messages", {user_id: 2} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/messages", {user_id: userId} );
 
       if (response && response.length < 1){
         throw new Error('Failed to get messages for user');
@@ -199,7 +209,8 @@ export default class BelieverRequestController {
   async getMessage(message_id)
   {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/messages/show", {user_id: 2, message_id: message_id} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/messages/show", {user_id: userId, message_id: message_id} );
       if (response && response.length < 1){
         throw new Error('Failed to get message details');
       }
@@ -213,13 +224,14 @@ export default class BelieverRequestController {
 
   async postReferral(first, last, email, brand_id) {
     try {
+      const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/referral/create",
         {
           'first_name': first,
           'last_name': last,
           'email': email,
           'brand_id': brand_id,
-          'referred_by_id': 2
+          'referred_by_id': userId,
         });
 
       if (response && response.length < 1){

@@ -74,6 +74,7 @@ export default class EditProfile extends React.Component {
   async logout() {
     try {
       await CommonUtils.clearLoginToken();
+      await CommonUtils.clearUserId();
       goToAuth()
     } catch (err) {
       console.log('error signing out...: ', err)

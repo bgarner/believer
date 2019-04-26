@@ -5,6 +5,7 @@ export default class HttpRequestController {
 
   constructor() {
     this.token = null;
+    this.userId = null;
     // this.baseUrl = "http://localhost:8000";
     this.baseUrl = "https://gamegraft.com";
     this._instance = null;
@@ -22,6 +23,18 @@ export default class HttpRequestController {
   setToken(token) {
     this.token = token;
     CommonUtils.setLoginToken(token);
+  }
+
+  setUserId(userId) {
+    this.userId = userId;
+    CommonUtils.setUserId(userId);
+  }
+
+  async getUserId() {
+    if(!this.userId) {
+      return await CommonUtils.getUserId();
+    }
+    return this.userId;
   }
 
   async postRequest(path, request) {

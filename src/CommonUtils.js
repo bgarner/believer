@@ -32,6 +32,24 @@ export default class CommonUtils {
     }
   }
 
+  static async setUserId(userId) {
+    return await AsyncStorage.setItem('userId', JSON.stringify(userId));
+  }
+
+  static async clearUserId() {
+    return await AsyncStorage.setItem('userId', '');
+  }
+
+  static async getUserId() {
+    const value = await AsyncStorage.getItem('userId');
+    if (value !== null) {
+      return JSON.parse(value);
+    } else {
+      return null;
+    }
+  }
+
+
   static async setDrawerOpen(isOpen) {
     return await AsyncStorage.setItem('drawerOpen', JSON.stringify(isOpen));
   }
