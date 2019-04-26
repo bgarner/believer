@@ -144,7 +144,7 @@ export const goHome = () => Navigation.setRoot({
                 children: [
                   {
                     component: {
-                      name: 'Account',
+                      name: 'EditProfile',
                       options: {
                         bottomTab: {
                           fontSize: 12,

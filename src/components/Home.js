@@ -50,17 +50,6 @@ class Home extends Component {
 
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     let missions = await this.believerRequestController.getMissionsFeed();
-  //     this.setState({missions});
-  //   }
-  //   catch(e) {
-  //     throw e;
-  //   }
-  //
-  // }
-
   onMissionClick(item) {
     Navigation.push(this.props.componentId, {
       component: {
@@ -121,6 +110,9 @@ class Home extends Component {
 
 
   render() {
+    if(!this.state.missions) {
+      return null;
+    }
     return (
       <ScrollView style={styles.container}>
         { this.renderMissionList() }

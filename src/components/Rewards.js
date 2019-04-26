@@ -47,23 +47,34 @@ export default class Rewards extends React.Component {
 
   }
 
-  async componentDidMount() {
+  // async componentDidMount() {
+  //   try {
+  //     let rewards = await this.believerRequestController.getRewardsList();
+  //     let userProfile = await this.believerRequestController.getUserProfile();
+  //     this.setState({
+  //       rewards,
+  //       userPointBalance: parseInt(userProfile.point_balance)
+  //     });
+  //   }
+  //   catch(e) {
+  //     throw e;
+  //   }
+  // }
+
+  async componentDidAppear() {
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
     try {
       let rewards = await this.believerRequestController.getRewardsList();
       let userProfile = await this.believerRequestController.getUserProfile();
       this.setState({
         rewards,
-        userPointBalance: parseInt(userProfile.point_balance)
+        // userPointBalance: parseInt(userProfile.point_balance.replace(/,/g, ""))
+        userPointBalance: parseInt(userProfile.point_balance),
       });
     }
     catch(e) {
       throw e;
     }
-  }
-
-  componentDidAppear() {
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
-
   }
 
   async onRewardClick(item) {

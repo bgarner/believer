@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import FollowButton from "./FollowButton";
-// import UnfollowButton from "./UnfollowButton";
 
 class Client extends Component {
 
@@ -24,11 +23,6 @@ class Client extends Component {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     this.onClientClick = this.onClientClick.bind(this);
-    // this.followClient = this.followClient.bind(this);
-    // this.unfollowClient = this.unfollowClient.bind(this);
-    // this.state = {
-    //   isFollowing : false
-    // }
 
   }
 
@@ -45,7 +39,6 @@ class Client extends Component {
           <TouchableHighlight activeOpacity={0} style={{ height:'100%'}} onPress={this.onClientClick}>
             <Avatar
               medium
-              // rounded
               title="CR"
               onPress={() => console.log("Works!")}
               activeOpacity={0.7}

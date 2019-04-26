@@ -5,8 +5,8 @@ export default class HttpRequestController {
 
   constructor() {
     this.token = null;
-    this.baseUrl = "http://localhost:8000";
-    // this.baseUrl = "https://gamegraft.com";
+    // this.baseUrl = "http://localhost:8000";
+    this.baseUrl = "https://gamegraft.com";
     this._instance = null;
   }
 

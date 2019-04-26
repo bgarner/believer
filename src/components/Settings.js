@@ -5,8 +5,6 @@ import {
   Button,
   StyleSheet, AsyncStorage,
 } from 'react-native'
-import {Navigation} from 'react-native-navigation';
-import {USER_KEY} from "../config";
 import {goToAuth} from "../navigation";
 import CommonUtils from "../CommonUtils";
 
