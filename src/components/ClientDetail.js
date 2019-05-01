@@ -44,15 +44,16 @@ class ClientDetail extends Component {
 
   renderStatsList() {
     if(this.state.client) {
+      const client = this.state.client;
       return (
         <View>
-          {this.renderSingleStat( 'Believers',  this.state.client.stats.follower_count )}
+          {client.stats && this.renderSingleStat( 'Believers',  this.state.client.stats.follower_count )}
           {this.renderSingleStat( 'City',  this.state.client.city)}
           {this.renderSingleStat( 'Address',  this.state.client.address1)}
-          {this.renderSingleStat( 'New Believers this week',  this.state.client.stats.new_followers_this_week )}
-          {this.renderSingleStat( 'Active Missions',  this.state.client.stats.active_missions )}
-          {this.renderSingleStat( 'Missions Completed this week',  this.state.client.stats.mission_completions_this_week )}
-          {this.renderLeaderboard()}
+          {client.stats && this.renderSingleStat( 'New Believers this week',  this.state.client.stats.new_followers_this_week )}
+          {client.stats && this.renderSingleStat( 'Active Missions',  this.state.client.stats.active_missions )}
+          {client.stats && this.renderSingleStat( 'Missions Completed this week',  this.state.client.stats.mission_completions_this_week )}
+          {client.stats && this.renderLeaderboard()}
 
         </View>
       );
