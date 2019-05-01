@@ -67,7 +67,7 @@ class MessageList extends Component {
       component: {
         name: 'Message',
         passProps: {
-          messageId: item.id,
+          messageId: item.message_id,
         },
         options: {
           topBar: {
