@@ -7,6 +7,7 @@ import {
 import {Navigation} from 'react-native-navigation';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button} from "react-native-elements";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 export default class Status extends React.Component {
   static get options() {
@@ -56,8 +57,11 @@ export default class Status extends React.Component {
   }
 
    renderImage() {
+     if(!this.state.user) {
+       return null;
+     }
     return <ImageBackground
-      source={{uri: 'https://picsum.photos/g/640/480/?random'}}
+      source={{uri: CLOUDINARY_BASE_URL + this.state.user.image }}
       style={{ flex:2.5, height:'100%', width:'100%',}}>
       <View style={{flex:1, flexDirection:'column', alignItems:'center', }}>
         <View style={{flex:3, width:'100%', alignItems: 'center', paddingTop:20}}>

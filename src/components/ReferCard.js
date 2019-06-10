@@ -34,7 +34,7 @@ export default class ReferCard extends React.Component {
           <Text
             style={{
               fontWeight: 'bold',
-              fontSize: 16,
+              fontSize: 14,
               fontFamily:'Helvetica',
               color: '#FFF',
               textAlign:'center',
@@ -75,7 +75,7 @@ export default class ReferCard extends React.Component {
             source={{
               uri: this.props.clientLogo,
             }}
-            containerStyle={{flex: 1, margin: 10}}
+            containerStyle={{flex: 1, margin: 13}}
           />
         </View>
       </View>);

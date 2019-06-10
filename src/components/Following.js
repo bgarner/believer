@@ -8,6 +8,7 @@ import {Navigation} from 'react-native-navigation';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import ClientCard from "./ClientCard";
 import CommonUtils from "../CommonUtils";
+import {CLOUDINARY_BASE_URL} from "../config.js";
 
 export default class Following extends React.Component {
   static get options() {
@@ -56,8 +57,8 @@ export default class Following extends React.Component {
           clientId: item.id,
           clientName: item.name,
           clientDescription: item.description,
-          clientImage: 'https://picsum.photos/g/640/480/?random',
-          clientLogo: 'https://picsum.photos/75/75/?random',
+          clientImage: CLOUDINARY_BASE_URL + item.banner,
+          clientLogo: CLOUDINARY_BASE_URL + item.logo,
         },
         options: {
           topBar: {
@@ -80,8 +81,8 @@ export default class Following extends React.Component {
       clientId={item.id}
       clientName={item.name}
       clientDescription={item.content}
-      clientImage={'https://picsum.photos/g/640/480/?random'}
-      clientLogo={'https://picsum.photos/75/75/?random'}
+      clientImage={CLOUDINARY_BASE_URL + item.banner}
+      clientLogo={CLOUDINARY_BASE_URL + item.logo}
       onClientCardClick={() => this.onClientCardClick(item)}
     />
   }

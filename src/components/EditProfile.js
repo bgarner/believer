@@ -9,6 +9,7 @@ import CommonUtils from "../CommonUtils";
 import {Button, Avatar, ListItem} from "react-native-elements";
 import {goToAuth} from "../navigation";
 import BelieverRequestController from "../controllers/BelieverRequestController";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 export default class EditProfile extends React.Component {
 
@@ -124,7 +125,7 @@ export default class EditProfile extends React.Component {
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
           source={{
-            uri: 'https://picsum.photos/200/200/?random',
+            uri: CLOUDINARY_BASE_URL + this.state.profile.image
           }}
         />
       </View>

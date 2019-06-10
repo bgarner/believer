@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import CommonUtils from "../CommonUtils";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import ReferCard from "./ReferCard";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 export default class Refer extends React.Component {
   static propTypes = {
@@ -62,7 +63,7 @@ export default class Refer extends React.Component {
           clientId: item.id,
           clientName: item.name,
           clientDescription: item.description,
-          clientImage: 'https://picsum.photos/g/640/480/?random',
+          clientImage: CLOUDINARY_BASE_URL + item.banner,
           viewTitle: `Refer a Friend to ${item.name}`,
 
         },
@@ -86,8 +87,8 @@ export default class Refer extends React.Component {
       clientId={item.id}
       clientName={item.name}
       clientDescription={item.description}
-      clientImage={'https://picsum.photos/g/640/480/?random'}
-      clientLogo={'https://picsum.photos/75/75/?random'}
+      clientImage={CLOUDINARY_BASE_URL + item.banner}
+      clientLogo={CLOUDINARY_BASE_URL + item.logo2}
       onReferClick={() => this.onReferClick(item)}
     />
   }

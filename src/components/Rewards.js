@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import CommonUtils from "../CommonUtils";
 import RewardCard from "./RewardCard";
 import BelieverRequestController from "../controllers/BelieverRequestController";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 export default class Rewards extends React.Component {
 
@@ -102,7 +103,7 @@ export default class Rewards extends React.Component {
       rewardDescription={item.description}
       rewardType={item.type}
       rewardPoints={item.points}
-      rewardImage={'https://picsum.photos/g/640/480/?random'}
+      rewardImage={CLOUDINARY_BASE_URL + item.image}
       onRewardClick={() => this.onRewardClick(item)}
       userPointBalance={this.state.userPointBalance}
 

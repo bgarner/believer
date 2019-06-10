@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
+import {CLOUDINARY_BASE_URL} from "../config.js";
 
 class Home extends Component {
   static propTypes = {
@@ -60,9 +61,9 @@ class Home extends Component {
           missionDescription: item.content,
           missionType: item.challenge_type,
           missionPoints: item.points,
-          missionImage: 'https://picsum.photos/g/640/480/?random',
+          missionImage: CLOUDINARY_BASE_URL + item.image,
           missionUrl: item.share_url,
-          clientLogo: 'https://picsum.photos//75/75/?random',
+          clientLogo: CLOUDINARY_BASE_URL + item.client_logo,
           clientName: item.brand_name,
 
         },
@@ -88,8 +89,8 @@ class Home extends Component {
       missionDescription={item.content}
       missionType={item.challenge_type}
       missionPoints={item.points}
-      missionImage={'https://picsum.photos/g/640/480/?random'}
-      clientLogo={'https://picsum.photos//75/75/?random'}
+      missionImage={CLOUDINARY_BASE_URL + item.image}
+      clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
       onMissionClick={() => this.onMissionClick(item)}
       onBrandClick={() => this.onMissionClick(item)}

@@ -7,6 +7,7 @@ import CommonUtils from "../CommonUtils";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {Avatar, Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
+import {CLOUDINARY_BASE_URL} from "../config";
 
 class MessageList extends Component {
   static propTypes = {
@@ -130,7 +131,7 @@ class MessageList extends Component {
                   onPress={() => console.log("Works!")}
                   activeOpacity={0.7}
                   source={{
-                    uri: 'https://picsum.photos/75/75/?random',
+                    uri: CLOUDINARY_BASE_URL + data.item.client.logo,
                   }}
                 />
               </View>

@@ -6,6 +6,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import {Avatar, Button, SocialIcon, Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import CommonUtils from "../CommonUtils";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 class Message extends Component {
   static propTypes = {
@@ -28,7 +29,7 @@ class Message extends Component {
       let message = await this.believerRequestController.getMessage(this.props.messageId);
       this.setState({
         message,
-        clientLogo: 'https://picsum.photos/g/75/75/?random'
+        clientLogo: CLOUDINARY_BASE_URL + message.brand_logo,
       });
     }
     catch(e) {
@@ -53,7 +54,7 @@ class Message extends Component {
         return (
           <View style={{flex:2.5}}>
             <Image
-              source={{ uri: 'https://picsum.photos/g/640/480/?random'}}
+              source={{ uri: this.state.clientLogo}}
               style={{width:'100%', height: '100%'}} />
           </View>
         );
@@ -80,7 +81,7 @@ class Message extends Component {
                 onPress={() => console.log("Works!")}
                 activeOpacity={0.7}
                 source={{
-                  uri: this.state.clientLogo,
+                  uri: this.state.clientLogo
                 }}
 
               />
