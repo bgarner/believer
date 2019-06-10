@@ -18,7 +18,7 @@ export default class SignUp extends React.Component {
       username: '', password: '', email: ''
     }
     this.believerRequestController = new BelieverRequestController();
-    this.signUp = this.signUp.bind();
+    this.signUp = this.signUp.bind(this);
   }
 
   onChangeText = (key, val) => {

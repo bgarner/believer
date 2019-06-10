@@ -7,14 +7,12 @@ import {
   TextInput,
   AsyncStorage,
   TouchableHighlight,
-  Button
+  Linking,
 } from 'react-native'
 
 import {goHome, goSignup} from '../navigation'
-// import { USER_KEY } from '../config'
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import CommonUtils from "../CommonUtils";
-
 
 export default class SignIn extends React.Component {
 
@@ -41,9 +39,8 @@ export default class SignIn extends React.Component {
     } catch (err) {
       console.log('error:', err)
     }
-
-
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -79,7 +76,9 @@ export default class SignIn extends React.Component {
           <Text style={styles.loginText}>Sign In</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight>
+        <TouchableHighlight
+          onPress={ ()=>{ Linking.openURL('https://gamegraft.com/password/reset')} }
+        >
           <Text style={{color: '#35AFC8'}}>Forgot your password?</Text>
         </TouchableHighlight>
         </View>

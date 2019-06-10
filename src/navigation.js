@@ -25,7 +25,7 @@ export const goSignup = () => Navigation.setRoot({
       name: 'SignUp'
     },
   }
-})
+});
 
 export const goHome = () => Navigation.setRoot({
   root: {

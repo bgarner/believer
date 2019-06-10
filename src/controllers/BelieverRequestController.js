@@ -44,7 +44,6 @@ export default class BelieverRequestController {
     }
   }
 
-
   async getMissionsFeed() {
     try {
       const userId = await this.httpRequestController.getUserId();
