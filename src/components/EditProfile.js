@@ -2,6 +2,7 @@ import React from 'react'
 import {
   View,
   StyleSheet,
+  Linking
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 import PropTypes from "prop-types";
@@ -42,7 +43,8 @@ export default class EditProfile extends React.Component {
     this.state = {
       profile:null,
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickProfile = this.handleClickProfile.bind(this);
+    this.handleClickContact = this.handleClickContact.bind(this);
     this.menuItems = [
       {
         componentName: 'UpdateUsername'
@@ -82,17 +84,21 @@ export default class EditProfile extends React.Component {
     }
   }
 
-  async handleClick(item) {
+  async handleClickProfile(item, title) {
     try {
       const currentActiveTab = await CommonUtils.getCurrentActiveTab();
       Navigation.push(currentActiveTab, {
         component: {
-          name: item,
+          name: 'UpdateUsername',
+          passProps: {
+            firstname: item.first,
+            lastname: item.last,
+          },
           options: {
             topBar: {
               visible: true,
               title: {
-                // text: item.name
+                title
               }
             }
           }
@@ -111,6 +117,38 @@ export default class EditProfile extends React.Component {
     }
   }
 
+  async handleClickContact(item, title) {
+    try {
+      const currentActiveTab = await CommonUtils.getCurrentActiveTab();
+      Navigation.push(currentActiveTab, {
+        component: {
+          name: 'UpdateContact',
+          passProps: {
+
+
+          },
+          options: {
+            topBar: {
+              visible: true,
+              title: {
+                title
+              }
+            }
+          }
+        }
+      });
+      Navigation.mergeOptions(this.props.componentId, {
+        sideMenu: {
+          left: {
+            visible: false
+          }
+        }
+      });
+    }
+    catch(e){
+      throw e;
+    }
+  }
   render() {
     if(!this.state.profile) {
       return null;
@@ -122,7 +160,6 @@ export default class EditProfile extends React.Component {
           xlarge
           rounded
           title="CR"
-          onPress={() => console.log("Works!")}
           activeOpacity={0.7}
           source={{
             uri: CLOUDINARY_BASE_URL + this.state.profile.image
@@ -136,7 +173,7 @@ export default class EditProfile extends React.Component {
             title={this.state.profile.name}
             subtitle={this.state.profile.email}
             containerStyle={{borderBottomWidth:0}}
-            // onPress={() => this.handleClick('UpdateUsername')}
+            onPress={() => this.handleClickProfile(this.state.profile, 'Update Username')}
           />
         </View>
         <View style={styles.listViewContainerStyle}>
@@ -149,7 +186,7 @@ export default class EditProfile extends React.Component {
             subtitleNumberOfLines={2}
             textInputMultiline={true}
             containerStyle={{borderBottomWidth:0}}
-            // onPress={() => this.handleClick('UpdateContact')}
+            onPress={() => this.handleClickContact(this.state.profile, 'Update Contact')}
           />
         </View>
 
@@ -158,7 +195,7 @@ export default class EditProfile extends React.Component {
             key={4}
             title={'Update Password'}
             containerStyle={{borderBottomWidth:0}}
-            // onPress={() => this.handleClick('UpdatePassword')}
+            onPress={()=>{ Linking.openURL('https://gamegraft.com/password/reset')}}
           />
         </View>
 
