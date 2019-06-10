@@ -26,16 +26,35 @@ export default class BelieverRequestController {
 
   }
 
+  async register(credentials) {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/user/register", credentials);
+      if(!response.token){
+        if (response.email) {
+          alert('Failed to register! \n' + response.email);
+        }
+        throw new Error('Failed to register');
+      }
+      this.httpRequestController.setToken(response.token);
+      this.httpRequestController.setUserId(response.user_id);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 
   async getMissionsFeed() {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': userId} );
 
-      if (response && response.length < 1){
-        throw new Error('Failed to get missions for user');
+      if (response && response.length >= 1){
+        return (response);
       }
-       return (response);
+      return [];
+      throw new Error('Failed to get missions for user');
 
     }
     catch(e){
@@ -48,10 +67,12 @@ export default class BelieverRequestController {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/clients", {'user_id': userId} );
 
-      if (response && response.length < 1){
-        throw new Error('Failed to get brands for user');
+      if (response && response.length >= 1){
+        return (response);
+
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get brands for user');
 
     }
     catch(e){
@@ -64,10 +85,12 @@ export default class BelieverRequestController {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/clientsFollowedByUser", {'user_id': userId} );
 
-      if (response && response.length < 1){
-        throw new Error('Failed to get followed brands for user');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get followed brands for user');
+
 
     }
     catch(e){
@@ -213,6 +236,21 @@ export default class BelieverRequestController {
       let response = await this.httpRequestController.postRequest("/api/v1/messages/show", {user_id: userId, message_id: message_id} );
       if (response && response.length < 1){
         throw new Error('Failed to get message details');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async deleteMessage(message_id) {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/messages/delete", {user_id: userId, message_id: message_id} );
+      if (response && response.length < 1){
+        throw new Error('Failed to delete message');
       }
       return (response);
 

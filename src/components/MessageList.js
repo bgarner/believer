@@ -87,12 +87,13 @@ class MessageList extends Component {
     }
   }
 
-  deleteRow(rowMap, rowKey) {
+  async deleteRow(rowMap, rowKey) {
     this.closeRow(rowMap, rowKey);
     const newData = [...this.state.messages];
     const prevIndex = this.state.messages.findIndex(item => item.key === rowKey);
     newData.splice(prevIndex, 1);
     this.setState({messages: newData});
+    await this.believerRequestController.deleteMessage(rowKey);
   }
 
   onRowDidOpen = (rowKey, rowMap) => {

@@ -6,22 +6,31 @@ import {
   TextInput,
   StyleSheet, Text, TouchableHighlight
 } from 'react-native'
-import {goToAuth} from "../navigation";
+import {goHome, goToAuth} from "../navigation";
+import BelieverRequestController from "../controllers/BelieverRequestController";
 
 export default class SignUp extends React.Component {
-  state = {
-    username: '', password: '', email: ''
+
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      username: '', password: '', email: ''
+    }
+    this.believerRequestController = new BelieverRequestController();
+    this.signUp = this.signUp.bind();
   }
+
   onChangeText = (key, val) => {
     this.setState({ [key]: val })
   }
   signUp = async () => {
-    const { username, password, email } = this.state
+    const { name, password, email } = this.state
     try {
-      // here place your signup logic
-      console.log('user successfully signed up!: ', success)
+      await this.believerRequestController.register({name, email, password});
+      goHome();
     } catch (err) {
-      console.log('error signing up: ', err)
+      console.log('error:', err)
     }
   }
 

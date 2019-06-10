@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, Button} from 'react-native';
+import {StyleSheet, ScrollView, Button, View, Text} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
@@ -101,10 +101,20 @@ class Home extends Component {
 
   renderMissionList() {
     let missionList = [];
-    this.state.missions.forEach((item) => {
-      missionList.push(this.renderMission(item));
-    });
-    return missionList;
+    if(this.state.missions.length > 0) {
+      this.state.missions.forEach((item) => {
+        missionList.push(this.renderMission(item));
+      });
+      return missionList;
+    }
+    else{
+      return <View style={styles.message}>
+        <Text>
+          No Missions found. Let's find some brands to follow!
+        </Text>
+      </View>
+    }
+
   }
 
 
@@ -126,6 +136,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
   },
+  message: {
+    padding: 10,
+  }
 
 });
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   View,
-  StyleSheet, ScrollView,
+  StyleSheet, ScrollView, Text,
 } from 'react-native'
 import {Button} from 'react-native-elements'
 import {Navigation} from 'react-native-navigation';
@@ -88,10 +88,20 @@ export default class Following extends React.Component {
 
   renderClientList() {
     let clientList = [];
-    this.state.clients.forEach((item) => {
-      clientList.push(this.renderClient(item));
-    });
-    return clientList;
+    if(this.state.clients.length >= 1) {
+      this.state.clients.forEach((item) => {
+        clientList.push(this.renderClient(item));
+      });
+      return clientList;
+    }
+    else{
+      return <View>
+        <Text>
+          No brands to follow!
+        </Text>
+      </View>
+    }
+
   }
 
   render() {
