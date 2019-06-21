@@ -24,13 +24,6 @@ export default class Rewards extends React.Component {
         title: {
           text: 'Rewards',
         },
-        leftButtons: [
-          {
-            id: 'sideMenuHamburger',
-            icon: require('../../assets/menu-button.png'),
-            color: 'white',
-          }
-        ],
       }
     };
   }

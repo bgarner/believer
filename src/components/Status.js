@@ -25,6 +25,7 @@ export default class Status extends React.Component {
     this.believerRequestController = new BelieverRequestController();
     this.onRedeemPointsClick = this.onRedeemPointsClick.bind(this);
     this.onSendReferralClick = this.onSendReferralClick.bind(this);
+    this.onProfileUpdateClick = this.onProfileUpdateClick.bind(this);
     this.state = {
       user : null
     }
@@ -33,7 +34,7 @@ export default class Status extends React.Component {
   onRedeemPointsClick() {
     Navigation.mergeOptions('BottomTabsId', {
       bottomTabs: {
-        currentTabIndex: 1,
+        currentTabIndex: 2,
       }
     });
   }
@@ -42,6 +43,23 @@ export default class Status extends React.Component {
     Navigation.mergeOptions('BottomTabsId', {
       bottomTabs: {
         currentTabIndex: 3,
+      }
+    });
+  }
+
+  onProfileUpdateClick() {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'EditProfile',
+        options: {
+          topBar: {
+            visible: true,
+            title: {
+              // text: item.name
+            }
+          }
+        }
+
       }
     });
   }
@@ -173,12 +191,31 @@ export default class Status extends React.Component {
     </View>
   }
 
+  renderUpdateProfileButton() {
+    return <View style={{flex:1, backgroundColor:'#fff', justifyContent:'center', alignItems:'center'}}>
+      <View>
+        <Button
+          backgroundColor={'#35AFC8'}
+          title={'Update Profile'}
+          onPress={this.onProfileUpdateClick}
+          textStyle={{
+            fontSize: 16,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            fontFamily:'Helvetica',
+            paddingHorizontal: 30
+          }}
+        />
+      </View>
+    </View>
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {this.renderImage()}
         {this.renderAnalytics()}
-        {this.renderReferralButton()}
+        {this.renderUpdateProfileButton()}
       </View>
     )
   }

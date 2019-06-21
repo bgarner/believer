@@ -9,6 +9,7 @@ import BelieverRequestController from "../controllers/BelieverRequestController"
 import ClientCard from "./ClientCard";
 import CommonUtils from "../CommonUtils";
 import {CLOUDINARY_BASE_URL} from "../config.js";
+import PropTypes from "prop-types";
 
 export default class Following extends React.Component {
   static get options() {
@@ -21,6 +22,9 @@ export default class Following extends React.Component {
     };
   }
 
+  static propTypes = {
+    componentId: PropTypes.string.isRequired,
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -46,11 +50,7 @@ export default class Following extends React.Component {
 
 
   async onClientCardClick(item) {
-
-
-    let currentActiveTab = await CommonUtils.getCurrentActiveTab();
-    console.log(currentActiveTab)
-    Navigation.push(currentActiveTab, {
+    Navigation.push(this.props.componentId, {
       component: {
         name: 'ClientDetail',
         passProps: {
@@ -114,20 +114,6 @@ export default class Following extends React.Component {
               { this.renderClientList() }
             </View>
           </ScrollView>
-        </View>
-
-        <View style={{flex:1, flexDirection: 'row', width:'100%', justifyContent: 'center', alignItems:'flex-end'}}>
-          <Button
-          backgroundColor={'#35AFC8'}
-          title={'Find Worthy Brands'}
-          textStyle={{
-          fontSize: 14,
-          fontWeight: 'bold',
-          textAlign: 'center',
-          fontFamily:'Helvetica'
-          }}
-          onPress={() => { alert('You are following the brand now!');}}
-          />
         </View>
       </View>
     )

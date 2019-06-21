@@ -7,7 +7,7 @@ import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
 import {CLOUDINARY_BASE_URL} from "../config.js";
 
-class Home extends Component {
+class MissionHistory extends Component {
   static propTypes = {
     componentId: PropTypes.string.isRequired,
   };
@@ -15,6 +15,9 @@ class Home extends Component {
   static get options() {
     return {
       topBar: {
+        title: {
+          text: 'Mission History'
+        },
       }
     };
   }
@@ -22,7 +25,6 @@ class Home extends Component {
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
-    this.onMissionClick = this.onMissionClick.bind(this);
     Navigation.events().bindComponent(this);
 
     this.state = {
@@ -35,42 +37,13 @@ class Home extends Component {
     console.log(this.props.componentId);
     CommonUtils.setCurrentActiveTab(this.props.componentId);
     try {
-      let missions = await this.believerRequestController.getMissionsFeed();
+      let missions = await this.believerRequestController.getMissionHistory();
       this.setState({missions});
     }
     catch(e) {
       throw e;
     }
 
-  }
-
-  onMissionClick(item) {
-    Navigation.push(this.props.componentId, {
-      component: {
-        name: 'MissionDetail',
-        passProps: {
-          missionId: item.id,
-          missionTitle: item.name,
-          missionDescription: item.content,
-          missionType: item.challenge_type,
-          missionPoints: item.points,
-          missionImage: CLOUDINARY_BASE_URL + item.image,
-          missionUrl: item.share_url,
-          clientLogo: CLOUDINARY_BASE_URL + item.client_logo,
-          clientName: item.brand_name,
-
-        },
-        options: {
-          topBar: {
-            visible: true,
-            title: {
-              text: item.name
-            }
-          }
-        }
-
-      }
-    });
   }
 
   renderMission(item) {
@@ -85,9 +58,6 @@ class Home extends Component {
       missionImage={CLOUDINARY_BASE_URL + item.image}
       clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
-      onMissionClick={() => this.onMissionClick(item)}
-      onBrandClick={() => this.onMissionClick(item)}
-
     />
   }
 
@@ -104,7 +74,7 @@ class Home extends Component {
     else{
       return <View style={styles.message}>
         <Text>
-          No Missions found. Let's find some brands to follow!
+          No Missions history found. Let's find some missions to complete!
         </Text>
       </View>
     }
@@ -114,7 +84,7 @@ class Home extends Component {
 
 
   render() {
-    if(!this.state.missions) {
+    if(!this.state.missions || this.state.missions.length < 1) {
       return null;
     }
     return (
@@ -136,4 +106,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Home;
+export default MissionHistory;

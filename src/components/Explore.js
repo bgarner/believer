@@ -10,14 +10,14 @@ import CommonUtils from "../CommonUtils";
 import {CLOUDINARY_BASE_URL} from "../config";
 
 export default class Explore extends React.Component {
-  // static propTypes = {
-  //   componentId: PropTypes.string.isRequired,
-  // };
+  static propTypes = {
+    componentId: PropTypes.string.isRequired,
+  };
   static get options() {
     return {
       topBar: {
         title: {
-          text: 'Explore Brands'
+          text: 'Search Brands'
         },
       }
     };
@@ -45,11 +45,7 @@ export default class Explore extends React.Component {
   }
 
   async onClientClick(item) {
-
-
-    let currentActiveTab = await CommonUtils.getCurrentActiveTab();
-    console.log(currentActiveTab)
-    Navigation.push(currentActiveTab, {
+    Navigation.push(this.props.componentId, {
       component: {
         name: 'ClientDetail',
         passProps: {

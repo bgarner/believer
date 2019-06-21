@@ -22,13 +22,6 @@ export default class Refer extends React.Component {
         title: {
           text: 'Refer',
         },
-        leftButtons: [
-          {
-            id: 'sideMenuHamburger',
-            icon: require('../../assets/menu-button.png'),
-            color: 'white',
-          }
-        ],
       }
     };
   }

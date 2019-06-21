@@ -24,13 +24,6 @@ export default class EditProfile extends React.Component {
         title: {
           text: 'Profile'
         },
-        leftButtons: [
-          {
-            id: 'sideMenuHamburger',
-            icon: require('../../assets/menu-button.png'),
-            color: 'white',
-          }
-        ],
       }
     };
   }
@@ -45,6 +38,7 @@ export default class EditProfile extends React.Component {
     }
     this.handleClickProfile = this.handleClickProfile.bind(this);
     this.handleClickContact = this.handleClickContact.bind(this);
+    this.handleClickMissionHistory = this.handleClickMissionHistory.bind(this);
     this.menuItems = [
       {
         componentName: 'UpdateUsername'
@@ -86,13 +80,12 @@ export default class EditProfile extends React.Component {
 
   async handleClickProfile(item, title) {
     try {
-      const currentActiveTab = await CommonUtils.getCurrentActiveTab();
-      Navigation.push(currentActiveTab, {
+      Navigation.push(this.props.componentId, {
         component: {
           name: 'UpdateUsername',
           passProps: {
-            firstname: item.first,
-            lastname: item.last,
+            firstName: item.first,
+            lastName: item.last,
           },
           options: {
             topBar: {
@@ -101,13 +94,6 @@ export default class EditProfile extends React.Component {
                 title
               }
             }
-          }
-        }
-      });
-      Navigation.mergeOptions(this.props.componentId, {
-        sideMenu: {
-          left: {
-            visible: false
           }
         }
       });
@@ -119,12 +105,15 @@ export default class EditProfile extends React.Component {
 
   async handleClickContact(item, title) {
     try {
-      const currentActiveTab = await CommonUtils.getCurrentActiveTab();
-      Navigation.push(currentActiveTab, {
+      Navigation.push(this.props.componentId, {
         component: {
           name: 'UpdateContact',
           passProps: {
-
+            address: item.address1,
+            city: item.city,
+            province: item.province,
+            postalCode: item.postal_code,
+            phone: item.phone1,
 
           },
           options: {
@@ -137,10 +126,24 @@ export default class EditProfile extends React.Component {
           }
         }
       });
-      Navigation.mergeOptions(this.props.componentId, {
-        sideMenu: {
-          left: {
-            visible: false
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async handleClickManageBrands() {
+    try {
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: 'Following',
+          options: {
+            topBar: {
+              visible: true,
+              // title: {
+              //   title
+              // }
+            }
           }
         }
       });
@@ -149,12 +152,34 @@ export default class EditProfile extends React.Component {
       throw e;
     }
   }
+
+  async handleClickMissionHistory() {
+    try {
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: 'MissionHistory',
+          options: {
+            topBar: {
+              visible: true,
+              // title: {
+              //   title
+              // }
+            }
+          }
+        }
+      });
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
   render() {
     if(!this.state.profile) {
       return null;
     }
     return <View style={{flex:1}}>
-      <View style={{ flex:0.75, backgroundColor: '#e6e7e8', alignItems:'center'}}/>
+      <View style={{ flex:1.1, backgroundColor: '#e6e7e8', alignItems:'center'}}/>
       <View style={{flex:0.5, alignItems:'center', bottom:80}}>
         <Avatar
           xlarge
@@ -166,7 +191,7 @@ export default class EditProfile extends React.Component {
           }}
         />
       </View>
-      <View style={{flex:2}}>
+      <View style={{flex:5.2}}>
         <View style={styles.listViewContainerStyle}>
           <ListItem
             key={1}
@@ -196,6 +221,24 @@ export default class EditProfile extends React.Component {
             title={'Update Password'}
             containerStyle={{borderBottomWidth:0}}
             onPress={()=>{ Linking.openURL('https://gamegraft.com/password/reset')}}
+          />
+        </View>
+
+        <View style={styles.listViewContainerStyle}>
+          <ListItem
+            key={4}
+            title={'Manage Brands'}
+            containerStyle={{borderBottomWidth:0}}
+            onPress={()=> this.handleClickManageBrands() }
+          />
+        </View>
+
+        <View style={styles.listViewContainerStyle}>
+          <ListItem
+            key={4}
+            title={'View Completed Missions'}
+            containerStyle={{borderBottomWidth:0}}
+            // onPress={()=> this.handleClickMissionHistory() }
           />
         </View>
 

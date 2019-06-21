@@ -20,13 +20,6 @@ class MessageList extends Component {
         title: {
           text: 'Inbox',
         },
-        leftButtons: [
-          {
-            id: 'sideMenuHamburger',
-            icon: require('../../assets/menu-button.png'),
-            color: 'white',
-          }
-        ],
       }
     };
   }

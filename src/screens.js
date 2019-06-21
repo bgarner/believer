@@ -24,6 +24,7 @@ import EditProfile from "./components/EditProfile";
 import UpdateUsername from "./components/UpdateUsername";
 import UpdateContact from "./components/UpdateContact";
 import UpdatePassword from "./components/UpdatePassword";
+import MissionHistory from "./components/MissionHistory";
 
 export function registerScreens() {
   // Navigation.registerComponent('Login', () => Login);
@@ -52,6 +53,7 @@ export function registerScreens() {
   Navigation.registerComponent('UpdateUsername', () => UpdateUsername);
   Navigation.registerComponent('UpdateContact', () => UpdateContact);
   Navigation.registerComponent('UpdatePassword', () => UpdatePassword);
+  Navigation.registerComponent('MissionHistory', () => MissionHistory);
 
 
 

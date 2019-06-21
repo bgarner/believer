@@ -6,8 +6,11 @@ import {Button, Text} from "react-native-elements";
 class UpdateContact extends Component {
 
   static propTypes = {
-    // firstName: PropTypes.string.isRequired,
-    // lastName: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    province: PropTypes.string.isRequired,
+    postalCode: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
   };
 
   constructor(props, context) {
@@ -77,7 +80,7 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.postal_code}
+              value={this.props.postalCode}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'

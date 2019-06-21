@@ -22,13 +22,6 @@ export default class Account extends React.Component {
         title: {
           text: 'Accounts'
         },
-        leftButtons: [
-          {
-            id: 'sideMenuHamburger',
-            icon: require('../../assets/menu-button.png'),
-            color: 'white',
-          }
-        ],
       }
     };
   }

@@ -97,8 +97,7 @@ export default class BelieverRequestController {
     }
   }
 
-  async getClientDetails(client_id)
-  {
+  async getClientDetails(client_id) {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/clients/show", {client_id} );
       if (response && response.length < 1){
@@ -175,10 +174,7 @@ export default class BelieverRequestController {
     }
   }
 
-
-
-  async followClient(client_id)
-  {
+  async followClient(client_id) {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/clients/follow", {user_id: userId, client_id: client_id} );
@@ -194,8 +190,7 @@ export default class BelieverRequestController {
     }
   }
 
-  async unfollowClient(client_id)
-  {
+  async unfollowClient(client_id) {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/clients/unfollow", {user_id: userId, client_id: client_id} );
@@ -211,8 +206,7 @@ export default class BelieverRequestController {
     }
   }
 
-  async getMessages()
-  {
+  async getMessages() {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/messages", {user_id: userId} );
@@ -228,8 +222,7 @@ export default class BelieverRequestController {
     }
   }
 
-  async getMessage(message_id)
-  {
+  async getMessage(message_id) {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/messages/show", {user_id: userId, message_id: message_id} );
@@ -282,5 +275,20 @@ export default class BelieverRequestController {
     }
   }
 
+  async getMissionHistory() {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/missions/getMissionHistory", {user_id: userId} );
+      console.log(response);
+      if (response && response.length < 1){
+        throw new Error('Failed to get messages for user');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
 
 }
