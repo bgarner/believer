@@ -238,7 +238,7 @@ export default class EditProfile extends React.Component {
             key={4}
             title={'View Completed Missions'}
             containerStyle={{borderBottomWidth:0}}
-            // onPress={()=> this.handleClickMissionHistory() }
+            onPress={()=> this.handleClickMissionHistory() }
           />
         </View>
 
