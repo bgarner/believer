@@ -52,10 +52,18 @@ export default class EditProfile extends React.Component {
     ]
   }
 
-  componentDidAppear() {
-    CommonUtils.setCurrentActiveTab(this.props.componentId);
+  async componentDidAppear() {
 
+    CommonUtils.setCurrentActiveTab(this.props.componentId);
+    try {
+      let profile = await this.believerRequestController.getUserProfile();
+      this.setState({profile});
+    }
+    catch(e) {
+      throw e;
+    }
   }
+
   async componentDidMount() {
     try {
       let profile = await this.believerRequestController.getUserProfile();

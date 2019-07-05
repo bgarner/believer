@@ -38,7 +38,6 @@ class UpdatePassword extends Component {
         <TextInput
           value={this.props.lastName}
           style={styles.input}
-          // placeholder="Friend's Last Name"
           autoCapitalize="none"
           placeholderTextColor='#939495'
           onChangeText={val => this.onChangeText('lastName', val)}

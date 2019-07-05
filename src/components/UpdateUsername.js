@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View, Alert} from 'react-native';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button, Text} from "react-native-elements";
 class UpdateUsername extends Component {
 
   static propTypes = {
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
   };
 
   constructor(props, context) {
@@ -17,12 +17,20 @@ class UpdateUsername extends Component {
     this.onChangeText = this.onChangeText.bind(this);
 
   }
-  onChangeText = (key, val) => {
+  onChangeText(key, val) {
     this.setState({ [key]: val })
   }
 
-  saveChanges() {
-    console.log(this.state);
+  async saveChanges() {
+    try {
+      await this.believerRequestController.updateUsername(
+        this.state
+      );
+      Alert.alert('','Username updated');
+    }
+    catch(e) {
+      throw e;
+    }
   }
 
   render() {
@@ -34,7 +42,7 @@ class UpdateUsername extends Component {
           </Text>
           <View style={{ flex:3}}>
           <TextInput
-            value={this.props.firstName}
+            placeholder={this.props.firstName}
             style={styles.input}
             autoCapitalize="none"
             placeholderTextColor='#939495'
@@ -48,7 +56,7 @@ class UpdateUsername extends Component {
           </Text>
           <View style={{ flex:3}}>
           <TextInput
-            value={this.props.lastName}
+            placeholder={this.props.lastName}
             style={styles.input}
             autoCapitalize="none"
             placeholderTextColor='#939495'
@@ -61,7 +69,7 @@ class UpdateUsername extends Component {
             <Button
               backgroundColor={'#35AFC8'}
               title={'Save Changes'}
-              onPress={() => this.saveChanges}
+              onPress={() => this.saveChanges()}
               textStyle={{
                 fontSize: 14,
                 fontWeight: 'bold',

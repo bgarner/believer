@@ -292,4 +292,35 @@ export default class BelieverRequestController {
     }
   }
 
+  async updateContact(credentials) {
+    console.log(credentials);
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/profile/editContact", {user_id: userId, ...credentials } );
+      if (response && response.length < 1){
+        throw new Error('Failed to update username');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async updateUsername(credentials) {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/profile/editUsername", {user_id: userId, ...credentials } );
+      if (response && response.length < 1){
+        throw new Error('Failed to update profile');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
 }

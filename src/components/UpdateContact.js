@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {Alert, StyleSheet, TextInput, View} from 'react-native';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button, Text} from "react-native-elements";
 class UpdateContact extends Component {
 
   static propTypes = {
-    address: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    province: PropTypes.string.isRequired,
-    postalCode: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    address: PropTypes.string,
+    city: PropTypes.string,
+    province: PropTypes.string,
+    postalCode: PropTypes.string,
+    phone: PropTypes.string,
   };
 
   constructor(props, context) {
@@ -18,15 +18,22 @@ class UpdateContact extends Component {
     this.believerRequestController = new BelieverRequestController();
     this.saveChanges = this.saveChanges.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
-
   }
 
-  onChangeText = (key, val) => {
-    this.setState({ [key]: val })
+  onChangeText(key, val) {
+    this.setState({ [key]: val });
   }
 
-  saveChanges() {
-    console.log(this.state);
+  async saveChanges() {
+    try {
+      await this.believerRequestController.updateContact(
+        this.state
+      );
+      Alert.alert('','Contact information updated');
+    }
+    catch(e) {
+      throw e;
+    }
   }
 
   render() {
@@ -38,7 +45,7 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.address}
+              placeholder={this.props.address}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'
@@ -52,7 +59,7 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.city}
+              placeholder={this.props.city}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'
@@ -66,7 +73,7 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.province}
+              placeholder={this.props.province}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'
@@ -80,11 +87,11 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.postalCode}
+              placeholder={this.props.postalCode}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'
-              onChangeText={val => this.onChangeText('postal_code', val)}
+              onChangeText={val => this.onChangeText('postalCode', val)}
             />
           </View>
         </View>
@@ -95,7 +102,7 @@ class UpdateContact extends Component {
           </Text>
           <View style={{ flex:3}}>
             <TextInput
-              value={this.props.phone}
+              placeholder={this.props.phone}
               style={styles.input}
               autoCapitalize="none"
               placeholderTextColor='#939495'
@@ -108,7 +115,7 @@ class UpdateContact extends Component {
             <Button
               backgroundColor={'#35AFC8'}
               title={'Save Changes'}
-              onPress={this.saveChanges}
+              onPress={() => this.saveChanges()}
               textStyle={{
                 fontSize: 14,
                 fontWeight: 'bold',
