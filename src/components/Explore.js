@@ -50,10 +50,6 @@ export default class Explore extends React.Component {
         name: 'ClientDetail',
         passProps: {
           clientId: item.id,
-          clientName: item.name,
-          clientDescription: item.description,
-          clientImage: CLOUDINARY_BASE_URL + item.banner,
-          clientLogo: CLOUDINARY_BASE_URL + item.logo,
         },
         options: {
           topBar: {

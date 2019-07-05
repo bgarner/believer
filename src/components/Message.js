@@ -79,7 +79,7 @@ class Message extends Component {
                 rounded
                 title="CR"
                 onPress={() => console.log("Works!")}
-                activeOpacity={0.7}
+                activeOpacity={1}
                 source={{
                   uri: this.state.clientLogo
                 }}
@@ -87,7 +87,7 @@ class Message extends Component {
               />
             </View>
             <View style={{flex: 6, paddingLeft: 10, height:'100%', justifyContent: 'flex-start', paddingTop: 20  }}>
-              <Text style={{ fontSize: 14,  color: '#231F20'}}>{this.state.message.brand_name}</Text>
+              <Text style={{ fontSize: 14,  color: '#000'}}>{this.state.message.brand_name}</Text>
               <Text style={{ fontSize: 10,  color: '#9c9d9e', paddingTop:3}}>{this.state.message.created_at}</Text>
             </View>
           </View>
@@ -100,7 +100,7 @@ class Message extends Component {
           {this.renderMessageImage()}
           <View style={{flex:2, alignItems: 'center', padding: 20, textAlign: 'center', fontFamily: 'Helvetica'}}>
             <View>
-              <Text style={{lineHeight:16, color:'#231F20'}}>{this.state.message.body}</Text>
+              <Text style={{lineHeight:16, color:'#000'}}>{this.state.message.body}</Text>
             </View>
           </View>
 

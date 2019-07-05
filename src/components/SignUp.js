@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   signup:{
     width: '80%',
     height: 55,
-    backgroundColor: '#231F20',
+    backgroundColor: '#000',
     margin: 12,
     padding: 8,
     borderRadius: 2,

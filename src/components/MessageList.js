@@ -120,6 +120,7 @@ class MessageList extends Component {
               <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingLeft:20}}>
                 <Avatar
                   medium
+                  rounded
                   title="CR"
                   onPress={() => console.log("Works!")}
                   activeOpacity={0.7}
@@ -129,7 +130,7 @@ class MessageList extends Component {
                 />
               </View>
               <View style={{flex:5, paddingTop:15, paddingLeft:15}}>
-                <Text style={{color:'#231F20', fontSize:14, fontFamily:'Helvetica', fontWeight:'bold'}}>{data.item.client.name}</Text>
+                <Text style={{color:'#000', fontSize:14, fontFamily:'Helvetica', fontWeight:'bold'}}>{data.item.client.name}</Text>
                 <Text style={{color:'#9c9d9e', marginTop: 5 }}>{data.item.subject}</Text>
               </View>
               <View style={{ flex:1.5, alignItems:'flex-end', paddingRight:15}}>

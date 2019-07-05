@@ -1,15 +1,15 @@
 import {Navigation} from 'react-native-navigation'
 
-// Navigation.setDefaultOptions({
-//   topBar: {
-//     visible: true,
-//     background: {
-//       color: 'black',
-//       translucent: true,
-//       blur: false
-//     }
-//   },
-// });
+Navigation.setDefaultOptions({
+  topBar: {
+    visible: true,
+    background: {
+      color: 'white',
+      translucent: false,
+      blur: false
+    }
+  },
+});
 export const goToAuth = () => Navigation.setRoot({
   root: {
     component: {
@@ -42,9 +42,10 @@ export const goHome = () => Navigation.setRoot({
                   options: {
                     bottomTab: {
                       fontSize: 12,
+                      // scale: 10,
                       text: 'Missions',
                       icon: require('../assets/home.png'),
-                      iconInsets: { top: 0, left: 0, bottom: 0, right: 0 },
+                      // iconInsets: { top: 0, left: 0, bottom: 0, right: 0 },
                     },
                     topBar: {
                       title: {
@@ -72,9 +73,6 @@ export const goHome = () => Navigation.setRoot({
                       icon: require('../assets/search.png')
 
                     },
-                    // topBar: {
-                    //   visible: true
-                    // },
                   },
                 },
 
@@ -95,9 +93,6 @@ export const goHome = () => Navigation.setRoot({
                       text: 'Rewards',
                       icon: require('../assets/rewards.png')
                     },
-                    // topBar: {
-                    //   visible: true
-                    // },
                   },
                 },
 
@@ -119,9 +114,6 @@ export const goHome = () => Navigation.setRoot({
                       icon: require('../assets/inbox.png')
 
                     },
-                    // topBar: {
-                    //   visible: true
-                    // },
                   },
                 },
 
@@ -143,9 +135,6 @@ export const goHome = () => Navigation.setRoot({
                       icon: require('../assets/account.png')
 
                     },
-                    // topBar: {
-                    //   visible: true
-                    // },
                   },
                 },
 

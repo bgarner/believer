@@ -61,12 +61,12 @@ class MissionDetail extends Component {
         const result = await ShareDialog.show(tmp.state.shareLinkContent);
         if(! DeviceInfo.isEmulator()){
           if (result.isCancelled) {
-            alert('Share cancelled');
+            alert('Not ready yet? This share was cancelled');
           }
           else {
             try{
               await this.believerRequestController.postMissionCompletion(this.props.missionId);
-              alert(`You earned ${this.props.missionPoints} points`);
+              alert(`Nice work! \nYou earned ${this.props.missionPoints} points`);
             }
             catch(e) {
               alert('Oops! Something went wrong while saving your progress.');
@@ -77,7 +77,7 @@ class MissionDetail extends Component {
         else {
           try{
             await this.believerRequestController.postMissionCompletion(this.props.missionId);
-            alert(`You earned ${this.props.missionPoints} points`);
+            alert(`Nice work! \n You earned ${this.props.missionPoints} points`);
           }
           catch(e) {
             alert('Oops! Something went wrong while saving your progress.');
@@ -117,7 +117,7 @@ class MissionDetail extends Component {
 
   renderImage() {
 
-    return <View style={{flex:4, backgroundColor: '#f2f2f2', width:'100%', height: 50}}>
+    return <View style={{flex:4, backgroundColor: '#f2f2f2', width:'100%', height: 100}}>
       <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
     </View>
@@ -168,9 +168,12 @@ class MissionDetail extends Component {
               {/*}*/}
             {/*}*/}
             {/*onLogoutFinished={() => alert("User logged out")}/>*/}
-          <TouchableHighlight onPress={this.shareLinkWithShareDialog}>
+          <TouchableHighlight style={ styles.fbButton} onPress={this.shareLinkWithShareDialog}>
           {/*<TouchableHighlight onPress={this.shareToSocialMedia}>*/}
-            <Text style={styles.shareText}> Share on Facebook </Text>
+          <View style={styles.fbButtonContainer}>
+          <Image source = {require('../../assets/fb.png')}></Image>
+          <Text style={styles.shareText}> Share </Text>
+          </View>
           </TouchableHighlight>
         </View>
       );
@@ -214,7 +217,16 @@ const styles = StyleSheet.create({
   shareText: {
     fontSize: 20,
     margin: 10,
+    color: '#fff',
   },
+  fbButton: {
+    backgroundColor: "#3b5998"
+  },
+  fbButtonContainer: {
+    height: 70,
+    borderColor: '#000',
+    borderWidth: 1,
+  }
 
 });
 

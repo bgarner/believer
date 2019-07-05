@@ -6,6 +6,7 @@ import BelieverRequestController from "../controllers/BelieverRequestController"
 import Mission from "./Mission";
 import CommonUtils from "../CommonUtils";
 import {CLOUDINARY_BASE_URL} from "../config.js";
+import MissionsTopbar from './MissionsTopbar.js';
 
 class Home extends Component {
   static propTypes = {
@@ -15,14 +16,20 @@ class Home extends Component {
   static get options() {
     return {
       topBar: {
-      }
-    };
+        title: {
+          component: {
+            name: 'MissionsTopbar',
+          }
+        },
+      },
+    }
   }
 
   constructor(props, context) {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     this.onMissionClick = this.onMissionClick.bind(this);
+    this.onClientClick = this.onClientClick.bind(this);
     Navigation.events().bindComponent(this);
 
     this.state = {
@@ -73,6 +80,27 @@ class Home extends Component {
     });
   }
 
+  onClientClick(item) {
+
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'ClientDetail',
+        passProps: {
+          clientId: item.brand_id,
+        },
+        options: {
+          topBar: {
+            visible: true,
+            title: {
+              text: item.brand_name
+            }
+          }
+        }
+
+      }
+    });
+  }
+
   renderMission(item) {
     return <Mission
       id={item.id}
@@ -86,7 +114,7 @@ class Home extends Component {
       clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
       onMissionClick={() => this.onMissionClick(item)}
-      onBrandClick={() => this.onMissionClick(item)}
+      onBrandClick={() => this.onClientClick(item)}
 
     />
   }

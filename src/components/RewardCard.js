@@ -23,7 +23,7 @@ export default class RewardCard extends React.Component {
 
   renderImage() {
 
-    return <View style={{flex:2, height: 125, width:'100%'}}>
+    return <View style={{flex:2, height: 185, width:'100%'}}>
       <TouchableHighlight /*onPress={this.onMissionClick}*/ activeOpacity={0} style={{width:'100%', height: '100%'}}>
         <Image source={{uri: this.props.rewardImage}}
                style={{width:'100%', height: '100%'}} />

@@ -46,7 +46,7 @@ class Mission extends Component {
         <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
           medium
-          // rounded
+          rounded
           title="CR"
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
@@ -72,7 +72,7 @@ class Mission extends Component {
 
   renderImage() {
 
-    return <View style={{flex:2.5, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 50}}>
+    return <View style={{flex:2.5, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 185}}>
       <TouchableHighlight onPress={this.onMissionClick} activeOpacity={0} style={{width:'100%', height: '100%'}}>
         <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
@@ -85,7 +85,7 @@ class Mission extends Component {
     return (
       <View style={{flex: 1, paddingHorizontal: 10, backgroundColor: '#f2f2f2', width: '100%'}}>
           <View style={{flex: 1, paddingTop:20, flexDirection: 'row', backgroundColor: '#f2f2f2', }}>
-            <Text style={{ flex: 5 ,fontWeight: 'bold' }}>{this.props.missionTitle}</Text>
+            <Text style={{ flex: 5 ,fontWeight: 'bold', fontSize: 14 }}>{this.props.missionTitle}</Text>
             <View style={{flex : 1, }}>
               <Badge
                 value={this.props.missionPoints}
@@ -98,7 +98,7 @@ class Mission extends Component {
             </View>
           </View>
 
-          <Text style={{ flex: 3, flexGrow:1, }}>{this.props.missionDescription}</Text>
+          <Text style={{ flex: 3, flexGrow:1, fontSize:14 }}>{this.props.missionDescription}</Text>
       </View>);
   }
 

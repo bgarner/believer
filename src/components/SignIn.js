@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   login:{
     width: '80%',
     height: 55,
-    backgroundColor: '#231F20',
+    backgroundColor: '#000',
     margin: 12,
     // marginTop:50,
     padding: 8,

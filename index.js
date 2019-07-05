@@ -15,7 +15,7 @@ Navigation.events().registerAppLaunchedListener(() => {
       //   }
       // ],
       background: {
-        color: '#231f20',
+        color: '#000',
         blur: false
       },
       title: {

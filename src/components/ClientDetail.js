@@ -6,18 +6,13 @@ import PropTypes from 'prop-types';
 import { Avatar, Icon } from 'react-native-elements';
 import FollowButton from "./FollowButton";
 import BelieverRequestController from "../controllers/BelieverRequestController";
+import {CLOUDINARY_BASE_URL} from "../config";
 
 class ClientDetail extends Component {
 
   static propTypes = {
     componentId: PropTypes.string.isRequired,
     clientId : PropTypes.number.isRequired,
-    clientName : PropTypes.string.isRequired,
-    clientDescription : PropTypes.string.isRequired,
-    clientImage : PropTypes.string.isRequired,
-    clientLogo : PropTypes.string.isRequired,
-
-
   };
 
   constructor(props, context) {
@@ -121,7 +116,7 @@ class ClientDetail extends Component {
         />
       </View>
       <View style={{flex: 5, paddingLeft: 10, height:'100%', justifyContent: 'flex-start',   }}>
-        <Text style={{ fontSize: 14,  color: '#231F20'}}>{name}</Text>
+        <Text style={{ fontSize: 14,  color: '#000'}}>{name}</Text>
         <Text style={{ fontSize: 10,  color: '#9c9d9e', paddingTop:3}}>{point_balance} total points</Text>
       </View>
     </View>
@@ -129,12 +124,15 @@ class ClientDetail extends Component {
   }
 
   render() {
+    if (!this.state.client) {
+      return null;
+    }
     return (
       <View style={{height: '100%', flex:1}}>
       <ScrollView styles={{flex:1}}>
       <View style={styles.container}>
         <View style={{flex:2.5}}>
-          <Image source={{uri: this.props.clientImage}}
+          <Image source={{uri: CLOUDINARY_BASE_URL + this.state.client.banner}}
                  style={{width:'100%', height: 150}} />
         </View>
         <View style={{flex:2.5, flexDirection: 'row', alignItems: 'center',}}>
@@ -145,18 +143,18 @@ class ClientDetail extends Component {
                 title="CR"
                 activeOpacity={0.7}
                 source={{
-                  uri: this.props.clientLogo,
+                  uri: CLOUDINARY_BASE_URL + this.state.client.logo,
                 }}
 
               />
           </View>
           <View style={{flex: 7, paddingLeft: 10, height:'100%', justifyContent: 'center', }}>
-            <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#231F20'}}>{this.props.clientName}</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#000'}}>{this.state.client.name}</Text>
           </View>
         </View>
         <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
           <View style={{flex:1}}>
-            <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.props.clientId}/>
+            <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.state.client.id}/>
           </View>
 
           <View style={{flex:1}}>
@@ -185,7 +183,7 @@ class ClientDetail extends Component {
           borderColor: '#9c9d9e'
         }}>
           <View style={{flex:1}}>
-          <Text>{this.props.clientDescription}</Text>
+          <Text>{this.state.client.description}</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: '60%', paddingBottom: 20 }}>
             <SocialIcon
