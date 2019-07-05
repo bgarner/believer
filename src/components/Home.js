@@ -16,9 +16,11 @@ class Home extends Component {
   static get options() {
     return {
       topBar: {
+        drawBehind: true,
         title: {
           component: {
             name: 'MissionsTopbar',
+            alignment: 'center'
           }
         },
       },
@@ -38,8 +40,17 @@ class Home extends Component {
   }
 
   async componentDidAppear() {
-    console.log('home');
-    console.log(this.props.componentId);
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        drawBehind: true,
+        title: {
+          component: {
+            name: 'MissionsTopbar',
+            alignment: 'center'
+          }
+        },
+      }
+    });
     CommonUtils.setCurrentActiveTab(this.props.componentId);
     try {
       let missions = await this.believerRequestController.getMissionsFeed();
@@ -48,7 +59,6 @@ class Home extends Component {
     catch(e) {
       throw e;
     }
-
   }
 
   onMissionClick(item) {

@@ -1,4 +1,5 @@
 import HttpRequestController from './HttpRequestController';
+import {Alert} from "react-native";
 
 export default class BelieverRequestController {
 
@@ -31,7 +32,7 @@ export default class BelieverRequestController {
       let response = await this.httpRequestController.postRequest("/api/user/register", credentials);
       if(!response.token){
         if (response.email) {
-          alert('Failed to register! \n' + response.email);
+          Alert.alert(  'Failed to register! ', '' + response.email);
         }
         throw new Error('Failed to register');
       }

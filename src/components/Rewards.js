@@ -1,9 +1,7 @@
 import React from 'react'
 import {
-  View,
-  Text,
-  Button,
   StyleSheet, ScrollView,
+  Alert
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 import PropTypes from "prop-types";
@@ -75,10 +73,10 @@ export default class Rewards extends React.Component {
     try {
       let message = await this.believerRequestController.redeemReward(item.id);
       if(message.isRedeemed){
-        alert(`Reward redeemed. New point balance : ${message.new_point_balance} `)
+        Alert.alert('Reward redeemed', `New point balance : ${message.new_point_balance} `)
       }
       else{
-        alert(`Could not redeem reward. Point balance : ${message.new_point_balance} `)
+        Alert.alert('Not enough points', `Point balance : ${message.new_point_balance} `)
       }
       this.setState({userPointBalance: message.new_point_balance})
     }

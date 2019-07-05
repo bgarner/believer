@@ -4,6 +4,7 @@ import {
   View,
   Image,
   StyleSheet,
+  StatusBar
 } from 'react-native'
 
 import { goToAuth, goHome } from '../navigation'
@@ -26,9 +27,10 @@ export default class Initialising extends React.Component {
   }
 
   render() {
+    StatusBar.setBarStyle('light-content', true);
     return (
       <View style={styles.container}>
-        <Image source={require('../../assets/splash.png')} style={{height: 85, width: 300}}/>
+        <Image source={require('../../assets/splash.png')} style={{height: '100%', width: '100%'}}/>
       </View>
     )
   }

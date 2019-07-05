@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView, Image, Animated,} from 'react-native';
-// import {Navigation} from "react-native-navigation";
+import {View, StyleSheet, ScrollView, Image, Linking} from 'react-native';
 import PropTypes from 'prop-types';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import {Avatar, Button, SocialIcon, Text} from "react-native-elements";
+import {Avatar, Button, Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
-import CommonUtils from "../CommonUtils";
 import {CLOUDINARY_BASE_URL} from "../config";
 
 class Message extends Component {
@@ -102,6 +99,20 @@ class Message extends Component {
             <View>
               <Text style={{lineHeight:16, color:'#000'}}>{this.state.message.body}</Text>
             </View>
+          </View>
+
+          <View style={{flex:1.5, alignItems: 'center', padding: 20, textAlign: 'center', fontFamily: 'Helvetica'}}>
+            <Button
+              backgroundColor={'#35AFC8'}
+              title={this.state.message.action_title}
+              onPress={ ()=>{ Linking.openURL(this.state.message.action_url)} }
+              textStyle={{
+                fontSize: 14,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                fontFamily:'Helvetica'
+              }}
+            />
           </View>
 
         </View>

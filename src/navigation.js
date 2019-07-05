@@ -46,12 +46,7 @@ export const goHome = () => Navigation.setRoot({
                       text: 'Missions',
                       icon: require('../assets/home.png'),
                       // iconInsets: { top: 0, left: 0, bottom: 0, right: 0 },
-                    },
-                    topBar: {
-                      title: {
-                        text: 'Missions',
-                      },
-                    },
+                    }
                   },
                 },
 

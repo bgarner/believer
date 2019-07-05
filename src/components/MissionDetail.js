@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
-import { Alert, Button, View, StyleSheet, Image, Share, TouchableHighlight} from 'react-native';
-import {Avatar, Badge, Text} from "react-native-elements";
+import { Alert, View, StyleSheet, Image, Share, TouchableHighlight} from 'react-native';
+import {Avatar,Button, Badge, Text} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
+
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {default as DeviceInfo} from 'react-native-device-info';
+import {
+  shareOnTwitter,
+} from 'react-native-social-share';
 
 class MissionDetail extends Component {
   static propTypes = {
@@ -25,7 +29,7 @@ class MissionDetail extends Component {
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
-    this.shareToSocialMedia = this.shareToSocialMedia.bind(this);
+    // this.shareToSocialMedia = this.shareToSocialMedia.bind(this);
     this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
     const shareLinkContent = {
       contentType: 'link',
@@ -34,23 +38,25 @@ class MissionDetail extends Component {
     };
     this.state = {shareLinkContent: shareLinkContent};
     this.believerRequestController = new BelieverRequestController();
+    this.tweet = this.tweet.bind(this);
+
   }
 
-  shareToSocialMedia() {
-    const self = this;
-    Share.share({
-      message: self.props.missionDescription,
-      url: self.props.missionUrl,
-      title: self.props.missionTitle,
-    }, {
-      // Android only:
-      // dialogTitle: 'Share BAM goodness',
-      // iOS only:
-      excludedActivityTypes: [
-        'com.apple.UIKit.activity.PostToTwitter'
-      ]
-    })
-  }
+  // shareToSocialMedia() {
+  //   const self = this;
+  //   Share.share({
+  //     message: self.props.missionDescription,
+  //     url: self.props.missionUrl,
+  //     title: self.props.missionTitle,
+  //   }, {
+  //     // Android only:
+  //     // dialogTitle: 'Share BAM goodness',
+  //     // iOS only:
+  //     excludedActivityTypes: [
+  //       'com.apple.UIKit.activity.PostToTwitter'
+  //     ]
+  //   })
+  // }
 
 
   async shareLinkWithShareDialog() {
@@ -61,15 +67,15 @@ class MissionDetail extends Component {
         const result = await ShareDialog.show(tmp.state.shareLinkContent);
         if(! DeviceInfo.isEmulator()){
           if (result.isCancelled) {
-            alert('Not ready yet? This share was cancelled');
+            Alert.alert('Not ready yet?','This share was cancelled');
           }
           else {
             try{
               await this.believerRequestController.postMissionCompletion(this.props.missionId);
-              alert(`Nice work! \nYou earned ${this.props.missionPoints} points`);
+              Alert.alert('Nice work!',`You earned ${this.props.missionPoints} points`);
             }
             catch(e) {
-              alert('Oops! Something went wrong while saving your progress.');
+              Alert.alert('Oops!', 'Something went wrong while saving your progress.');
             }
 
           }
@@ -77,21 +83,52 @@ class MissionDetail extends Component {
         else {
           try{
             await this.believerRequestController.postMissionCompletion(this.props.missionId);
-            alert(`Nice work! \n You earned ${this.props.missionPoints} points`);
+            Alert.alert('Nice work!', `You earned ${this.props.missionPoints} points`);
           }
           catch(e) {
-            alert('Oops! Something went wrong while saving your progress.');
+            Alert.alert('Oops!', 'Something went wrong while saving your progress.');
           }
         }
       }
     }
     catch(e) {
-      alert('Share fail with error: ' + e);
+      Alert.alert( 'Error!','Share fail with error: ' + e);
     }
 
   }
 
+  tweet() {
 
+    shareOnTwitter({
+        // 'text':'Global democratized marketplace for art',
+        'link': this.props.missionUrl,
+      },
+      (results) => {
+        console.log(results);
+      }
+    );
+  }
+
+  // async tweet() {
+  //   try {
+  //     const result = await Share.share({
+  //       message:
+  //         'React Native | A framework for building native apps using React',
+  //     });
+  //
+  //     if (result.action === Share.sharedAction) {
+  //       if (result.activityType) {
+  //         // shared with activity type of result.activityType
+  //       } else {
+  //         // shared
+  //       }
+  //     } else if (result.action === Share.dismissedAction) {
+  //       // dismissed
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
 
   renderHeader() {
     return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', padding: 10}}>
@@ -146,35 +183,33 @@ class MissionDetail extends Component {
 
   renderMissionLaunchButton() {
     if(this.props.missionType) {
-      // return <Button
-      // onPress={this.shareToSocialMedia}
-      // title="Complete Mission"
-      // color="#35AFC8"
-      //   />
-
       return (
         <View style={styles.container}>
-          {/*<LoginButton*/}
-            {/*readPermissions={["email"]}*/}
-            {/*onLoginFinished={*/}
-              {/*(error, result) => {*/}
-                {/*if (error) {*/}
-                  {/*alert("Login failed with error: " + error.message);*/}
-                {/*} else if (result.isCancelled) {*/}
-                  {/*alert("Login was cancelled");*/}
-                {/*} else {*/}
-                  {/*alert("Login was successful with permissions: " + result.grantedPermissions)*/}
-                {/*}*/}
-              {/*}*/}
-            {/*}*/}
-            {/*onLogoutFinished={() => alert("User logged out")}/>*/}
-          <TouchableHighlight style={ styles.fbButton} onPress={this.shareLinkWithShareDialog}>
-          {/*<TouchableHighlight onPress={this.shareToSocialMedia}>*/}
-          <View style={styles.fbButtonContainer}>
-          <Image source = {require('../../assets/fb.png')}></Image>
-          <Text style={styles.shareText}> Share </Text>
-          </View>
-          </TouchableHighlight>
+          {/*<TouchableHighlight  onPress={this.shareLinkWithShareDialog}>*/}
+          {/*<View style={styles.fbButtonContainer}>*/}
+          {/*/!*<Image source = {require('../../assets/fb.png')}></Image>/!**!/*!/*/}
+          {/*<Text style={styles.shareText}> Share </Text>*/}
+          {/*</View>*/}
+          {/*</TouchableHighlight>*/}
+
+          <Button
+            backgroundColor={'#3b5998'}
+            title={'Share on Facebook'}
+            onPress={this.shareLinkWithShareDialog}
+            textStyle={{
+              fontSize: 14,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              fontFamily:'Helvetica'
+            }}
+          />
+
+          {/*<TouchableHighlight style={ styles.fbButton} onPress={this.tweet}>*/}
+          {/*  <View style={styles.fbButtonContainer}>*/}
+          {/*    <Image source = {require('../../assets/fb.png')}></Image>*/}
+          {/*    <Text style={styles.shareText}> Share </Text>*/}
+          {/*  </View>*/}
+          {/*</TouchableHighlight>*/}
         </View>
       );
 
@@ -191,8 +226,6 @@ class MissionDetail extends Component {
       </View>
     );
   }
-
-
 }
 
 const styles = StyleSheet.create({
