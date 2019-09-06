@@ -15,10 +15,17 @@ class MissionHistory extends Component {
   static get options() {
     return {
       topBar: {
-        title: {
-          text: 'Mission History'
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
         },
-      }
+        title: {
+          text: 'Mission History',
+          color: 'white',
+        },
+      },
     };
   }
 

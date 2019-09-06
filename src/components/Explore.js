@@ -89,15 +89,13 @@ export default class Explore extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', flex: 1, flexDirection: 'row', flexWrap: 'wrap', }}>
         { this.renderClientList() }
       </ScrollView>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
+// const styles = StyleSheet.create({
+//   container: { flex: 1, flexDirection: 'row', flexWrap: 'wrap', }
+// })

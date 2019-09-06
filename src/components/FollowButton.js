@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {StyleSheet} from 'react-native';
 import {Text, Button,} from "react-native-elements";
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
@@ -56,17 +57,18 @@ class FollowButton extends Component {
   render() {
     const currentState = this.state.subsequentState === null? this.props.initialState: this.state.subsequentState;
 
-    let backgroundColour = currentState === 'Follow'? '#35AFC8' : '#E6E7E8';
+    let backgroundColour = currentState === 'Follow'? '#fff' : '#35AFC8';
     let onClickFunction = currentState === 'Follow'? this.onFollowClick : this.onUnfollowClick;
-    let title = currentState === 'Follow'? 'Follow':( this.props.unFollowEnable? 'Unfollow' : 'Followed')
+    let title = currentState === 'Follow'? 'Follow':( this.props.unFollowEnable? 'Unfollow' : 'Following')
     let clickEnabled = currentState === 'Follow'? true :( this.props.unFollowEnable?  true : false)
     return <Button
+      style={styles.buttonStyle}
       backgroundColor={backgroundColour}
       title={title}
       onPress={onClickFunction}
       textStyle={{
-        fontSize: 14,
-        fontWeight: 'bold',
+        color: '#666',
+        fontSize: 12,
         textAlign: 'center',
         fontFamily:'Helvetica'
       }}
@@ -75,7 +77,10 @@ class FollowButton extends Component {
 
   }
 
-
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: { borderWidth: 2, borderColor: '#35AFC8' }
+})
 
 export default FollowButton;

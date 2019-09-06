@@ -21,13 +21,20 @@ export default class EditProfile extends React.Component {
   static get options() {
     return {
       topBar: {
-        title: {
-          text: 'Profile'
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
         },
-      }
+        title: {
+          text: 'Profile',
+          color: 'white',
+        },
+      },
     };
   }
-
+  
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);

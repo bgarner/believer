@@ -10,19 +10,19 @@ export default class MissionsTopbar extends Component {
   }
 
 // state = { orientation: 'P' };
-  componentDidAppear() {
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        drawBehind: true,
-        title: {
-          component: {
-            name: 'MissionsTopbar',
-            alignment: 'center'
-          }
-        },
-      }
-    });
-  }
+//   componentDidAppear() {
+//     Navigation.mergeOptions(this.props.componentId, {
+//       topBar: {
+//         drawBehind: true,
+//         title: {
+//           component: {
+//             name: 'MissionsTopbar',
+//             alignment: 'center'
+//           }
+//         },
+//       }
+//     });
+//   }
 
   render() {
     return <View style={styles.container}>
@@ -36,8 +36,8 @@ export default class MissionsTopbar extends Component {
 const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     // alignSelf: 'center',
     backgroundColor: '#000',
     width: '100%'

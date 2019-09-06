@@ -6,6 +6,7 @@ registerScreens();
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({
     topBar: {
+      headerTintColor: '#fff',
       visible: true,
       // leftButtons: [
       //   {

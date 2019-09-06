@@ -5,6 +5,23 @@ import BelieverRequestController from "../controllers/BelieverRequestController"
 import {Button, Text} from "react-native-elements";
 class UpdateContact extends Component {
 
+  static get options() {
+    return {
+      topBar: {
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
+        },
+        title: {
+          text: '',
+          color: 'white',
+        },
+      },
+    };
+  }
+
   static propTypes = {
     address: PropTypes.string,
     city: PropTypes.string,

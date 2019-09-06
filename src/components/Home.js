@@ -39,18 +39,8 @@ class Home extends Component {
     }
   }
 
+
   async componentDidAppear() {
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        drawBehind: true,
-        title: {
-          component: {
-            name: 'MissionsTopbar',
-            alignment: 'center'
-          }
-        },
-      }
-    });
     CommonUtils.setCurrentActiveTab(this.props.componentId);
     try {
       let missions = await this.believerRequestController.getMissionsFeed();

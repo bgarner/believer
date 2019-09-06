@@ -33,38 +33,36 @@ class Client extends Component {
   }
 
   render() {
-    return <ImageBackground source={{uri: this.props.clientImage}} style={{ marginBottom: 10}}>
-      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center',  height: 70,}}>
-        <View style={{flex: 2, height:'100%',backgroundColor: '#FFF', }}>
-          <TouchableHighlight activeOpacity={0} style={{ height:'100%'}} onPress={this.onClientClick}>
-            <Avatar
-              medium
-              title="CR"
-              onPress={() => console.log("Works!")}
-              activeOpacity={0.7}
-              source={{
-                uri: this.props.clientLogo,
-              }}
-              containerStyle={{flex: 1, margin: 10}}
-            />
-          </TouchableHighlight>
-        </View>
-        <TouchableHighlight activeOpacity={0} onPress={this.onClientClick} style={{flex: 8, paddingLeft: 10, height:'100%', justifyContent: 'center', }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16, fontFamily:'Helvetica',  color: '#FFF'}}>{this.props.clientName}</Text>
+    return <View style={{ width: '50%', height: '40%', padding: 5, borderWidth: 1, borderColor: '#eee', justifyContent: 'center', alignContent: 'center' }}>
+      <View style={{ width: '100%', height: '60%' }}>
+        <ImageBackground source={{uri: this.props.clientImage}} style={{ flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center', height: '100%', }}>
+            <TouchableHighlight activeOpacity={0} style={{ height:100 }} onPress={this.onClientClick}>
+              <Avatar
+                height={90}
+                rounded
+                title="CR"
+                onPress={() => console.log("Works!")}
+                activeOpacity={0.7}
+                source={{
+                  uri: this.props.clientLogo,
+                }}
+                containerStyle={{  }}
+              />
+            </TouchableHighlight>
+        </ImageBackground>
+      </View>
+
+        <TouchableHighlight activeOpacity={0} onPress={this.onClientClick} style={{ }}>
+            <Text style={{fontWeight: 'bold', fontSize: 12, fontFamily:'Helvetica',  color: '#333', textAlign: 'center', paddingTop: 10}}>{this.props.clientName}</Text>
         </TouchableHighlight>
 
 
-      </View>
-
-      <View style={{flex: 1, flexDirection: 'column',  height: 80, paddingLeft: '50%', marginTop: 25, }}>
+      <View style={{flex: 1, flexDirection: 'column',  height: 80, marginTop: 25, }}>
         <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.props.clientId}/>
       </View>
-    </ImageBackground>
 
-
+    </View>
   }
-
-
 }
 
 export default Client;

@@ -17,6 +17,7 @@ class MessageList extends Component {
   static get options() {
     return {
       topBar: {
+        color: 'white',
         title: {
           text: 'Inbox',
         },

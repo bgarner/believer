@@ -26,6 +26,22 @@ class MissionDetail extends Component {
 
   };
 
+  static get options() {
+    return {
+      topBar: {
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: ""
+        },
+        title: {
+          color: 'white',
+        },
+      },
+    };
+  }
+
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);

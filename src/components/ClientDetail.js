@@ -15,6 +15,22 @@ class ClientDetail extends Component {
     clientId : PropTypes.number.isRequired,
   };
 
+  static get options() {
+    return {
+      topBar: {
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
+        },
+        title: {
+          color: 'white',
+        },
+      },
+    };
+  }
+
   constructor(props, context) {
     super(props, context);
     Navigation.events().bindComponent(this);
@@ -42,14 +58,8 @@ class ClientDetail extends Component {
       const client = this.state.client;
       return (
         <View>
-          {client.stats && this.renderSingleStat( 'Believers',  this.state.client.stats.follower_count )}
           {this.renderSingleStat( 'City',  this.state.client.city)}
           {this.renderSingleStat( 'Address',  this.state.client.address1)}
-          {client.stats && this.renderSingleStat( 'New Believers this week',  this.state.client.stats.new_followers_this_week )}
-          {client.stats && this.renderSingleStat( 'Active Missions',  this.state.client.stats.active_missions )}
-          {client.stats && this.renderSingleStat( 'Missions Completed this week',  this.state.client.stats.mission_completions_this_week )}
-          {client.stats && this.renderLeaderboard()}
-
         </View>
       );
 
@@ -70,17 +80,16 @@ class ClientDetail extends Component {
   }
 
   renderLeaderboard() {
-    let result = [];
-    result.push(this.renderLeaderboardHeader());
+
     const leaderboardData = this.state.client.stats.leaderboard;
     Object.getOwnPropertyNames(leaderboardData).forEach( (item, index) => {
       result.push(
         <View key={`${index}`} style={{  marginHorizontal:10,  flexDirection: 'row', flexGrow: 1}}>
           <View style={{ flex:1, padding:10, justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
-            {this.renderLeaderboardProfile(leaderboardData[item].name, leaderboardData[item].point_balance)}
+
           </View>
           <View style={{ flex:1, padding:10, borderLeftWidth:1, borderColor:'#E6E7E8', justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
-            {this.renderLeaderboardProfile(leaderboardData[item].name, leaderboardData[item].point_balance)}
+
           </View>
         </View>)
     })
@@ -184,17 +193,6 @@ class ClientDetail extends Component {
         }}>
           <View style={{flex:1}}>
           <Text>{this.state.client.description}</Text>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: '60%', paddingBottom: 20 }}>
-            <SocialIcon
-              type='facebook'
-            />
-            <SocialIcon
-              type='twitter'
-            />
-            <SocialIcon
-              type='instagram'
-            />
           </View>
         </View>
 

@@ -1,15 +1,15 @@
 import {Navigation} from 'react-native-navigation'
 
-Navigation.setDefaultOptions({
-  topBar: {
-    visible: true,
-    background: {
-      color: 'white',
-      translucent: false,
-      blur: false
-    }
-  },
-});
+// Navigation.setDefaultOptions({
+//   topBar: {
+//     visible: true,
+//     background: {
+//       color: 'white',
+//       translucent: false,
+//       blur: false
+//     }
+//   },
+// });
 export const goToAuth = () => Navigation.setRoot({
   root: {
     component: {

@@ -15,10 +15,17 @@ export default class Following extends React.Component {
   static get options() {
     return {
       topBar: {
-        title: {
-          text: 'Manage Brands'
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
         },
-      }
+        title: {
+          text: 'Manage Brands',
+          color: 'white',
+        },
+      },
     };
   }
 

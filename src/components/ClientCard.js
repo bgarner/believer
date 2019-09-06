@@ -31,7 +31,7 @@ class ClientCard extends Component {
 
   render() {
 
-    return <View style={{width:160, height:200, marginHorizontal:12, marginVertical:15}}>
+    return <View style={{width:160, height:200, marginHorizontal:12, marginVertical:15,}}>
       <TouchableHighlight onPress={this.onClientCardClick} activeOpacity={0} style={{height:'25%', justifyContent:'flex-end'}}>
       <Text style={{paddingHorizontal:20, paddingVertical:10, fontWeight:'bold', fontSize:12,}} multiline={true}>{this.props.clientName}</Text>
       </TouchableHighlight>

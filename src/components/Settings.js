@@ -9,13 +9,20 @@ import {goToAuth} from "../navigation";
 import CommonUtils from "../CommonUtils";
 
 export default class Explore extends React.Component {
+
   static get options() {
     return {
       topBar: {
-        title: {
-          text: 'Settings'
+        backButton: {
+          color: "white",
+          fontFamily: "Nunito",
+          fontSize: 12,
+          title: "Back"
         },
-      }
+        title: {
+          color: 'Settings',
+        },
+      },
     };
   }
 
