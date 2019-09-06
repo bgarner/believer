@@ -17,7 +17,7 @@ export default class Explore extends React.Component {
     return {
       topBar: {
         title: {
-          text: 'Search Brands'
+          text: 'Brands'
         },
       }
     };

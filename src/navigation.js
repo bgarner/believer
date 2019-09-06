@@ -64,7 +64,7 @@ export const goHome = () => Navigation.setRoot({
                   options: {
                     bottomTab: {
                       fontSize: 12,
-                      text: 'Search',
+                      text: 'Brands',
                       icon: require('../assets/search.png')
 
                     },
