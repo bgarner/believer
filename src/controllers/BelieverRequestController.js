@@ -112,6 +112,20 @@ export default class BelieverRequestController {
     }
   }
 
+  async getClientActiveMissions(client_id) {
+    try {
+      let response = await this.httpRequestController.postRequest("/api/v1/missions/client", {'client_id': client_id} );
+      if (response && response.length < 1){
+        throw new Error('Failed to get clients active missions');
+      }
+      return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
   async postMissionCompletion(mission_id) {
     try {
       const userId = await this.httpRequestController.getUserId();

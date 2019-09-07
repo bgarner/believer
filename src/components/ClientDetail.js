@@ -7,6 +7,7 @@ import { Avatar, Icon } from 'react-native-elements';
 import FollowButton from "./FollowButton";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {CLOUDINARY_BASE_URL} from "../config";
+import Mission from "./Mission";
 
 class ClientDetail extends Component {
 
@@ -37,7 +38,8 @@ class ClientDetail extends Component {
     this.believerRequestController = new BelieverRequestController();
     // this.renderStatsContainer = this.renderStatsContainer.bind(this);
     this.state= {
-      client: null
+      client: null,
+      missions: []
     }
 
   }
@@ -46,6 +48,8 @@ class ClientDetail extends Component {
     try {
       let client = await this.believerRequestController.getClientDetails(this.props.clientId);
       this.setState({client: client});
+      let missions =  await this.believerRequestController.getClientActiveMissions(this.props.clientId);
+      this.setState({missions: missions});
     }
     catch(e) {
       throw e;
@@ -79,57 +83,37 @@ class ClientDetail extends Component {
       );
   }
 
-  renderLeaderboard() {
-
-    const leaderboardData = this.state.client.stats.leaderboard;
-    Object.getOwnPropertyNames(leaderboardData).forEach( (item, index) => {
-      result.push(
-        <View key={`${index}`} style={{  marginHorizontal:10,  flexDirection: 'row', flexGrow: 1}}>
-          <View style={{ flex:1, padding:10, justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
-
-          </View>
-          <View style={{ flex:1, padding:10, borderLeftWidth:1, borderColor:'#E6E7E8', justifyContent:'flex-start', alignItems:'center', flexDirection: 'row' }}>
-
-          </View>
-        </View>)
-    })
-    return result;
-  }
-  renderLeaderboardHeader() {
-    return <View key='header' style={{  marginHorizontal:10,   flexGrow: 1}}>
-      <Text style={{marginTop:10, color: '#9c9d9e'}}>Leaderboards</Text>
-      <View style={{flexDirection: 'row', marginTop:20}}>
-        <View style={{ flex:1, padding:10, justifyContent:'center', alignItems:'center', flexDirection: 'row' }}>
-          <Text style={{color: '#35AFC8'}}>Highest Points</Text>
-        </View>
-        <View style={{ flex:1, padding:10, justifyContent:'center', alignItems:'center', flexDirection: 'row' }}>
-          <Text style={{color: '#35AFC8'}}>Growing Influencers</Text>
-        </View>
-      </View>
-    </View>
+  renderMission(item) {
+    return <Mission
+      id={item.id}
+      key={item.id}
+      missionId={item.id}
+      missionTitle={item.name}
+      missionDescription={item.content}
+      missionType={item.challenge_type}
+      missionPoints={item.points}
+      missionImage={CLOUDINARY_BASE_URL + item.image}
+      clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
+      clientName={item.brand_name}
+    />
   }
 
-  renderLeaderboardProfile(name, point_balance) {
-    return (
-      <View style={{flex:1.75, flexDirection: 'row', alignItems: 'center', marginHorizontal:0}}>
-      <View style={{flex: 3.5, height:'100%',backgroundColor: '#FFF', }}>
-        <Avatar
-          medium
-          rounded
-          title="CR"
-          activeOpacity={0.7}
-          source={{
-            uri: 'http://lorempixel.com/100/100/people/',
-          }}
+  renderMissionList() {
+    let missionList = [];
+    if(this.state.missions.length > 0) {
+      this.state.missions.forEach((item) => {
+        missionList.push(this.renderMission(item));
+      });
+      return missionList;
+    }
+    else{
+      return <View style={styles.message}>
+        <Text>
+          No Active Missions for this Brand
+        </Text>
+      </View>
+    }
 
-        />
-      </View>
-      <View style={{flex: 5, paddingLeft: 10, height:'100%', justifyContent: 'flex-start',   }}>
-        <Text style={{ fontSize: 14,  color: '#000'}}>{name}</Text>
-        <Text style={{ fontSize: 10,  color: '#9c9d9e', paddingTop:3}}>{point_balance} total points</Text>
-      </View>
-    </View>
-    );
   }
 
   render() {
@@ -140,12 +124,12 @@ class ClientDetail extends Component {
       <View style={{height: '100%', flex:1}}>
       <ScrollView styles={{flex:1}}>
       <View style={styles.container}>
-        <View style={{flex:2.5}}>
+        <View style={{flex:3}}>
           <Image source={{uri: CLOUDINARY_BASE_URL + this.state.client.banner}}
-                 style={{width:'100%', height: 150}} />
+                 style={{width:'100%', height: 200}} />
         </View>
         <View style={{flex:2.5, flexDirection: 'row', alignItems: 'center',}}>
-          <View style={{flex: 3, height:'100%',backgroundColor: '#FFF', paddingLeft:20, paddingTop:15}}>
+          <View style={{flex: 3, height:'100%',backgroundColor: '#FFF', paddingLeft:10, paddingTop:30}}>
               <Avatar
                 large
                 rounded
@@ -157,50 +141,44 @@ class ClientDetail extends Component {
 
               />
           </View>
-          <View style={{flex: 7, paddingLeft: 10, height:'100%', justifyContent: 'center', }}>
-            <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#000'}}>{this.state.client.name}</Text>
+          <View style={{flex: 7, paddingLeft: 10, height:'100%', justifyContent: 'center',paddingTop:30 }}>
+            <Text style={{fontWeight: 'bold', fontSize: 14,  color: '#000', paddingBottom: 10}}>{this.state.client.name}</Text>
+            <Text style={{fontWeight: 'normal', fontSize:12, lineHeight:16, color: '#333'}}>{this.state.client.description}</Text>
+
+            <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
+              <View style={{flex:1}}>
+                <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.state.client.id} />
+              </View>
+
+              <View style={{flex:1, width:'20%'}}>
+                <Button
+                  backgroundColor={'#35AFC8'}
+                  title={'Map'}
+                  textStyle={{
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    fontFamily:'Helvetica'
+                  }}
+                />
+              </View>
+            </View>
+
           </View>
         </View>
-        <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
-          <View style={{flex:1}}>
-            <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.state.client.id}/>
-          </View>
-
-          <View style={{flex:1}}>
-          <Button
-            backgroundColor={'#35AFC8'}
-            title={'Share This'}
-            onPress={() => { alert('You are sharing the brand now!');}}
-            textStyle={{
-              fontSize: 14,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontFamily:'Helvetica'
-            }}
-          />
-          </View>
+      </View>
 
 
-        </View>
-        <View style={{
-          flex:2,
-          alignItems: 'center',
-          margin: 20,
-          textAlign: 'center',
-          fontFamily: 'Helvetica',
-          borderBottomWidth:0.25,
-          borderColor: '#9c9d9e'
-        }}>
-          <View style={{flex:1}}>
-          <Text>{this.state.client.description}</Text>
-          </View>
-        </View>
+      <View style={{paddingTop:30}}>
 
-        <View style={{flex:8}}>
-          {this.renderStatsList()}
+        <Text style={{fontWeight: 'bold', fontSize: 14, color:'#333', paddingBottom: 10, paddingTop: 10, textAlign:'center', borderBottom:2, borderColor:'#333', backgroundColor: '#ccc', }}>Active Missions</Text>
+
+        <View style={styles.container}>
+          { this.renderMissionList() }
         </View>
 
       </View>
+
       </ScrollView>
       </View>
     );

@@ -68,8 +68,6 @@ class MissionHistory extends Component {
     />
   }
 
-
-
   renderMissionList() {
     let missionList = [];
     if(this.state.missions.length > 0) {
