@@ -113,6 +113,7 @@ class Home extends Component {
       missionImage={CLOUDINARY_BASE_URL + item.image}
       clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
+      isFavourite={item.is_fav}
       onMissionClick={() => this.onMissionClick(item)}
       onBrandClick={() => this.onClientClick(item)}
 

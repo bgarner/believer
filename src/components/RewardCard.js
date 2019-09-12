@@ -13,7 +13,7 @@ export default class RewardCard extends React.Component {
   static propTypes = {
     // componentId: PropTypes.string.isRequired,
     rewardTitle : PropTypes.string.isRequired,
-    rewardDescription : PropTypes.string.isRequired,
+    rewardDescription : PropTypes.string,
     rewardImage : PropTypes.string.isRequired,
     rewardType : PropTypes.string.isRequired,
     rewardPoints : PropTypes.number.isRequired,

@@ -114,7 +114,8 @@ export default class BelieverRequestController {
 
   async getClientActiveMissions(client_id) {
     try {
-      let response = await this.httpRequestController.postRequest("/api/v1/missions/client", {'client_id': client_id} );
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/missions/client", {'user_id': userId, 'client_id': client_id} );
       if (response && response.length < 1){
         throw new Error('Failed to get clients active missions');
       }
@@ -330,6 +331,38 @@ export default class BelieverRequestController {
         throw new Error('Failed to update profile');
       }
       return (response);
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async saveFavouriteMission (mission_id) {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/favs/create", {user_id: userId, mission_id: mission_id} );
+      console.log(response);
+      if (response && response.length < 1){
+        throw new Error('Failed to save favourite mission');
+      }
+      return true;
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async deleteFavouriteMission (mission_id) {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/favs/delete", {user_id: userId, mission_id: mission_id} );
+      console.log(response);
+      if (response && response.length < 1){
+        throw new Error('Failed to delete favourite mission');
+      }
+      return true;
 
     }
     catch(e){

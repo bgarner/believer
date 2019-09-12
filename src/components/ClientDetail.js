@@ -93,6 +93,7 @@ class ClientDetail extends Component {
       missionType={item.challenge_type}
       missionPoints={item.points}
       missionImage={CLOUDINARY_BASE_URL + item.image}
+      isFavourite={item.is_fav}
       clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
     />
@@ -171,7 +172,7 @@ class ClientDetail extends Component {
 
       <View style={{paddingTop:30}}>
 
-        <Text style={{fontWeight: 'bold', fontSize: 14, color:'#333', paddingBottom: 10, paddingTop: 10, textAlign:'center', borderBottom:2, borderColor:'#333', backgroundColor: '#ccc', }}>Active Missions</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 14, color:'#333', paddingBottom: 10, paddingTop: 10, textAlign:'center', borderColor:'#333', backgroundColor: '#ccc', }}>Active Missions</Text>
 
         <View style={styles.container}>
           { this.renderMissionList() }

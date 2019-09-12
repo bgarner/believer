@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import {Badge, Text} from "react-native-elements";
-// import BelieverRequestController from "../controllers/BelieverRequestController";
+import BelieverRequestController from "../controllers/BelieverRequestController";
 // import HttpRequestController from "../controllers/HttpRequestController";
 // import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
@@ -17,14 +17,22 @@ class Mission extends Component {
     missionPoints : PropTypes.number.isRequired,
     clientLogo : PropTypes.string.isRequired,
     clientName : PropTypes.string.isRequired,
+    isFavourite : PropTypes.number.isRequired,
     onMissionClick : PropTypes.func,
     onBrandClick : PropTypes.func,
+
   };
 
   constructor(props, context) {
     super(props, context);
     this.onMissionClick = this.onMissionClick.bind(this);
     this.onBrandClick = this.onBrandClick.bind(this);
+    this.favourite = this.favourite.bind(this);
+    this.unfavourite = this.unfavourite.bind(this);
+    this.state = {
+      isFavourite : this.props.isFavourite
+    }
+    this.believerRequestController = new BelieverRequestController();
 
   }
 
@@ -37,6 +45,20 @@ class Mission extends Component {
   onBrandClick() {
     if (this.props.onBrandClick) {
       this.props.onBrandClick();
+    }
+  }
+
+  async favourite() {
+    let response = await this.believerRequestController.saveFavouriteMission(this.props.missionId);
+    if(response) {
+      this.setState({isFavourite: 1});
+    }
+  }
+
+  async unfavourite() {
+    let response = await this.believerRequestController.deleteFavouriteMission(this.props.missionId);
+    if(response) {
+      this.setState({isFavourite : 0});
     }
   }
 
@@ -61,14 +83,27 @@ class Mission extends Component {
             <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
           </TouchableHighlight>
       </View>
-      <View style={{flex: 1, alignItems: 'flex-end'}}>
-        <Text>...</Text>
-      </View>
+      {this.renderFavourite()}
 
     </View>
   }
 
-
+  renderFavourite() {
+    if(this.state.isFavourite === 1) {
+      return <View style={{flex: 1, alignItems: 'flex-end'}}>
+        <TouchableHighlight onPress={this.unfavourite} activeOpacity={0} >
+        <Image source={require('../../assets/bookmark_filled.png')} />
+        </TouchableHighlight>
+      </View>
+    }
+    else{
+      return <View style={{flex: 1, alignItems: 'flex-end'}}>
+        <TouchableHighlight onPress={this.favourite} activeOpacity={0} >
+        <Image source={require('../../assets/bookmark.png')} />
+        </TouchableHighlight>
+      </View>
+    }
+  }
 
   renderImage() {
 
