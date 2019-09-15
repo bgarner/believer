@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, Button, View, Text} from 'react-native';
+import {StyleSheet, ScrollView, Button, View, Text, SafeAreaView} from 'react-native';
+import {ButtonGroup} from 'react-native-elements';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import BelieverRequestController from "../controllers/BelieverRequestController";
@@ -32,13 +33,14 @@ class Home extends Component {
     this.believerRequestController = new BelieverRequestController();
     this.onMissionClick = this.onMissionClick.bind(this);
     this.onClientClick = this.onClientClick.bind(this);
+    this.onClickTopBarButton = this.onClickTopBarButton.bind(this);
     Navigation.events().bindComponent(this);
 
     this.state = {
-      missions : []
+      missions : [],
+      selectedIndex: 0,
     }
   }
-
 
   async componentDidAppear() {
     CommonUtils.setCurrentActiveTab(this.props.componentId);
@@ -120,8 +122,6 @@ class Home extends Component {
     />
   }
 
-
-
   renderMissionList() {
     let missionList = [];
     if(this.state.missions.length > 0) {
@@ -137,26 +137,65 @@ class Home extends Component {
         </Text>
       </View>
     }
-
   }
 
+  async onClickTopBarButton(selectedIndex) {
+    this.setState({selectedIndex});
+    if(selectedIndex === 2) {
+      let missions = await this.believerRequestController.getMissionHistory();
+      this.setState({missions});
+    } else if(selectedIndex === 1) {
+      let missions = await this.believerRequestController.getFavouriteMission();
+      this.setState({missions});
+    }else{
+      let missions = await this.believerRequestController.getMissionsFeed();
+      this.setState({missions});
+    }
+  }
 
+  renderTopBar() {
+    const component1 = () => <Text>Hello</Text>
+    const component2 = () => <Text>World</Text>
+    const component3 = () => <Text>ButtonGroup</Text>
+    const buttons = ['Missions', 'Saved', 'Completed'];
+    // const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+    const { selectedIndex } = this.state;
+
+    return (
+      <View style={{height: 100, top: 30, marginTop: 30, padding: 0}}>
+        <ButtonGroup
+          onPress={this.onClickTopBarButton}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          buttonStyle={{margin: 0, borderBottomWidth: 3, borderBottomColor: '#e9e9e9', backgroundColor: 'white', borderColor: 'white'}}
+          containerStyle={{height: 60, borderWidth: 0, padding: 0, margin: 0, backgroundColor: 'white'}}
+          selectedButtonStyle={{borderBottomColor: '#35AFC8', borderBottomWidth: 5}}
+          selectedTextStyle={{color: '#35AFC8'}}
+          textStyle={{fontSize: 12, color: 'black', textAlign: 'auto'}}
+        />
+      </View>
+    );
+  }
 
   render() {
     if(!this.state.missions) {
       return null;
     }
     return (
-      <ScrollView style={styles.container}>
-        { this.renderMissionList() }
-      </ScrollView>
+      <View style={{flex: 1}}>
+        {this.renderTopBar()}
+        {/*<View>*/}
+          <ScrollView style={styles.container}>
+            { this.renderMissionList() }
+          </ScrollView>
+        {/*</View>*/}
+      </View>
     );
   }
 
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#ecf0f1',
   },
   message: {

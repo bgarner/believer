@@ -2,7 +2,8 @@ import React from 'react'
 import {
   View,
   StyleSheet,
-  Linking
+  Linking,
+  ScrollView
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 import PropTypes from "prop-types";
@@ -11,6 +12,8 @@ import {Button, Avatar, ListItem} from "react-native-elements";
 import {goToAuth} from "../navigation";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {CLOUDINARY_BASE_URL} from "../config";
+import ImagePicker from 'react-native-image-picker';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class EditProfile extends React.Component {
 
@@ -42,6 +45,7 @@ export default class EditProfile extends React.Component {
     this.believerRequestController = new BelieverRequestController();
     this.state = {
       profile:null,
+      uploading: false,
     }
     this.handleClickProfile = this.handleClickProfile.bind(this);
     this.handleClickContact = this.handleClickContact.bind(this);
@@ -56,7 +60,15 @@ export default class EditProfile extends React.Component {
       {
         componentName: 'UpdatePassword'
       },
-    ]
+    ];
+    this.imageSelectorOptions = {
+      title: 'Select Avatar',
+      // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
   }
 
   async componentDidAppear() {
@@ -147,46 +159,73 @@ export default class EditProfile extends React.Component {
     }
   }
 
-  async handleClickManageBrands() {
-    try {
-      Navigation.push(this.props.componentId, {
-        component: {
-          name: 'Following',
-          options: {
-            topBar: {
-              visible: true,
-              // title: {
-              //   title
-              // }
-            }
-          }
-        }
-      });
-    }
-    catch(e){
-      throw e;
-    }
-  }
+  // async handleClickManageBrands() {
+  //   try {
+  //     Navigation.push(this.props.componentId, {
+  //       component: {
+  //         name: 'Following',
+  //         options: {
+  //           topBar: {
+  //             visible: true,
+  //             // title: {
+  //             //   title
+  //             // }
+  //           }
+  //         }
+  //       }
+  //     });
+  //   }
+  //   catch(e){
+  //     throw e;
+  //   }
+  // }
 
-  async handleClickMissionHistory() {
-    try {
-      Navigation.push(this.props.componentId, {
-        component: {
-          name: 'MissionHistory',
-          options: {
-            topBar: {
-              visible: true,
-              // title: {
-              //   title
-              // }
-            }
-          }
-        }
-      });
-    }
-    catch(e){
-      throw e;
-    }
+  // async handleClickMissionHistory() {
+  //   try {
+  //     Navigation.push(this.props.componentId, {
+  //       component: {
+  //         name: 'MissionHistory',
+  //         options: {
+  //           topBar: {
+  //             visible: true,
+  //             // title: {
+  //             //   title
+  //             // }
+  //           }
+  //         }
+  //       }
+  //     });
+  //   }
+  //   catch(e){
+  //     throw e;
+  //   }
+  // }
+
+  async handleClickProfilePicture() {
+    ImagePicker.showImagePicker(this.imageSelectorOptions, async (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        this.setState({uploading: true});
+        const fileName = response.fileName ? response.fileName : 'profile-image' + new Date();
+        const source = { uri: response.uri, name: fileName, type: response.type };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        let res = await this.believerRequestController.updateProfileImage(source);
+        const profile = {...this.state.profile};
+        profile.image = res.image;
+        this.setState({
+          profile,
+          uploading: false
+        })
+      }
+    });
   }
 
   render() {
@@ -194,19 +233,30 @@ export default class EditProfile extends React.Component {
       return null;
     }
     return <View style={{flex:1}}>
-      <View style={{ flex:1.1, backgroundColor: '#e6e7e8', alignItems:'center'}}/>
-      <View style={{flex:0.5, alignItems:'center', bottom:80}}>
-        <Avatar
-          xlarge
-          rounded
-          title="CR"
-          activeOpacity={0.7}
-          source={{
-            uri: CLOUDINARY_BASE_URL + this.state.profile.image
-          }}
+      <View style={{flex:3}}>
+        <View style={{ flex:2, backgroundColor: '#e6e7e8', alignItems:'center'}}/>
+        <Spinner
+          visible={this.state.uploading}
+          textContent={'Uploading...'}
         />
-      </View>
+        <View style={{flex:1, alignItems:'center', bottom:100}}>
+          <Avatar
+            xlarge
+            rounded
+            title="CR"
+            activeOpacity={0.7}
+            source={{
+              uri: CLOUDINARY_BASE_URL + this.state.profile.image
+            }}
+            onPress={() => this.handleClickProfilePicture()}
+          />
+        </View>
+
+        </View>
+
+
       <View style={{flex:5.2}}>
+        <ScrollView>
         <View style={styles.listViewContainerStyle}>
           <ListItem
             key={1}
@@ -238,25 +288,7 @@ export default class EditProfile extends React.Component {
             onPress={()=>{ Linking.openURL('https://gamegraft.com/password/reset')}}
           />
         </View>
-
-        <View style={styles.listViewContainerStyle}>
-          <ListItem
-            key={4}
-            title={'Manage Brands'}
-            containerStyle={{borderBottomWidth:0}}
-            onPress={()=> this.handleClickManageBrands() }
-          />
-        </View>
-
-        <View style={styles.listViewContainerStyle}>
-          <ListItem
-            key={4}
-            title={'View Completed Missions'}
-            containerStyle={{borderBottomWidth:0}}
-            onPress={()=> this.handleClickMissionHistory() }
-          />
-        </View>
-
+        </ScrollView>
       </View>
       <View style={{flex:1, flexDirection: 'row'}}>
         <View style={{flex:1, justifyContent: 'center', marginHorizontal:50}}>

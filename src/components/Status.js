@@ -26,6 +26,8 @@ export default class Status extends React.Component {
     this.onRedeemPointsClick = this.onRedeemPointsClick.bind(this);
     this.onSendReferralClick = this.onSendReferralClick.bind(this);
     this.onProfileUpdateClick = this.onProfileUpdateClick.bind(this);
+    Navigation.events().bindComponent(this);
+
     this.state = {
       user : null
     }
@@ -64,7 +66,7 @@ export default class Status extends React.Component {
     });
   }
 
-  async componentDidMount() {
+  async componentDidAppear() {
     try {
       let user = await this.believerRequestController.getUserProfile();
       this.setState({user: user});

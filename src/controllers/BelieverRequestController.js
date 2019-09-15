@@ -7,10 +7,7 @@ export default class BelieverRequestController {
     this.httpRequestController = HttpRequestController.getInstance();
   }
 
-
-
   async login(credentials) {
-
     try {
       let response = await this.httpRequestController.postRequest("/api/user/login", credentials);
 
@@ -24,7 +21,6 @@ export default class BelieverRequestController {
     catch(e){
       throw e;
     }
-
   }
 
   async register(credentials) {
@@ -90,8 +86,6 @@ export default class BelieverRequestController {
       }
       return [];
       throw new Error('Failed to get followed brands for user');
-
-
     }
     catch(e){
       throw e;
@@ -368,6 +362,48 @@ export default class BelieverRequestController {
     catch(e){
       throw e;
     }
+  }
+
+  async getFavouriteMission () {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/favs", {user_id: userId} );
+      if (response && response.length < 1){
+        throw new Error('Failed to get favourite mission');
+      }
+      return response;
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+
+  async updateProfileImage(source) {
+    let form = new FormData();
+    const userId = await this.httpRequestController.getUserId();
+    form.append("user_id", userId);
+    form.append("profilepic", source);
+    form.append("file", source);
+    const baseUrl = this.httpRequestController.getBaseUrl();
+
+    try {
+      const response = await fetch(baseUrl +"/api/v1/profile/editProfilePic", {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: 'application/json',
+        },
+        body: form,
+      });
+      console.log(response.toString());
+      return response.json();
+    }
+    catch (e) {
+      throw e;
+    }
+
   }
 
 }

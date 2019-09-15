@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
 import {Badge, Text} from "react-native-elements";
 import BelieverRequestController from "../controllers/BelieverRequestController";
 // import HttpRequestController from "../controllers/HttpRequestController";
@@ -17,7 +17,7 @@ class Mission extends Component {
     missionPoints : PropTypes.number.isRequired,
     clientLogo : PropTypes.string.isRequired,
     clientName : PropTypes.string.isRequired,
-    isFavourite : PropTypes.number.isRequired,
+    isFavourite : PropTypes.number,
     onMissionClick : PropTypes.func,
     onBrandClick : PropTypes.func,
 
@@ -63,7 +63,7 @@ class Mission extends Component {
   }
 
   renderHeader() {
-    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight:10}}>
+    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 10}}>
       <View style={{flex: 2 }}>
         <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
@@ -83,7 +83,11 @@ class Mission extends Component {
             <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
           </TouchableHighlight>
       </View>
-      {this.renderFavourite()}
+      <View style={{flex : 3, height: '100%', backgroundColor: 'rgba(61,185,214,0.11)', justifyContent: 'center'}}>
+        <Text style={{textAlign: 'center', fontSize: 11}}>
+          {this.props.missionPoints + ' Points'}
+        </Text>
+      </View>
 
     </View>
   }
@@ -91,16 +95,16 @@ class Mission extends Component {
   renderFavourite() {
     if(this.state.isFavourite === 1) {
       return <View style={{flex: 1, alignItems: 'flex-end'}}>
-        <TouchableHighlight onPress={this.unfavourite} activeOpacity={0} >
+        <TouchableOpacity onPress={this.unfavourite}>
         <Image source={require('../../assets/bookmark_filled.png')} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     }
     else{
       return <View style={{flex: 1, alignItems: 'flex-end'}}>
-        <TouchableHighlight onPress={this.favourite} activeOpacity={0} >
+        <TouchableOpacity onPress={this.favourite} activeOpacity={0} >
         <Image source={require('../../assets/bookmark.png')} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     }
   }
@@ -121,19 +125,11 @@ class Mission extends Component {
       <View style={{flex: 1, paddingHorizontal: 10, backgroundColor: '#f2f2f2', width: '100%'}}>
           <View style={{flex: 1, paddingTop:20, flexDirection: 'row', backgroundColor: '#f2f2f2', }}>
             <Text style={{ flex: 5 ,fontWeight: 'bold', fontSize: 14 }}>{this.props.missionTitle}</Text>
-            <View style={{flex : 1, }}>
-              <Badge
-                value={this.props.missionPoints}
-                containerStyle={{
-                  backgroundColor: '#35AFC8',
-                  width: 50,
-                  height: 25,
-                }}
-              />
-            </View>
           </View>
 
           <Text style={{ flex: 3, flexGrow:1, fontSize:14 }}>{this.props.missionDescription}</Text>
+        {this.renderFavourite()}
+
       </View>);
   }
 
@@ -158,7 +154,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // borderColor: 'black', borderWidth: 1,
     fontFamily: 'Helvetica',
-    minHeight: 400
+    minHeight: 400,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+
+    elevation: 4,
   },
   input: {
     width: 200,

@@ -75,6 +75,7 @@ export default class Explore extends React.Component {
       clientDescription={item.content}
       clientImage={CLOUDINARY_BASE_URL + item.banner}
       clientLogo={CLOUDINARY_BASE_URL + item.logo}
+      isFollowing={item.is_following === 1}
       onClientClick={() => this.onClientClick(item)}
     />
   }

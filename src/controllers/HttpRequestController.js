@@ -37,6 +37,10 @@ export default class HttpRequestController {
     return this.userId;
   }
 
+  getBaseUrl() {
+    return this.baseUrl;
+  }
+
   async postRequest(path, request) {
 
     try {

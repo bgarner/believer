@@ -16,6 +16,7 @@ class Client extends Component {
     clientImage : PropTypes.string.isRequired,
     clientLogo : PropTypes.string.isRequired,
     onClientClick : PropTypes.func.isRequired,
+    isFollowing: PropTypes.bool,
 
   };
 
@@ -23,7 +24,6 @@ class Client extends Component {
     super(props, context);
     this.believerRequestController = new BelieverRequestController();
     this.onClientClick = this.onClientClick.bind(this);
-
   }
 
   onClientClick() {
@@ -57,8 +57,8 @@ class Client extends Component {
         </TouchableHighlight>
 
 
-      <View style={{flex: 1, flexDirection: 'column',  height: 80, marginTop: 25, }}>
-        <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.props.clientId}/>
+      <View style={{flex: 1, flexDirection: 'column',  height: 80, marginTop: 10, }}>
+        <FollowButton unFollowEnable={true} initialState={this.props.isFollowing ? "Unfollow": "Follow"} clientId={this.props.clientId}/>
       </View>
 
     </View>
