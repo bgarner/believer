@@ -34,11 +34,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>14</string>
 	<key>FacebookAppID</key>
-	<string>258118938398280</string>
+	<string>468919773834345</string>
 	<key>FacebookDisplayName</key>
-	<string>Ensphere&apos;s first app</string>
+	<string>Believer</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,8 +63,10 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to upload profile image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to upload profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -99,9 +101,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Used to upload profile image</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to upload profile picture</string>
 </dict>
 </plist>

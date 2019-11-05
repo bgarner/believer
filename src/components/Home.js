@@ -39,6 +39,7 @@ class Home extends Component {
     this.state = {
       missions : [],
       selectedIndex: 0,
+      hideFavourite: false,
     }
   }
 
@@ -118,7 +119,7 @@ class Home extends Component {
       isFavourite={item.is_fav}
       onMissionClick={() => this.onMissionClick(item)}
       onBrandClick={() => this.onClientClick(item)}
-
+      hideFavourite={this.state.hideFavourite}
     />
   }
 
@@ -143,26 +144,22 @@ class Home extends Component {
     this.setState({selectedIndex});
     if(selectedIndex === 2) {
       let missions = await this.believerRequestController.getMissionHistory();
-      this.setState({missions});
+      this.setState({missions, hideFavourite: true});
     } else if(selectedIndex === 1) {
       let missions = await this.believerRequestController.getFavouriteMission();
-      this.setState({missions});
+      this.setState({missions, hideFavourite: false});
     }else{
       let missions = await this.believerRequestController.getMissionsFeed();
-      this.setState({missions});
+      this.setState({missions, hideFavourite: false});
     }
   }
 
   renderTopBar() {
-    const component1 = () => <Text>Hello</Text>
-    const component2 = () => <Text>World</Text>
-    const component3 = () => <Text>ButtonGroup</Text>
     const buttons = ['Missions', 'Saved', 'Completed'];
-    // const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
     const { selectedIndex } = this.state;
 
     return (
-      <View style={{height: 100, top: 30, marginTop: 30, padding: 0}}>
+      <View style={{height: 100, top: 30, marginTop: 50, padding: 0}}>
         <ButtonGroup
           onPress={this.onClickTopBarButton}
           selectedIndex={selectedIndex}

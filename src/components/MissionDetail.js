@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Alert, View, StyleSheet, Image, Share, TouchableHighlight} from 'react-native';
-import {Avatar,Button, Badge, Text} from "react-native-elements";
+import {Alert, View, StyleSheet, Image, Share, TouchableHighlight} from 'react-native';
+import {Avatar, Button, Badge, Text} from "react-native-elements";
 import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
@@ -10,18 +10,19 @@ import {default as DeviceInfo} from 'react-native-device-info';
 import {
   shareOnTwitter,
 } from 'react-native-social-share';
+import Mission from "./Mission";
 
 class MissionDetail extends Component {
   static propTypes = {
     componentId: PropTypes.string.isRequired,
-    missionId : PropTypes.number.isRequired,
-    missionTitle : PropTypes.string.isRequired,
-    missionDescription : PropTypes.string.isRequired,
-    missionImage : PropTypes.string.isRequired,
-    missionType : PropTypes.number.isRequired,
-    missionPoints : PropTypes.number.isRequired,
-    clientLogo : PropTypes.string.isRequired,
-    clientName : PropTypes.string.isRequired,
+    missionId: PropTypes.number.isRequired,
+    missionTitle: PropTypes.string.isRequired,
+    missionDescription: PropTypes.string.isRequired,
+    missionImage: PropTypes.string.isRequired,
+    missionType: PropTypes.number.isRequired,
+    missionPoints: PropTypes.number.isRequired,
+    clientLogo: PropTypes.string.isRequired,
+    clientName: PropTypes.string.isRequired,
     missionUrl: PropTypes.string
 
   };
@@ -58,57 +59,35 @@ class MissionDetail extends Component {
 
   }
 
-  // shareToSocialMedia() {
-  //   const self = this;
-  //   Share.share({
-  //     message: self.props.missionDescription,
-  //     url: self.props.missionUrl,
-  //     title: self.props.missionTitle,
-  //   }, {
-  //     // Android only:
-  //     // dialogTitle: 'Share BAM goodness',
-  //     // iOS only:
-  //     excludedActivityTypes: [
-  //       'com.apple.UIKit.activity.PostToTwitter'
-  //     ]
-  //   })
-  // }
-
-
   async shareLinkWithShareDialog() {
     const tmp = this;
     try {
       const canShowDialog = await ShareDialog.canShow(this.state.shareLinkContent);
-      if(canShowDialog) {
+      if (canShowDialog) {
         const result = await ShareDialog.show(tmp.state.shareLinkContent);
-        if(! DeviceInfo.isEmulator()){
+        if (!DeviceInfo.isEmulator()) {
           if (result.isCancelled) {
-            Alert.alert('Not ready yet?','This share was cancelled');
-          }
-          else {
-            try{
+            Alert.alert('Not ready yet?', 'This share was cancelled');
+          } else {
+            try {
               await this.believerRequestController.postMissionCompletion(this.props.missionId);
-              Alert.alert('Nice work!',`You earned ${this.props.missionPoints} points`);
-            }
-            catch(e) {
+              Alert.alert('Nice work!', `You earned ${this.props.missionPoints} points`);
+            } catch (e) {
               Alert.alert('Oops!', 'Something went wrong while saving your progress.');
             }
 
           }
-        }
-        else {
-          try{
+        } else {
+          try {
             await this.believerRequestController.postMissionCompletion(this.props.missionId);
             Alert.alert('Nice work!', `You earned ${this.props.missionPoints} points`);
-          }
-          catch(e) {
+          } catch (e) {
             Alert.alert('Oops!', 'Something went wrong while saving your progress.');
           }
         }
       }
-    }
-    catch(e) {
-      Alert.alert( 'Error!','Share fail with error: ' + e);
+    } catch (e) {
+      Alert.alert('Error!', 'Share fail with error: ' + e);
     }
 
   }
@@ -125,89 +104,10 @@ class MissionDetail extends Component {
     );
   }
 
-  // async tweet() {
-  //   try {
-  //     const result = await Share.share({
-  //       message:
-  //         'React Native | A framework for building native apps using React',
-  //     });
-  //
-  //     if (result.action === Share.sharedAction) {
-  //       if (result.activityType) {
-  //         // shared with activity type of result.activityType
-  //       } else {
-  //         // shared
-  //       }
-  //     } else if (result.action === Share.dismissedAction) {
-  //       // dismissed
-  //     }
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // };
-
-  renderHeader() {
-    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', padding: 10}}>
-      <View style={{flex: 2 }}>
-        <Avatar
-          medium
-          rounded
-          title="CR"
-          onPress={() => console.log("Works!")}
-          activeOpacity={0.7}
-          source={{
-            uri: this.props.clientLogo,
-          }}
-        />
-      </View>
-      <View style={{flex: 8, paddingLeft: 10}}>
-        <Text style={{fontWeight: 'bold'}}>{this.props.clientName}</Text>
-      </View>
-
-
-    </View>
-  }
-
-  renderImage() {
-
-    return <View style={{flex:4, backgroundColor: '#f2f2f2', width:'100%', height: 100}}>
-      <Image source={{uri: this.props.missionImage}}
-             style={{width:'100%', height: '100%'}} />
-    </View>
-  }
-  renderDescription() {
-    return <View style={{flex: 2, backgroundColor: '#f2f2f2', width: '100%'}}>
-
-      <View style={{flex: 0.75, flexDirection: 'row', padding: 15, backgroundColor: '#f2f2f2', alignItems: 'center'}}>
-
-        <Text style={{ flex: 4 , fontFamily:'Helvetica', fontWeight: 'bold'}}>{this.props.missionTitle}</Text>
-
-        <Badge
-          value={this.props.missionPoints}
-          containerStyle={{
-            backgroundColor: '#35AFC8',
-            width: 50,
-            height: 25,
-          }}
-        />
-      </View>
-
-      <Text style={{ flex: 1, paddingHorizontal:15}}>{this.props.missionDescription}</Text>
-    </View>
-  }
-
-
   renderMissionLaunchButton() {
-    if(this.props.missionType) {
+    if (this.props.missionType) {
       return (
         <View style={styles.container}>
-          {/*<TouchableHighlight  onPress={this.shareLinkWithShareDialog}>*/}
-          {/*<View style={styles.fbButtonContainer}>*/}
-          {/*/!*<Image source = {require('../../assets/fb.png')}></Image>/!**!/*!/*/}
-          {/*<Text style={styles.shareText}> Share </Text>*/}
-          {/*</View>*/}
-          {/*</TouchableHighlight>*/}
-
           <Button
             backgroundColor={'#3b5998'}
             title={'Share on Facebook'}
@@ -216,16 +116,9 @@ class MissionDetail extends Component {
               fontSize: 14,
               fontWeight: 'bold',
               textAlign: 'center',
-              fontFamily:'Helvetica'
+              fontFamily: 'Helvetica'
             }}
           />
-
-          {/*<TouchableHighlight style={ styles.fbButton} onPress={this.tweet}>*/}
-          {/*  <View style={styles.fbButtonContainer}>*/}
-          {/*    <Image source = {require('../../assets/fb.png')}></Image>*/}
-          {/*    <Text style={styles.shareText}> Share </Text>*/}
-          {/*  </View>*/}
-          {/*</TouchableHighlight>*/}
         </View>
       );
 
@@ -235,10 +128,20 @@ class MissionDetail extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderHeader()}
-        {this.renderImage()}
-        {this.renderDescription()}
-        {this.renderMissionLaunchButton()}
+        <View style={{flex: 7}}>
+          <Mission
+            missionId={this.props.missionId}
+            missionTitle={this.props.missionTitle}
+            missionDescription={this.props.missionDescription}
+            missionImage={this.props.missionImage}
+            missionType={this.props.missionType}
+            missionPoints={this.props.missionPoints}
+            clientLogo={this.props.clientLogo}
+            clientName={this.props.clientName}
+            hideFavourite
+            />
+        </View>
+          {this.renderMissionLaunchButton()}
       </View>
     );
   }
@@ -247,13 +150,13 @@ class MissionDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    // borderColor: 'black', borderWidth: 1,
-    fontFamily: 'Helvetica',
-    height: 500
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: '#fff',
+    // // borderColor: 'black', borderWidth: 1,
+    // fontFamily: 'Helvetica',
+    // height: 500
   },
   input: {
     width: 200,

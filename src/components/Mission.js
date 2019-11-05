@@ -6,6 +6,7 @@ import BelieverRequestController from "../controllers/BelieverRequestController"
 // import {Navigation} from "react-native-navigation";
 import PropTypes from 'prop-types';
 import { Avatar, Icon } from 'react-native-elements';
+import {CLOUDINARY_BASE_URL} from "../config";
 
 class Mission extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ class Mission extends Component {
     isFavourite : PropTypes.number,
     onMissionClick : PropTypes.func,
     onBrandClick : PropTypes.func,
-
+    hideFavourite: PropTypes.bool.isRequired,
   };
 
   constructor(props, context) {
@@ -63,7 +64,7 @@ class Mission extends Component {
   }
 
   renderHeader() {
-    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 10}}>
+    return <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 10, maxHeight: 80}}>
       <View style={{flex: 2 }}>
         <TouchableHighlight activeOpacity={0} onPress={this.onBrandClick}>
         <Avatar
@@ -111,11 +112,11 @@ class Mission extends Component {
 
   renderImage() {
 
-    return <View style={{flex:2.5, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 185}}>
-      <TouchableHighlight onPress={this.onMissionClick} activeOpacity={0} style={{width:'100%', height: '100%'}}>
+    return <View style={{flex:2.5, backgroundColor: '#f2f2f2', /*borderColor: 'blue', borderWidth: 1,*/ width:'100%', height: 185, maxHeight: 250}}>
+      <TouchableOpacity onPress={this.onMissionClick} style={{width:'100%', height: '100%'}}>
         <Image source={{uri: this.props.missionImage}}
              style={{width:'100%', height: '100%'}} />
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   }
 
@@ -123,12 +124,13 @@ class Mission extends Component {
   renderDescription() {
     return (
       <View style={{flex: 1, paddingHorizontal: 10, backgroundColor: '#f2f2f2', width: '100%'}}>
-          <View style={{flex: 1, paddingTop:20, flexDirection: 'row', backgroundColor: '#f2f2f2', }}>
-            <Text style={{ flex: 5 ,fontWeight: 'bold', fontSize: 14 }}>{this.props.missionTitle}</Text>
+          <View style={{flex: 0.2, paddingTop:20, paddingBottom: 10, flexDirection: 'row', backgroundColor: '#f2f2f2', }}>
+            <Text style={{ flex: 1 ,fontWeight: 'bold', fontSize: 14 }}>{this.props.missionTitle}</Text>
           </View>
-
-          <Text style={{ flex: 3, flexGrow:1, fontSize:14 }}>{this.props.missionDescription}</Text>
-        {this.renderFavourite()}
+          <View style={{ flex: 1, flexGrow:1, justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+            <Text style={{fontSize:14}}>{this.props.missionDescription}</Text>
+          </View>
+        {!this.props.hideFavourite && this.renderFavourite()}
 
       </View>);
   }

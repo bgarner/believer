@@ -49,7 +49,6 @@ export default class EditProfile extends React.Component {
     }
     this.handleClickProfile = this.handleClickProfile.bind(this);
     this.handleClickContact = this.handleClickContact.bind(this);
-    this.handleClickMissionHistory = this.handleClickMissionHistory.bind(this);
     this.menuItems = [
       {
         componentName: 'UpdateUsername'
