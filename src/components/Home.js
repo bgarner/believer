@@ -164,7 +164,7 @@ class Home extends Component {
           onPress={this.onClickTopBarButton}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          buttonStyle={{margin: 0, borderBottomWidth: 3, borderBottomColor: '#e9e9e9', backgroundColor: 'white', borderColor: 'white'}}
+          buttonStyle={{margin: -1, borderBottomWidth: 3, borderBottomColor: '#e9e9e9', backgroundColor: 'white', borderColor: 'white'}}
           containerStyle={{height: 60, borderWidth: 0, padding: 0, margin: 0, backgroundColor: 'white'}}
           selectedButtonStyle={{borderBottomColor: '#35AFC8', borderBottomWidth: 5}}
           selectedTextStyle={{color: '#35AFC8'}}

@@ -60,7 +60,8 @@ class FollowButton extends Component {
     let backgroundColour = currentState === 'Follow'? '#fff' : '#35AFC8';
     let textColour = currentState === 'Follow'? '#666'  : '#fff';
     let onClickFunction = currentState === 'Follow'? this.onFollowClick : this.onUnfollowClick;
-    let title = currentState === 'Follow'? 'Follow': 'Following';
+    let title = currentState === 'Follow'? 'Follow': 'Unfollow';
+    // let title = currentState === 'Follow'? 'Follow':( this.props.unFollowEnable? 'Unfollow' : 'Following');
     let clickEnabled = currentState === 'Follow'? true :( this.props.unFollowEnable?  true : false)
     return <Button
       style={styles.buttonStyle}

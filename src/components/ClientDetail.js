@@ -96,6 +96,7 @@ class ClientDetail extends Component {
       isFavourite={item.is_fav}
       clientLogo={CLOUDINARY_BASE_URL + item.client_logo}
       clientName={item.brand_name}
+      hideFavourite={true}
     />
   }
 
@@ -147,22 +148,22 @@ class ClientDetail extends Component {
             <Text style={{fontWeight: 'normal', fontSize:12, lineHeight:16, color: '#333'}}>{this.state.client.description}</Text>
 
             <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
-              <View style={{flex:1}}>
+              <View style={{flex:0.5}}>
                 <FollowButton unFollowEnable={false} initialState={"Follow"} clientId={this.state.client.id} />
               </View>
 
-              <View style={{flex:1, width:'20%'}}>
-                <Button
-                  backgroundColor={'#35AFC8'}
-                  title={'Map'}
-                  textStyle={{
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    fontFamily:'Helvetica'
-                  }}
-                />
-              </View>
+              {/*<View style={{flex:1, width:'20%'}}>*/}
+              {/*  <Button*/}
+              {/*    backgroundColor={'#35AFC8'}*/}
+              {/*    title={'Map'}*/}
+              {/*    textStyle={{*/}
+              {/*      fontSize: 14,*/}
+              {/*      fontWeight: 'bold',*/}
+              {/*      textAlign: 'center',*/}
+              {/*      fontFamily:'Helvetica'*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</View>*/}
             </View>
 
           </View>

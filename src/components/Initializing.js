@@ -9,6 +9,7 @@ import {
 
 import { goToAuth, goHome } from '../navigation'
 import CommonUtils from "../CommonUtils";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class Initialising extends React.Component {
   async componentDidMount() {
@@ -30,7 +31,11 @@ export default class Initialising extends React.Component {
     StatusBar.setBarStyle('light-content', true);
     return (
       <View style={styles.container}>
-        <Image source={require('../../assets/splash.png')} style={{height: '100%', width: '100%'}}/>
+        <Spinner
+          visible={true}
+          textStyle={{color:'#fff'}}
+          textContent={'Loading'}
+        />
       </View>
     )
   }

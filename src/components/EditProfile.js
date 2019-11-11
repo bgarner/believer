@@ -284,7 +284,7 @@ export default class EditProfile extends React.Component {
             key={4}
             title={'Update Password'}
             containerStyle={{borderBottomWidth:0}}
-            onPress={()=>{ Linking.openURL('https://gamegraft.com/password/reset')}}
+            onPress={()=>{ Linking.openURL('https://believer.io/password/reset')}}
           />
         </View>
         </ScrollView>

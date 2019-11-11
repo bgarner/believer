@@ -77,7 +77,7 @@ export default class SignIn extends React.Component {
         </TouchableHighlight>
 
         <TouchableHighlight
-          onPress={ ()=>{ Linking.openURL('https://gamegraft.com/password/reset')} }
+          onPress={ ()=>{ Linking.openURL('https://believer.io/password/reset')} }
         >
           <Text style={{color: '#35AFC8'}}>Forgot your password?</Text>
         </TouchableHighlight>

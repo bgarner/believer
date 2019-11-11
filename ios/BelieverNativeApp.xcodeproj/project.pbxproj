@@ -21,7 +21,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -33,6 +32,8 @@
 		173365DD223CD55D008AB3AC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173365D7223CD55D008AB3AC /* FBSDKLoginKit.framework */; };
 		173365DE223CD55D008AB3AC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173365D8223CD55D008AB3AC /* FBSDKCoreKit.framework */; };
 		173365DF223CD57E008AB3AC /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B3269E222B89810040356E /* libRCTFBSDK.a */; };
+		1775ACD7237913A0003DEE44 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1775ACD5237913A0003DEE44 /* LaunchScreen.xib */; };
+		1775ACD92379185A003DEE44 /* LaunchScreen2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1775ACD82379185A003DEE44 /* LaunchScreen2.storyboard */; };
 		1777DA0022345F0500C6F611 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1777D9FD22345EE700C6F611 /* libRNDeviceInfo.a */; };
 		1788DE302272C0480019C33E /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1788DE2F2272C0480019C33E /* Images-2.xcassets */; };
 		17CDE12E223CD66600E82F10 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17CDE0FC223CD66600E82F10 /* Bolts.framework */; };
@@ -492,7 +493,6 @@
 		13B07F961A680F5B00A75B9A /* BelieverNativeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelieverNativeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BelieverNativeApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = BelieverNativeApp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BelieverNativeApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BelieverNativeApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BelieverNativeApp/main.m; sourceTree = "<group>"; };
@@ -504,6 +504,8 @@
 		173365D5223CD55D008AB3AC /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AccountKit.framework; path = ../../../Documents/FacebookSDK/AccountKit.framework; sourceTree = "<group>"; };
 		173365D7223CD55D008AB3AC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		173365D8223CD55D008AB3AC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		1775ACD6237913A0003DEE44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = BelieverNativeApp/Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		1775ACD82379185A003DEE44 /* LaunchScreen2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen2.storyboard; sourceTree = "<group>"; };
 		1777D9F722345EE700C6F611 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		1788DE2F2272C0480019C33E /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "BelieverNativeApp/Images-2.xcassets"; sourceTree = "<group>"; };
 		17B3269F222B89F80040356E /* react-native-fbsdk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-fbsdk"; path = "../node_modules/react-native-fbsdk"; sourceTree = "<group>"; };
@@ -736,12 +738,13 @@
 		13B07FAE1A68108700A75B9A /* BelieverNativeApp */ = {
 			isa = PBXGroup;
 			children = (
+				1775ACD5237913A0003DEE44 /* LaunchScreen.xib */,
+				1775ACD82379185A003DEE44 /* LaunchScreen2.storyboard */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				1788DE2F2272C0480019C33E /* Images-2.xcassets */,
 			);
@@ -1613,7 +1616,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				24BD1C3EB5784DF9B5368889 /* Entypo.ttf in Resources */,
 				2BF93BABBBE84BA999459EA5 /* EvilIcons.ttf in Resources */,
 				F1D8E3C325394F1ABFA1B4EC /* Feather.ttf in Resources */,
@@ -1626,8 +1628,10 @@
 				EADE983170F44A9BA0C9718B /* Octicons.ttf in Resources */,
 				BD1297ACA52D4EC0B392D1C5 /* SimpleLineIcons.ttf in Resources */,
 				F3C1426B235E43D7923D4E2D /* Zocial.ttf in Resources */,
+				1775ACD7237913A0003DEE44 /* LaunchScreen.xib in Resources */,
 				7C145246E285454FA9C2C479 /* AntDesign.ttf in Resources */,
 				E8A7910EDD8A47B89DE12788 /* FontAwesome5_Brands.ttf in Resources */,
+				1775ACD92379185A003DEE44 /* LaunchScreen2.storyboard in Resources */,
 				73B477DA6F6949CEACCC9C3B /* FontAwesome5_Regular.ttf in Resources */,
 				C56BCFE81C2E47C0B3074F48 /* FontAwesome5_Solid.ttf in Resources */,
 				81226D55DBDC453B82F30730 /* leaguespartan-bold.ttf in Resources */,
@@ -1734,13 +1738,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+		1775ACD5237913A0003DEE44 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				13B07FB21A68108700A75B9A /* Base */,
+				1775ACD6237913A0003DEE44 /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = BelieverNativeApp;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

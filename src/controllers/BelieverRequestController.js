@@ -44,6 +44,7 @@ export default class BelieverRequestController {
   async getMissionsFeed() {
     try {
       const userId = await this.httpRequestController.getUserId();
+      console.log(userId);
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': userId} );
 
       if (response && response.length >= 1){
@@ -110,10 +111,11 @@ export default class BelieverRequestController {
     try {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/missions/client", {'user_id': userId, 'client_id': client_id} );
-      if (response && response.length < 1){
-        throw new Error('Failed to get clients active missions');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get active missions for client');
 
     }
     catch(e){
@@ -141,10 +143,11 @@ export default class BelieverRequestController {
     try {
       let response = await this.httpRequestController.postRequest("/api/v1/rewards" );
 
-      if (response && response.length < 1){
-        throw new Error('Failed to get rewards');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get missions for user');
 
     }
     catch(e){
@@ -221,10 +224,11 @@ export default class BelieverRequestController {
       const userId = await this.httpRequestController.getUserId();
       let response = await this.httpRequestController.postRequest("/api/v1/messages", {user_id: userId} );
 
-      if (response && response.length < 1){
-        throw new Error('Failed to get messages for user');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get messages for user');
 
     }
     catch(e){
@@ -288,12 +292,13 @@ export default class BelieverRequestController {
   async getMissionHistory() {
     try {
       const userId = await this.httpRequestController.getUserId();
+      console.log(userId);
       let response = await this.httpRequestController.postRequest("/api/v1/missions/getMissionHistory", {user_id: userId} );
-      console.log(response);
-      if (response && response.length < 1){
-        throw new Error('Failed to get messages for user');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return (response);
+      return [];
+      throw new Error('Failed to get mission history for user');
 
     }
     catch(e){
@@ -367,18 +372,19 @@ export default class BelieverRequestController {
   async getFavouriteMission () {
     try {
       const userId = await this.httpRequestController.getUserId();
+      console.log(userId);
       let response = await this.httpRequestController.postRequest("/api/v1/favs", {user_id: userId} );
-      if (response && response.length < 1){
-        throw new Error('Failed to get favourite mission');
+      if (response && response.length >= 1){
+        return (response);
       }
-      return response;
+      return [];
+      throw new Error('Failed to get favourite missions for user');
 
     }
     catch(e){
       throw e;
     }
   }
-
 
   async updateProfileImage(source) {
     let form = new FormData();
