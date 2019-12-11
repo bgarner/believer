@@ -45,7 +45,6 @@ export default class BelieverRequestController {
   async getMissionsFeed() {
     try {
       const userId = await this.httpRequestController.getUserId();
-      console.log(userId);
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': userId} );
       if (response && response.length >= 1){
         return (response);

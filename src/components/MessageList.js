@@ -82,13 +82,14 @@ class MessageList extends Component {
     }
   }
 
-  async deleteRow(rowMap, rowKey) {
+  async deleteRow(rowMap, rowKey, rowIdentifier) {
     this.closeRow(rowMap, rowKey);
     const newData = [...this.state.messages];
     const prevIndex = this.state.messages.findIndex(item => item.key === rowKey);
+    console.log(rowMap);
     newData.splice(prevIndex, 1);
     this.setState({messages: newData});
-    await this.believerRequestController.deleteMessage(rowKey);
+    await this.believerRequestController.deleteMessage(rowIdentifier);
   }
 
   onRowDidOpen = (rowKey, rowMap) => {
@@ -149,7 +150,7 @@ class MessageList extends Component {
                 </View>
 
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, data.item.key) }>
+              <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteRow(rowMap, data.item.key, data.item.message_id) }>
 
                 <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
                   <Icon name='trash-alt' size={25} color="#fff" />

@@ -7,7 +7,7 @@ import {
   TextInput,
   AsyncStorage,
   TouchableHighlight,
-  Linking,
+  Linking, Image,
 } from 'react-native'
 
 import {goHome, goSignup} from '../navigation'
@@ -46,7 +46,7 @@ export default class SignIn extends React.Component {
       <View style={styles.container}>
 
         <View style={styles.title}>
-          <Text style={styles.titleText}> BELIEVER </Text>
+          <Image source={require('../../assets/login.png')} />
         </View>
 
         <View style={styles.formContainer}>
@@ -107,20 +107,22 @@ const styles = StyleSheet.create({
   title:{
     flex:1,
     width : '100%',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    marginTop: 25
   },
-  titleText:{
-    paddingTop:100,
-    fontSize:40,
-    fontWeight :'900',
-
-  },
+  // titleText:{
+  //   paddingTop:100,
+  //   fontSize:40,
+  //   fontWeight :'900',
+  //
+  // },
   formContainer:{
     flex: 2,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    width:'100%'
+    width:'100%',
+    marginTop: 50
   },
   input: {
     width: '80%',
