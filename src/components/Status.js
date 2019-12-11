@@ -3,12 +3,14 @@ import {
   View,
   Text,
   StyleSheet, Image, ScrollView, TouchableHighlight, ImageBackground, Linking,
+  Alert, Animated
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {Button} from "react-native-elements";
 import {CLOUDINARY_BASE_URL} from "../config";
-import {goSignup} from "../navigation";
+import {goSignup, goToAuth} from "../navigation";
+import CommonUtils from "../CommonUtils";
 
 export default class Status extends React.Component {
   static get options() {
@@ -27,6 +29,7 @@ export default class Status extends React.Component {
     this.onRedeemPointsClick = this.onRedeemPointsClick.bind(this);
     this.onSendReferralClick = this.onSendReferralClick.bind(this);
     this.onProfileUpdateClick = this.onProfileUpdateClick.bind(this);
+    this.showDeleteProfileConfirm = this.showDeleteProfileConfirm.bind(this);
     Navigation.events().bindComponent(this);
 
     this.state = {
@@ -67,6 +70,32 @@ export default class Status extends React.Component {
     });
   }
 
+  showDeleteProfileConfirm() {
+    Alert.alert(
+      'Delete Profile',
+      'Are you sure you want to delete your profile? Your point balance, brands that you follow and mission history will all be deleted.',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => this.deleteProfile()},
+      ],
+      { cancelable: true }
+    )
+  }
+
+  async deleteProfile() {
+    try {
+      let response = await this.believerRequestController.deleteProfile();
+      if(response) {
+        await CommonUtils.clearLoginToken();
+        await CommonUtils.clearUserId();
+        await goToAuth();
+      }
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
   async componentDidAppear() {
     try {
       let user = await this.believerRequestController.getUserProfile();
@@ -77,7 +106,7 @@ export default class Status extends React.Component {
     }
   }
 
-   renderImage() {
+  renderImage() {
      if(!this.state.user) {
        return null;
      }
@@ -216,7 +245,7 @@ export default class Status extends React.Component {
     </View>
   }
 
-  renderViewPrivacyPolicyButton() {
+  renderBottomLinks() {
     return <View style={{flex:1, backgroundColor:'#fff', justifyContent:'center', alignItems:'center'}}>
       <TouchableHighlight style={{padding:10,}} onPress={()=>{ Linking.openURL('https://believer.io/privacy')}}>
         <Text style={{color: '#35AFC8'}}> Privacy Policy
@@ -226,15 +255,20 @@ export default class Status extends React.Component {
         <Text style={{color: '#35AFC8'}}> Terms of Use
         </Text>
       </TouchableHighlight>
+      <TouchableHighlight style={{padding:10,}} onPress={()=> this.showDeleteProfileConfirm() } >
+        <Text style={{color: '#CF3338'}}> Delete Profile
+        </Text>
+      </TouchableHighlight>
     </View>
   }
+
   render() {
     return (
       <View style={styles.container}>
         {this.renderImage()}
         {this.renderAnalytics()}
         {this.renderRedeemButton()}
-        {this.renderViewPrivacyPolicyButton()}
+        {this.renderBottomLinks()}
       </View>
     )
   }

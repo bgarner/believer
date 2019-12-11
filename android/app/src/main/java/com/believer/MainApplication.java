@@ -1,4 +1,4 @@
-package com.believernativeapp;
+package com.believer;
 
 import android.app.Application;
 

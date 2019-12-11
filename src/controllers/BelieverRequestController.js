@@ -26,6 +26,7 @@ export default class BelieverRequestController {
   async register(credentials) {
     try {
       let response = await this.httpRequestController.postRequest("/api/user/register", credentials);
+      console.log(response);
       if(!response.token){
         if (response.email) {
           Alert.alert(  'Failed to register! ', '' + response.email);
@@ -46,7 +47,6 @@ export default class BelieverRequestController {
       const userId = await this.httpRequestController.getUserId();
       console.log(userId);
       let response = await this.httpRequestController.postRequest("/api/v1/missions", {'user_id': userId} );
-
       if (response && response.length >= 1){
         return (response);
       }
@@ -410,6 +410,22 @@ export default class BelieverRequestController {
       throw e;
     }
 
+  }
+
+  async deleteProfile() {
+    try {
+      const userId = await this.httpRequestController.getUserId();
+      let response = await this.httpRequestController.postRequest("/api/v1/profile/delete", {user_id: userId} );
+      if (!response.hasOwnProperty('deleted')){
+        return false;
+      }
+      return true;
+      throw new Error('Failed to delete profile');
+
+    }
+    catch(e){
+      throw e;
+    }
   }
 
 }
