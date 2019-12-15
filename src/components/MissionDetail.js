@@ -7,9 +7,6 @@ import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 
 import BelieverRequestController from "../controllers/BelieverRequestController";
 import {default as DeviceInfo} from 'react-native-device-info';
-import {
-  shareOnTwitter,
-} from 'react-native-social-share';
 import Mission from "./Mission";
 
 class MissionDetail extends Component {
@@ -55,7 +52,6 @@ class MissionDetail extends Component {
     };
     this.state = {shareLinkContent: shareLinkContent};
     this.believerRequestController = new BelieverRequestController();
-    this.tweet = this.tweet.bind(this);
 
   }
 
@@ -90,18 +86,6 @@ class MissionDetail extends Component {
       Alert.alert('Error!', 'Share fail with error: ' + e);
     }
 
-  }
-
-  tweet() {
-
-    shareOnTwitter({
-        // 'text':'Global democratized marketplace for art',
-        'link': this.props.missionUrl,
-      },
-      (results) => {
-        console.log(results);
-      }
-    );
   }
 
   renderMissionLaunchButton() {

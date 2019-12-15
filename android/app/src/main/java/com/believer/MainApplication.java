@@ -3,15 +3,8 @@ package com.believer;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.imagepicker.ImagePickerPackage;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.barefootcoders.android.react.KDSocialShare.KDSocialShare;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.christopherdro.RNPrint.RNPrintPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.ocetnik.timer.BackgroundTimerPackage;
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -33,15 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ImagePickerPackage(),
-            new RNCWebViewPackage(),
             new KDSocialShare(),
-            new FBSDKPackage(),
-            new VectorIconsPackage(),
             new RNPrintPackage(),
-            new RNFetchBlobPackage(),
-            new RNDeviceInfo(),
-            new BackgroundTimerPackage(),
             new BackgroundJobPackage()
       );
     }
