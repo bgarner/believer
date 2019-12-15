@@ -67,6 +67,10 @@
 	<string>Used to upload profile image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to upload profile picture</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used by Facebook API</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used by Facebook API</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

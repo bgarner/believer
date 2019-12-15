@@ -1861,6 +1861,7 @@
 					"$(SRCROOT)/../node_modules/react-native-social-share/iOS",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					/Users/megha/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Believer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1906,6 +1907,7 @@
 					"$(SRCROOT)/../node_modules/react-native-social-share/iOS",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					/Users/megha/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Believer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
