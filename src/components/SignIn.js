@@ -5,14 +5,12 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  AsyncStorage,
   TouchableHighlight,
   Linking, Image,
 } from 'react-native'
 
 import {goHome, goSignup} from '../navigation'
 import BelieverRequestController from "../controllers/BelieverRequestController";
-import CommonUtils from "../CommonUtils";
 
 export default class SignIn extends React.Component {
 
