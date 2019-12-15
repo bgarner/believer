@@ -257,7 +257,7 @@ PODS:
     - React
   - RNDeviceInfo (0.21.5):
     - React
-  - RNVectorIcons (6.4.1):
+  - RNVectorIcons (6.6.0):
     - React
   - Yoga (1.14.0)
 
@@ -413,7 +413,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeNavigation: 05945cfd4610260b1e6d46a07222dda6223959dd
   RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
-  RNVectorIcons: 09d03dfe7c9fc158c3dce50d891101637d428bb3
+  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: a1101b4b1e77ff55a36db16416c25ec44d3d77ad
