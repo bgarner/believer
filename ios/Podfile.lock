@@ -212,11 +212,9 @@ PODS:
   - react-native-fbsdk/Share (1.1.1):
     - FBSDKShareKit (= 5.8)
     - React
-  - react-native-fetch-blob (0.10.6):
-    - React-Core
   - react-native-image-picker (0.28.1):
     - React
-  - react-native-webview (7.0.2):
+  - react-native-webview (8.0.1):
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -257,7 +255,7 @@ PODS:
     - React
   - RNCAsyncStorage (1.7.1):
     - React
-  - RNDeviceInfo (0.21.5):
+  - RNDeviceInfo (5.4.0):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -285,7 +283,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
-  - react-native-fetch-blob (from `../node_modules/react-native-fetch-blob`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -345,8 +342,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-background-timer"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
-  react-native-fetch-blob:
-    :path: "../node_modules/react-native-fetch-blob"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-webview:
@@ -403,9 +398,8 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-background-timer: 0d34748e53a972507c66963490c775321a88f6f2
   react-native-fbsdk: b94a83971c496a35803f38b921aec6d637ba07b5
-  react-native-fetch-blob: 0cbdf9764c75d9438c162427395f4bc35a857d5a
   react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
-  react-native-webview: b500c24947ad8185fd9c5e0f9154074fdd1338ea
+  react-native-webview: b1ea98894c474b27c4080779939959e1f3653147
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -418,7 +412,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeNavigation: 05945cfd4610260b1e6d46a07222dda6223959dd
   RNCAsyncStorage: 8539fc80a0075fcc9c8e2dff84cd22dc5bf1dacf
-  RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
+  RNDeviceInfo: d0fff8432ccdf276cb342a52e665ea6dd311472e
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 

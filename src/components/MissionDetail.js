@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 
 import BelieverRequestController from "../controllers/BelieverRequestController";
-import {default as DeviceInfo} from 'react-native-device-info';
+
 import Mission from "./Mission";
+const DeviceInfo = require('react-native-device-info');
 
 class MissionDetail extends Component {
   static propTypes = {
@@ -58,10 +59,12 @@ class MissionDetail extends Component {
   async shareLinkWithShareDialog() {
     const tmp = this;
     try {
+      const isEmulator = await DeviceInfo.isEmulator();
       const canShowDialog = await ShareDialog.canShow(this.state.shareLinkContent);
+      // const DeviceInfo = require('react-native-device-info');
       if (canShowDialog) {
         const result = await ShareDialog.show(tmp.state.shareLinkContent);
-        if (!DeviceInfo.isEmulator()) {
+        if (!isEmulator) {
           if (result.isCancelled) {
             Alert.alert('Not ready yet?', 'This share was cancelled');
           } else {
